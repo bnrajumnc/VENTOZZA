@@ -1,0 +1,7 @@
+.contact { padding-top:clamp(50px,6vw,78px); padding-bottom:clamp(50px,6vw,78px); }
+.contact-copy>p { font-size:15px; }
+.contact-person { max-width:420px; }
+.contact-offices article p { font-size:13px; }
+.contact-form label { font-size:13px; }
+.contact-form input,.contact-form textarea { font-size:15px; }
+@media(max-width:700px){.contact{padding-top:44px;padding-bottom:44px}.contact-offices article p{font-size:12px}}

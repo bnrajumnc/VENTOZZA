@@ -1,0 +1,105 @@
+/* Shared contrast, logo sizing, and compact readable spacing across pages. */
+:root {
+  --muted: #665252;
+  --green: #16483c;
+  --teal: #008875;
+}
+
+body { color: #183e34; font-size: 15px; line-height: 1.58; }
+main p { color: #304b40; }
+.eyebrow { color: #FF7911; font-size: 12px; }
+.section-head-aside p,
+.about-copy > p,
+.sizes-head > p,
+.cert-intro > p,
+.contact-copy > p { color: #e4eee7; }
+.about-copy > p,
+.section-head-aside p { color: #304b40; }
+
+.header .logo img { width: clamp(185px, 15vw, 224px); height: auto; }
+.footer .footer-brand img { width: clamp(185px, 17vw, 220px); height: auto; }
+
+.footer { padding-top: 42px; }
+.footer .footer-main { padding-bottom: 32px; }
+.footer .footer-links { gap: 7px; }
+.footer .footer-links > span,
+.footer .footer-note > span { margin-bottom: 1px; }
+.footer .footer-note p { margin: 6px 0 10px; line-height: 1.52; }
+.footer .footer-contact a,
+.footer .footer-links a,
+.footer .footer-bottom a,
+.footer-sizes a { transition: color .18s ease, transform .18s ease, text-decoration-color .18s ease; }
+.footer .footer-contact a:hover,
+.footer .footer-links a:hover,
+.footer .footer-bottom a:hover,
+.footer-sizes a:hover { color: #ffd27a !important; text-decoration: underline; text-underline-offset: 3px; }
+.footer .footer-contact a:hover,
+.footer .footer-links a:hover,
+.footer-sizes a:hover { transform: translateX(3px); }
+.footer a:focus-visible { outline: 2px solid #ffd27a; outline-offset: 3px; }
+
+.contact-form label { color: #304b40; font-size: 14px; font-weight: 600; }
+.contact-form small,
+.callback-form > small { color: #304b40; font-size: 12px; line-height: 1.55; }
+.contact-form button:disabled,
+.callback-form button:disabled { opacity: .7; cursor: wait; }
+.form-success,
+.form-error { font-size: 14px; line-height: 1.5; }
+.form-success { color: #08745f; }
+.form-error { margin: 0; color: #9d3429; }
+
+@media (max-width: 1050px) {
+  .header .logo img { width: 190px; }
+}
+@media (max-width: 700px) {
+  .header .logo img { width: 174px; }
+  .footer { padding-top: 34px; }
+  .footer .footer-main { padding-bottom: 26px; }
+  .footer .footer-links { gap: 6px; }
+}
+
+/* Site-wide readability pass: retain each section's chosen palette and lift
+   text luminance gently without replacing its color. */
+body { line-height: 1.55; }
+main p { line-height: 1.6; font-weight: 500; }
+main :is(h1, h2, h3, h4, p, small, li),
+.footer :is(p, small, span) { filter: brightness(1.12); }
+main a, .header :is(a, button), .footer :is(a, button) { text-shadow: 0 0 .35px currentColor; }
+/* Keep the home hero headline in its original display style, in white for contrast. */
+main#home[data-page="home"] > .hero h1,
+main#home[data-page="home"] > .hero h1 em { color: #fff; }
+.section-wrap { padding-top: clamp(40px, 4.2vw, 56px); padding-bottom: clamp(40px, 4.2vw, 56px); }
+.section-head { margin-bottom: 22px; }
+.why-visit { padding-top: clamp(44px, 5vw, 64px); padding-bottom: clamp(46px, 5vw, 66px); }
+.why-visit .home-section-heading { margin-bottom: 22px; }
+.home-application-guide { padding-top: clamp(38px, 4vw, 54px); padding-bottom: clamp(38px, 4vw, 54px); }
+.home-featured { min-height: 0; }
+.home-featured-copy { padding-top: clamp(36px, 4vw, 54px); padding-bottom: clamp(36px, 4vw, 54px); }
+.home-featured-grid { min-height: clamp(330px, 36vw, 430px); }
+.recent-stories { padding-top: clamp(40px, 4.5vw, 58px); padding-bottom: clamp(40px, 4.5vw, 58px); }
+.catalogues-page { padding-bottom: 42px; }
+.catalogues-page-heading { padding-top: 26px; padding-bottom: 34px; }
+.catalogues-browser { gap: clamp(20px, 2.6vw, 32px); }
+.catalogues-grid { gap: 26px 18px; }
+.digital-showroom { padding-top: clamp(22px, 2.5vw, 34px); padding-bottom: clamp(22px, 2.5vw, 34px); }
+.showroom-heading { margin-bottom: 19px; }
+.calculator-view { gap: clamp(16px, 2.4vw, 32px); padding: clamp(13px, 1.6vw, 21px); }
+.tile-finder { padding-top: clamp(26px, 3.5vw, 46px); padding-bottom: clamp(26px, 3.5vw, 46px); }
+.contact { padding-top: clamp(42px, 4.5vw, 60px); padding-bottom: clamp(42px, 4.5vw, 60px); }
+.about-page.about.section-wrap { padding-top: clamp(28px, 3.5vw, 48px); padding-bottom: clamp(34px, 4.5vw, 62px); }
+.about-proof { margin-top: clamp(30px, 4vw, 52px); margin-bottom: clamp(30px, 4vw, 52px); }
+.about-principles-section, .about-team { padding-top: clamp(30px, 4vw, 48px); }
+.about-roadmap { padding-top: clamp(32px, 4vw, 52px); }
+.about-employee-first, .about-technology { padding-top: clamp(34px, 4.5vw, 60px); padding-bottom: clamp(34px, 4.5vw, 60px); }
+
+@media (max-width: 700px) {
+  .section-wrap { padding-top: 38px; padding-bottom: 38px; }
+  .why-visit { padding-top: 38px; padding-bottom: 40px; }
+  .home-application-guide { padding-top: 32px; padding-bottom: 34px; }
+  .home-featured-copy { padding-top: 30px; padding-bottom: 30px; }
+  .recent-stories { padding-top: 34px; padding-bottom: 34px; }
+  .catalogues-page-heading { padding-top: 22px; padding-bottom: 26px; }
+  .digital-showroom { padding-top: 20px; padding-bottom: 20px; }
+  .tile-finder { padding-top: 26px; padding-bottom: 26px; }
+  .about-page.about.section-wrap { padding-top: 26px; padding-bottom: 34px; }
+}

@@ -1,0 +1,32 @@
+/* The footer stays in its own file so its content and sizing are easy to edit. */
+.footer-sizes a { white-space: nowrap; }
+.footer .footer-brand img { filter: drop-shadow(0 2px 8px rgb(0 0 0 / 18%)); }
+.footer .footer-brand p,
+.footer .footer-note p,
+.footer .footer-links a,
+.footer .footer-contact a,
+.footer .footer-bottom { color: #fff; }
+.footer .footer-note p b,
+.footer .footer-contact p b { color: #fff; }
+.footer .footer-contact .footer-company { color: #fff; }
+.footer .footer-bottom span:last-child { color: #fff; }
+.footer .footer-links > span,
+.footer .footer-note > span { color: #fff; }
+.footer .footer-links > span::after,
+.footer .footer-note > span::after { background: #f29b34; }
+.footer-sizes { display: flex; flex-direction: column; align-items: flex-start; gap: 11px; }
+.footer-sizes a { width: fit-content; color: #d7e3da; font-size: 14px; line-height: 1.5; text-decoration: none; transition: color .2s ease; }
+.footer .footer-sizes a:hover { color: #f4a641; }
+@media (min-width: 1001px) {
+  .footer .footer-main { grid-template-columns: minmax(190px, 1.5fr) minmax(120px, .4fr) minmax(140px, .9fr) minmax(210px, 0.8fr) minmax(190px, .94fr); }
+}
+@media (max-width: 1000px) {
+  .footer .footer-main { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .footer-brand { grid-column: span 2; }
+}
+@media (max-width: 600px) {
+  .footer .footer-main { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-sizes { gap: 8px; }
+  .footer-sizes a { white-space: normal; font-size: 12px; }
+}

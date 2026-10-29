@@ -1,0 +1,37 @@
+.tile-finder { padding:clamp(30px,5vw,62px) clamp(20px,4vw,58px); color:#fff; background:linear-gradient(105deg,#111716ed 0%,#111716da 48%,#1017158c 100%),url('/images/stock/tile-wall-grid.webp') center/cover; }
+.finder-heading h2 { margin:14px 0 8px; font:500 clamp(34px,4.2vw,52px)/1.04 var(--display); letter-spacing:-.055em; }
+.finder-heading h2 em { font-family:var(--serif); font-weight:400; }
+.finder-heading>p { max-width:590px; color:#d5e0d8; font-size:15px; line-height:1.6; }
+.finder-upload { display:grid; grid-template-columns:.8fr 1.2fr; gap:26px; align-items:stretch; margin-top:25px; }
+.finder-steps { display:grid; align-content:center; gap:20px; }
+.finder-steps article { display:flex; gap:13px; align-items:flex-start; }
+.finder-steps article>span { flex:0 0 36px; display:grid; place-items:center; width:36px; height:36px; border:1px solid #c8a553; border-radius:50%; color:#e5c36c; font-size:12px; }
+.finder-steps b { font-size:14px; }
+.finder-steps p { margin:5px 0 0; color:#d0d9d2; font-size:13px; line-height:1.5; }
+.finder-dropzone { display:flex; min-height:230px; flex-direction:column; align-items:center; justify-content:center; border:1px dashed #d0d0c9a8; padding:20px; background:#ffffff16; text-align:center; backdrop-filter:blur(5px); transition:background .2s,border-color .2s; }
+.finder-dropzone.is-dragging { border-color:#dfbd66; background:#ffffff28; }
+.finder-upload-icon { color:#d8b456; font-size:36px; line-height:1; }
+.finder-dropzone strong { margin-top:12px; font-size:14px; }
+.finder-dropzone small { margin-top:6px; color:#cbd4ce; font-size:12px; }
+.finder-dropzone button { min-width:125px; margin-top:17px; border:1px solid #fff; padding:10px 18px; background:transparent; color:#fff; font-size:11px; font-weight:700; letter-spacing:.1em; cursor:pointer; }
+.finder-dropzone button:hover { background:#fff; color:var(--green); }
+.finder-dropzone input { display:none; }
+.finder-dropzone [role=alert] { margin:10px 0 0; color:#ffe2a4; font-size:12px; }
+.finder-file-preview { display:flex; gap:11px; align-items:center; max-width:100%; border-top:1px solid #ffffff35; padding-top:12px; }
+.finder-file-preview img { width:68px; height:54px; object-fit:cover; }
+.finder-file-preview div { min-width:0; display:grid; gap:5px; }
+.finder-file-preview b { overflow:hidden; max-width:230px; text-overflow:ellipsis; white-space:nowrap; font-size:12px; }
+.finder-file-preview button { border:0; padding:0; background:none; color:#eed27f; text-align:left; font-size:9px; letter-spacing:.1em; cursor:pointer; }
+.finder-results { margin-top:28px; border-top:1px solid #ffffff4d; padding-top:20px; }
+.finder-results-heading { display:flex; align-items:center; justify-content:space-between; gap:15px; margin-bottom:13px; }
+.finder-results-heading small { color:#d1d8d2; font-size:11px; }
+.finder-result-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:13px; }
+.finder-result-grid article { display:grid; grid-template-columns:118px 1fr; min-height:120px; background:#f8f7f1; color:var(--green); }
+.finder-result-grid article>img { width:100%; height:100%; min-height:120px; object-fit:cover; }
+.finder-result-grid article>div { display:grid; align-content:center; gap:5px; padding:11px; }
+.finder-result-grid article small { color:#718278; font-size:9px; letter-spacing:.07em; }
+.finder-result-grid article b { font:600 14px var(--display); }
+.finder-result-grid article span { color:#66776d; font-size:10px; }
+.finder-result-grid article button { justify-self:start; margin-top:4px; border:0; padding:0; background:none; color:#057b6a; font-size:9px; font-weight:700; letter-spacing:.05em; cursor:pointer; }
+@media(max-width:800px){.finder-upload{grid-template-columns:1fr}.finder-steps{grid-template-columns:1fr 1fr}.finder-result-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.tile-finder{padding:30px 16px}.finder-steps{grid-template-columns:1fr}.finder-results-heading{align-items:flex-start;flex-direction:column}.finder-result-grid article{grid-template-columns:100px 1fr}.finder-dropzone{min-height:205px}}
