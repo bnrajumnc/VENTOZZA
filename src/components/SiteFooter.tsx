@@ -172,12 +172,12 @@ export default function SiteFooter({
 
         {/* Office addresses */}
         <div className="footer-note footer-addresses">
-          <span>CORPORATE</span>
+          <span style={{marginBottom: '-15px' }}>REGISTERED OFFICE:</span>
 
           <p>
-            <b style={{ fontSize: '16px' }}>
+            {/* <b style={{ fontSize: '16px' }}>
               Registered Office:
-            </b>
+            </b> */}
             <br />
             10-3-71/3/A, 3rd Floor,
             <br />
@@ -187,11 +187,11 @@ export default function SiteFooter({
             <br />
             Telangana, India
           </p>
-
+          <span style={{ marginTop: '20px',marginBottom: '-15px' }}>CORPORATE OFFICE:</span>
           <p>
-            <b style={{ fontSize: '16px' }}>
+            {/* <b style={{ fontSize: '16px' }}>
               Corporate Office:
-            </b>
+            </b> */}
             <br />
             Siromani 142, Ground Floor,
             <br />

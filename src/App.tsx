@@ -212,7 +212,7 @@ function App() {
       visualizer: 'Digital Tile Visualizer', calculator: 'Tile Quantity Calculator', catalogues: 'Tile Catalogues',
     }
     const pageTitles: Record<Page, string> = {
-      home: 'Ceramic Tiles for Walls & Floors', products: viewTitles[tileView] ?? 'Tile Collection',
+      home: 'Residentials/Commercials project spaces', products: viewTitles[tileView] ?? 'Tile Collection',
       about: 'About VENTOZZA Surfaces', certificates: 'Tile Quality & Certificates', contact: 'Contact VENTOZZA',
     }
     const pageDescriptions: Record<Page, string> = {

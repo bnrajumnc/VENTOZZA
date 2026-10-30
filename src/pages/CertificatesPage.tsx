@@ -17,7 +17,7 @@ export default function CertificatesPage() {
 
   return <section className="certificates certificates-page" id="certificates">
     <div className="certificates-visual" aria-hidden="true" />
-    <div className="cert-page-head">
+    {/* <div className="cert-page-head">
       <div className="cert-intro reveal">
         <div className="eyebrow"><i /> QUALITY &amp; DOCUMENTATION</div>
         <h2>Quality you can<br/><em>look into.</em></h2>
@@ -29,9 +29,9 @@ export default function CertificatesPage() {
         <div><small>QUALITY MANAGEMENT SYSTEM</small><b>ISO 9001:2015</b><span>Issued to Greenray Granito Private Limited</span></div>
         <span className="cert-summary-index">01</span>
       </div>
-    </div>
+    </div> */}
 
-    <article className="cert-document reveal">
+    <article className="cert-document reveal" style ={{ marginTop:-50 } as React.CSSProperties}>
       <div className="cert-document-art" aria-hidden="true"><span>VENTOZZA</span><i>✳︎</i><small>QUALITY · MATERIAL · CARE</small></div>
       <div className="cert-document-copy">
         <span className="eyebrow"><i /> COMPANY PROFILE DOCUMENT</span>

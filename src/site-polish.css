@@ -32,11 +32,11 @@ main p { color: #304b40; }
 .footer .footer-contact a:hover,
 .footer .footer-links a:hover,
 .footer .footer-bottom a:hover,
-.footer-sizes a:hover { color: #ffd27a !important; text-decoration: underline; text-underline-offset: 3px; }
+.footer-sizes a:hover { color: #FF7911 !important; text-decoration: underline; text-underline-offset: 3px; }
 .footer .footer-contact a:hover,
 .footer .footer-links a:hover,
 .footer-sizes a:hover { transform: translateX(3px); }
-.footer a:focus-visible { outline: 2px solid #ffd27a; outline-offset: 3px; }
+.footer a:focus-visible { outline: 2px solid #FF7911; outline-offset: 3px; }
 
 .contact-form label { color: #304b40; font-size: 14px; font-weight: 600; }
 .contact-form small,
