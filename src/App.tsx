@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type FormEvent, type Mous
 import ventozzaLogo from '../assets/ventozza-logo-clear.png'
 import SiteFooter from './components/SiteFooter'
 import { enquiryRecipient, submitEnquiry } from './utils/formSubmit'
-import { products, tileLooks, tileSizeOptions } from './data/tileData'
+import { tileLooks, tileSizeOptions } from './data/tileData'
 import AboutPage from './pages/AboutPage'
 import CertificatesPage from './pages/CertificatesPage'
 import ContactPage from './pages/ContactPage'
@@ -14,48 +14,48 @@ const slides = [
     eyebrow: 'TILES THAT FEEL LIKE HOME',
     title: <>Find the tile<br />that feels like <em>you.</em></>,
     body: 'Explore tile styles, sizes and finishes for every room, from one considered collection.',
-    image: '/images/ventozza/catalogue-art/hero-slide-01.webp',
-    alt: 'Marble-look ceramic tiles across the walls and floor of a modern bathroom',
+    image: '/images/ventozza/hero/hero-room-01-regenerated.jpg',
+    alt: 'Marble-look floor tiles in a contemporary lounge and reception space',
     note: 'MARBLE-LOOK · WALL & FLOOR',
   },
   {
     eyebrow: 'A TILE FOR EVERY ROOM',
     title: <>Make room<br />for a new <em>look.</em></>,
     body: 'From subtle stone looks to expressive patterns, find tiles that bring your ideas together.',
-    image: '/images/ventozza/catalogue-art/hero-slide-02.webp',
-    alt: 'Warm wood-look tile flooring in a contemporary dining space',
+    image: '/images/ventozza/hero/hero-room-02-regenerated.jpg',
+    alt: 'Bright living room with light marble-look floor tiles',
     note: '200 × 1200 MM · WOOD-LOOK PLANK',
   },
   {
     eyebrow: 'SIZE. FINISH. FEEL.',
     title: <>The right tile<br />changes <em>everything.</em></>,
     body: 'Compare formats and finishes, then find the tile that fits your project and your plans.',
-    image: '/images/ventozza/catalogue-art/hero-slide-03.webp',
-    alt: 'Modern bathroom with clearly detailed wall and floor tiles',
+    image: '/images/ventozza/hero/hero-room-03-regenerated.jpg',
+    alt: 'Warm living room with expressive stone-look floor tiles',
     note: '600 × 1200 MM · FULL BODY',
   },
   {
     eyebrow: 'LARGE-FORMAT SURFACES',
     title: <>A calmer kind<br />of <em>statement.</em></>,
     body: 'Create a seamless impression with generous tile formats and considered stone looks.',
-    image: '/images/ventozza/catalogue-art/hero-slide-04.webp',
-    alt: 'Bright dining interior with large format ceramic floor tiles',
+    image: '/images/ventozza/hero/hero-room-04-regenerated.jpg',
+    alt: 'Modern lounge with large grey porcelain floor tiles',
     note: '800 × 1600 MM · GLOSSY RANGE',
   },
   {
     eyebrow: 'SURFACES FOR EVERY ROOM',
     title: <>Let the room<br />find its <em>rhythm.</em></>,
     body: 'Browse tile looks for kitchens, living spaces, bathrooms and more.',
-    image: '/images/ventozza/catalogue-art/hero-slide-05.webp',
-    alt: 'Contemporary living room finished with large format floor tiles',
+    image: '/images/ventozza/hero/hero-room-05-regenerated.jpg',
+    alt: 'Contemporary bathroom with patterned wall tiles and a tiled floor',
     note: '800 × 1600 MM · ANT CREMILO',
   },
   {
     eyebrow: 'COLOUR. TEXTURE. CHARACTER.',
     title: <>A surface that<br />speaks <em>your style.</em></>,
     body: 'From soft stone tones to distinctive patterns, find a finish that feels right.',
-    image: '/images/ventozza/catalogue-art/hero-slide-06.webp',
-    alt: 'Modern lounge with pale tile flooring and layered architectural details',
+    image: '/images/ventozza/hero/hero-room-06-regenerated.jpg',
+    alt: 'Restaurant interior with white marble-look floor tiles',
     note: '800 × 1600 MM · ANT GREY',
   },
 ]
@@ -64,19 +64,12 @@ const tileViews = [
   { id: 'overview', label: 'All tiles' },
   { id: 'size', label: 'By size' },
   { id: 'look-feel', label: 'Look & feel' },
-  { id: 'visualizer', label: 'Digital visualizer' },
+  { id: 'visualizer', label: 'Digital showroom' },
   { id: 'calculator', label: 'Tile calculator' },
   { id: 'catalogues', label: 'Catalogues' },
   // Temporarily disabled site-wide: By location and Collections.
 ] as const
 type TileView = typeof tileViews[number]['id']
-const normalizeSearchText = (value: string) => value
-  .toLowerCase()
-  .normalize('NFD')
-  .replace(/[\u0300-\u036f]/g, '')
-  .replace(/[×✕]/g, 'x')
-  .replace(/[^a-z0-9]+/g, ' ')
-  .trim()
 type Page = 'home' | 'products' | 'about' | 'certificates' | 'contact'
 type ChatAction = { label: string; page?: Page; tileView?: TileView; prompt?: string; catalogueFormat?: string }
 type ChatMessage = { id: number; role: 'assistant' | 'user'; text: string; actions?: ChatAction[] }
@@ -106,7 +99,7 @@ const getTileReply = (question: string, previousQuestion = ''): Pick<ChatMessage
   const previousFormat = findChatFormat(previous)
   const relevantFormat = matchedFormat ?? previousFormat
   if (/^(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(message)) return { text: 'Hello! I’m the VENTOZZA tile guide. I can help with catalogue formats, room ideas, finishes, quantity estimates and product documents. What are you working on?', actions: [{ label: 'Find a tile size', page: 'products', tileView: 'size' }, { label: 'Open visualizer', page: 'products', tileView: 'visualizer' }, { label: 'Calculate quantity', page: 'products', tileView: 'calculator' }] }
-  if (/visuali[sz]|showroom|preview|upload my room/.test(message)) return { text: 'The Digital Visualizer lets you preview tile looks in the living room, kitchen or bathroom scene. Choose a room, then compare the available surface looks. The preview is indicative; screen colour may differ from a physical tile.', actions: [{ label: 'Open digital visualizer', page: 'products', tileView: 'visualizer' }, { label: 'Browse tile finishes', page: 'products', tileView: 'look-feel' }] }
+  if (/visuali[sz]|showroom|preview|upload my room/.test(message)) return { text: 'The Digital Showroom is a catalogue-linked application gallery. Filter by tile format, view generated room illustrations and open matching catalogues. It does not apply tiles to an uploaded room. Confirm exact designs, colours and suitability with our team.', actions: [{ label: 'Open digital showroom', page: 'products', tileView: 'visualizer' }, { label: 'Browse tile finishes', page: 'products', tileView: 'look-feel' }] }
   if (/calculat|how many|quantity|pieces|tiles needed|wastage/.test(message)) return { text: matchedFormat ? `For ${matchedFormat.size}, each tile covers about ${Number(matchedFormat.key.slice(0, matchedFormat.key.indexOf('x'))) * Number(matchedFormat.key.slice(matchedFormat.key.indexOf('x') + 1)) / 1_000_000} m². The calculator uses your room dimensions and extra allowance to estimate pieces; confirm box coverage and installation requirements with your tile professional.` : 'The calculator estimates tile pieces from room length × width, selected tile format and an extra allowance for cuts. Enter the room dimensions in metres and choose a tile size to see an estimate. Want to open it?', actions: [{ label: 'Open tile calculator', page: 'products', tileView: 'calculator' }, ...(matchedFormat ? [{ label: `Browse ${matchedFormat.size}`, page: 'products' as Page, tileView: 'catalogues' as TileView, catalogueFormat: matchedFormat.groups[0] }] : [{ label: 'Browse available sizes', page: 'products' as Page, tileView: 'size' as TileView }])] }
   if (matchedFormat && !/catalog|brochure|download|pdf|kitchen|bath|shower|finish|texture|pattern|look|style|colour|color|glossy|matte|rustic|carving|calculate|quantity|pieces|how many|good for|suitable|room|wall|floor/.test(message)) return { text: `${matchedFormat.size} is listed in the VENTOZZA catalogue. ${matchedFormat.details} Would you like to see those catalogues or estimate how many tiles your room may need?`, actions: [{ label: `View ${matchedFormat.size} catalogues`, page: 'products', tileView: 'catalogues', catalogueFormat: matchedFormat.groups[0] }, { label: 'Calculate quantity', page: 'products', tileView: 'calculator' }] }
   if (/catalog|brochure|download|pdf/.test(message)) return { text: relevantFormat ? `I can take you directly to the ${relevantFormat.size} brochures. Open a catalogue to preview its PDF here, or use Download to save it.` : 'The e-catalogue library keeps the supplied brochure names and lets you preview PDFs on the site or download them. Which tile size or catalogue name should I look for?', actions: relevantFormat ? [{ label: `View ${relevantFormat.size} catalogues`, page: 'products', tileView: 'catalogues', catalogueFormat: relevantFormat.groups[0] }, { label: 'Browse all catalogues', page: 'products', tileView: 'catalogues' }] : [{ label: 'Browse catalogues', page: 'products', tileView: 'catalogues' }, { label: 'See tile sizes', page: 'products', tileView: 'size' }] }
@@ -158,6 +151,7 @@ function App() {
   const [headerSearch, setHeaderSearch] = useState('')
   const [productSearch, setProductSearch] = useState('')
   const [showTop, setShowTop] = useState(false)
+  const [headerScrolled, setHeaderScrolled] = useState(() => window.scrollY > 24)
   const [chatOpen, setChatOpen] = useState(false)
   const [chatInput, setChatInput] = useState('')
   const chatEndRef = useRef<HTMLDivElement>(null)
@@ -188,8 +182,22 @@ function App() {
   }
 
   useLayoutEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration
+    window.history.scrollRestoration = 'manual'
+    if (pageFromHash() === 'home') window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    return () => { window.history.scrollRestoration = previousScrollRestoration }
+  }, [])
+
+  useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
   }, [activePage, tileView, navigationRevision])
+
+  useEffect(() => {
+    const updateHeaderState = () => setHeaderScrolled(window.scrollY > 24)
+    window.addEventListener('scroll', updateHeaderState, { passive: true })
+    updateHeaderState()
+    return () => window.removeEventListener('scroll', updateHeaderState)
+  }, [])
 
   const handlePageLink = (event: ReactMouseEvent<HTMLElement>) => {
     if (event.defaultPrevented) return
@@ -197,19 +205,32 @@ function App() {
     if (!anchor) return
     const target = anchor.getAttribute('href')?.slice(1)
     if (!target) return
+    if (target.startsWith('about-') && document.getElementById(target)) {
+      event.preventDefault()
+      document.getElementById(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      return
+    }
+    if (target.startsWith('tiles/')) {
+      event.preventDefault()
+      navigateToTileView(target.slice('tiles/'.length) as TileView)
+      return
+    }
     const page: Page = target === 'products' || target === 'tile-formats' ? 'products' : target === 'about' ? 'about' : target === 'certificates' ? 'certificates' : target === 'contact' ? 'contact' : 'home'
     event.preventDefault()
     navigateTo(page)
   }
   useEffect(() => {
-    const timer = window.setInterval(() => setActiveSlide((current) => (current + 1) % slides.length), 6500)
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = window.setInterval(() => {
+      if (!document.hidden) setActiveSlide((current) => (current + 1) % slides.length)
+    }, 6500)
     return () => window.clearInterval(timer)
   }, [activePage])
 
   useEffect(() => {
     const viewTitles: Partial<Record<TileView, string>> = {
       overview: 'Ceramic Tile Collection', size: 'Tile Sizes & Formats', 'look-feel': 'Tile Looks & Finishes',
-      visualizer: 'Digital Tile Visualizer', calculator: 'Tile Quantity Calculator', catalogues: 'Tile Catalogues',
+      visualizer: 'Digital Tile Showroom', calculator: 'Tile Quantity Calculator', catalogues: 'Tile Catalogues',
     }
     const pageTitles: Record<Page, string> = {
       home: 'Residentials/Commercials project spaces', products: viewTitles[tileView] ?? 'Tile Collection',
@@ -259,10 +280,14 @@ function App() {
     let observer: IntersectionObserver | undefined
     const frame = window.requestAnimationFrame(() => {
       const activeView = document.querySelector<HTMLElement>(`main#home[data-page="${activePage}"]`)
+      // Animate leaf sections only: nested reveal layers delay content and compound opacity.
+      activeView?.querySelectorAll<HTMLElement>('section:not(.hero):not(.reveal)').forEach((section) => {
+        if (!section.querySelector('section, .reveal')) section.classList.add('reveal')
+      })
       const elements = activeView?.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)') ?? []
 
       // Reveal content immediately in older browsers that do not support IO.
-      if (!('IntersectionObserver' in window)) {
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         elements.forEach((element) => element.classList.add('is-visible'))
         return
       }
@@ -274,7 +299,7 @@ function App() {
             observer?.unobserve(entry.target)
           }
         })
-      }, { threshold: 0.08 })
+      }, { threshold: 0.01, rootMargin: '0px 0px -24px 0px' })
       elements.forEach((element) => observer?.observe(element))
     })
 
@@ -347,30 +372,43 @@ function App() {
 
   const moveSlide = (step: number) => setActiveSlide((current) => (current + step + slides.length) % slides.length)
   const slide = slides[activeSlide]
-  const searchTerms = normalizeSearchText(productSearch).split(' ').filter(Boolean)
-  const visibleProducts = products.filter((product) => {
-    const searchable = normalizeSearchText(`${product.name} ${product.code} ${product.size} ${product.finish} ${product.alt}`)
-    return searchTerms.every((term) => searchable.includes(term))
-  })
 
   return (
     <>
       {/* <div className="topline"><span>VENTOZZA · A TILE-FOCUSED COMPANY</span><span>Find your tile <a href="#products" onClick={(event) => { event.preventDefault(); navigateTo('products') }}>Explore <Arrow diagonal /></a></span><span className="topline-right">TILES FOR HOME & PROJECTS</span></div> */}
-      <header className="header">
+      <header className={activePage === 'home' ? (headerScrolled ? 'header header-home-scrolled' : 'header header-transparent') : 'header'}>
         <button className="menu-button" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
         <a className="logo" href="#home" aria-label="VENTOZZA home" onClick={(event) => { event.preventDefault(); navigateTo('home') }}><img src={ventozzaLogo} alt="VENTOZZA" /></a>
         <nav className={menuOpen ? 'nav nav-open' : 'nav'} aria-label="Main navigation">
           <button className={activePage === 'home' ? 'nav-active' : ''} aria-current={activePage === 'home' ? 'page' : undefined} onClick={() => navigateTo('home')}>Home</button>
           <button className={activePage === 'about' ? 'nav-active' : ''} aria-current={activePage === 'about' ? 'page' : undefined} onClick={() => navigateTo('about')}>About Us</button>
-          <div className={`nav-products ${tilesMenuOpen ? 'mobile-open' : ''}`}>
-            <button className={activePage === 'products' && !['visualizer', 'calculator'].includes(tileView) ? 'nav-active' : ''} aria-expanded={tilesMenuOpen} onClick={() => { if (window.matchMedia('(max-width: 700px)').matches) setTilesMenuOpen((open) => !open); else navigateToTileView('overview') }}>E-catalogue <span className="nav-chevron">⌄</span></button>
+          <div
+            className={`nav-products ${tilesMenuOpen ? 'menu-open mobile-open' : ''}`}
+            onMouseEnter={() => {
+              if (!window.matchMedia('(max-width: 700px)').matches) {
+                setTilesMenuOpen(true)
+                setVisualizerMenuOpen(false)
+              }
+            }}
+            onMouseLeave={() => setTilesMenuOpen(false)}
+          >
+            <button className={activePage === 'products' && !['visualizer', 'calculator'].includes(tileView) ? 'nav-active' : ''} aria-expanded={tilesMenuOpen} onClick={() => { if (window.matchMedia('(max-width: 700px)').matches) setTilesMenuOpen((open) => !open); else navigateToTileView('overview') }}>E-Catalogue <span className="nav-chevron">⌄</span></button>
             <div className="tiles-dropdown" aria-label="E-Eatalogue tile categories">
               {tileViews.filter((view) => !['visualizer', 'calculator'].includes(view.id)).map((view) => <button key={view.id} className={tileView === view.id ? 'submenu-active' : ''} onClick={() => navigateToTileView(view.id)}>{view.label}</button>)}
             </div>
           </div>
-          <div className={`nav-products nav-visualizer ${visualizerMenuOpen ? 'mobile-open' : ''}`}>
-            <button className={activePage === 'products' && ['visualizer', 'calculator'].includes(tileView) ? 'nav-active' : ''} aria-expanded={visualizerMenuOpen} onClick={() => { if (window.matchMedia('(max-width: 700px)').matches) setVisualizerMenuOpen((open) => !open); else navigateToTileView('visualizer') }}>Digital Visualizer <span className="nav-chevron">⌄</span></button>
-            <div className="tiles-dropdown" aria-label="Digital visualizer tools">
+          <div
+            className={`nav-products nav-visualizer ${visualizerMenuOpen ? 'menu-open mobile-open' : ''}`}
+            onMouseEnter={() => {
+              if (!window.matchMedia('(max-width: 700px)').matches) {
+                setVisualizerMenuOpen(true)
+                setTilesMenuOpen(false)
+              }
+            }}
+            onMouseLeave={() => setVisualizerMenuOpen(false)}
+          >
+            <button className={activePage === 'products' && ['visualizer', 'calculator'].includes(tileView) ? 'nav-active' : ''} aria-expanded={visualizerMenuOpen} onClick={() => { if (window.matchMedia('(max-width: 700px)').matches) setVisualizerMenuOpen((open) => !open); else navigateToTileView('visualizer') }}>Digital Showroom <span className="nav-chevron">⌄</span></button>
+            <div className="tiles-dropdown" aria-label="Digital showroom tools">
               <button className={tileView === 'visualizer' ? 'submenu-active' : ''} onClick={() => navigateToTileView('visualizer')}>Digital showroom</button>
               {/* Temporarily hidden; keep available here to re-enable later. */}
               {/* <button className="visualizer-unavailable" type="button" onClick={() => { setCallbackInterest('Virtual space creator enquiry'); setCallbackOpen(true) }}>Virtual space creator</button> */}
@@ -381,10 +419,10 @@ function App() {
           <button className={activePage === 'contact' ? 'nav-active' : ''} aria-current={activePage === 'contact' ? 'page' : undefined} onClick={() => navigateTo('contact')}>Contact Us</button>
         </nav>
         <div className="header-tools">
-          <button className="where-to-buy" type="button" onClick={() => navigateTo('contact')}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg><span>WHERE TO BUY</span></button>
+          <button className="header-icon-button" type="button" aria-label={headerSearchOpen ? 'Close search' : 'Search tiles'} aria-expanded={headerSearchOpen} onClick={() => setHeaderSearchOpen((open) => !open)}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.2" /><path d="m16 16 5 5" /></svg></button>
+          <button className="where-to-buy" type="button" aria-label="Where to buy — contact us" title="Where to buy" onClick={() => navigateTo('contact')}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg></button>
           {/* Temporarily hidden account access icon; restore this button when login is needed. */}
           {/* <button className="header-icon-button" type="button" aria-label="Login" onClick={() => navigateTo('login')}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="9" r="3" /><path d="M6.5 18c1.1-2.2 3-3.3 5.5-3.3s4.4 1.1 5.5 3.3" /></svg></button> */}
-          <button className="header-icon-button" type="button" aria-label={headerSearchOpen ? 'Close search' : 'Search tiles'} aria-expanded={headerSearchOpen} onClick={() => setHeaderSearchOpen((open) => !open)}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.2" /><path d="m16 16 5 5" /></svg></button>
           {headerSearchOpen && <form className="header-search-panel" onSubmit={submitTileSearch}><label htmlFor="header-tile-search">Search VENTOZZA tiles</label><div><input id="header-tile-search" type="search" value={headerSearch} onChange={(event) => setHeaderSearch(event.target.value)} onKeyDown={(event) => { if (event.key === 'Escape') setHeaderSearchOpen(false) }} placeholder="Try a tile name, size or finish" autoFocus /><button type="submit" aria-label="Search tiles">→</button></div><small>Search tile names, codes, finishes and displayed sizes.</small></form>}
         </div>
       </header>
@@ -392,9 +430,9 @@ function App() {
       <main id="home" data-page={activePage} data-tile-view={tileView} onClick={handlePageLink}>
         {activePage === 'home' && <HomePage slide={slide} activeSlide={activeSlide} slideCount={slides.length} onMoveSlide={moveSlide} onNavigate={navigateTo} onTiles={navigateToTileView} onCatalogueSize={(format) => navigateToTileView('catalogues', format)} />}
 
-        {activePage === 'products' && <ProductsPage tileView={tileView} views={tileViews} products={visibleProducts} productSearch={productSearch} sizeOptions={tileSizeOptions} looks={tileLooks} initialCatalogueFormat={initialCatalogueFormat} onSelect={navigateToTileView} onEnquire={(interest) => { setCallbackInterest(interest); setCallbackOpen(true) }} onClearSearch={() => { setProductSearch(''); setHeaderSearch('') }} onNavigateContact={() => navigateTo('contact')} />}
+        {activePage === 'products' && <ProductsPage tileView={tileView} views={tileViews} productSearch={productSearch} sizeOptions={tileSizeOptions} looks={tileLooks} initialCatalogueFormat={initialCatalogueFormat} onSelect={navigateToTileView} onEnquire={(interest) => { setCallbackInterest(interest); setCallbackOpen(true) }} onClearSearch={() => { setProductSearch(''); setHeaderSearch('') }} onNavigateContact={() => navigateTo('contact')} />}
 
-        <AboutPage />
+        {activePage === 'about' && <AboutPage />}
 
         <CertificatesPage />
 

@@ -1,0 +1,49 @@
+/* Readable secondary labels across all pages. Keep values in one place. */
+:root {
+  --readable-label-size: 13px;
+  --readable-label-weight: 600;
+  --readable-label-color: #007d70;
+}
+#root main#home :is(
+  .eyebrow, [class*='eyebrow'], .about-reference-kicker,
+  .about-reference-promoters>h3, .contact-office-heading>span,
+  .cert-holder>b, .cert-meta dt, .finish-detail-label,
+  .application-filter, .finish-compare-select,
+  .calculator-fields label, .calculator-fields label>span,
+  .expansion-phase-label, .expansion-focus-label,
+  .about-reference-specialty-slide-copy>small,
+  .why-visit-copy>small, .find-fit-editable-heading>span
+) {
+  font-size: var(--readable-label-size) !important;
+  font-weight: var(--readable-label-weight) !important;
+  line-height: 1.5 !important;
+  letter-spacing: .08em !important;
+  color: var(--readable-label-color) !important;
+  opacity: 1 !important;
+}
+#root main#home :is(.application-filter,.finish-compare-select,.calculator-fields label) {
+  letter-spacing: normal !important;
+}
+#root main#home :is(.finish-details dt,.finish-compare-toggle,.application-thumbnails span,.finish-selector small,.contact-person>span:not(.contact-channel-icon),.catalogue-card-copy>small,.all-tiles-library-copy>small) {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  opacity: 1 !important;
+}
+/* White labels remain readable on the photographic homepage hero. */
+#root main#home .hero-image-showcase .hero-copy .eyebrow-light {
+  color:#fff !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+}
+@media(max-width:600px) {
+  :root { --readable-label-size:12px; }
+}
+:root #root main#home .catalogues-sidebar-title {
+  color: #007d70 !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  letter-spacing: .08em !important;
+  line-height: 1.5;
+  opacity: 1 !important;
+}

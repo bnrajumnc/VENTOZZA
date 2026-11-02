@@ -1,0 +1,51 @@
+/* Final shared polish. Photo captions, the approved hero and footer keep their own palettes. */
+:root {
+  --sans: var(--site-font-family, 'Poppins', sans-serif);
+}
+body { overflow-wrap:break-word; }
+main#home { min-width:0; }
+main#home :is(input,select,textarea,button) { font-family:var(--site-font-family, 'Poppins', sans-serif); }
+#root main#home :is(
+  .application-note,.application-preview figcaption,.finish-caption,
+  .finish-selector small,.finish-details dt,.calculator-disclaimer,
+  .cert-pdf-label,.cert-blurred-preview figcaption span,
+  .team-promoter-details>span,.about-reference-team-grid article>small,
+  .catalogue-card-copy>small,.catalogues-note p,.login-preview-note,
+  .contact-person small,.contact-person>span:not(.contact-channel-icon)
+) { color:#484b50 !important; opacity:1; line-height:1.6; font-size:13px; }
+#root main#home .contact.contact-structured .contact-copy>p { color:#303236 !important; }
+#root main#home :is(.contact-form,.login-form,.calculator-fields) :is(input,textarea,select) {
+  color:#303236; border-color:#b7c5bf;
+}
+#root main#home :is(input,textarea)::placeholder { color:#62666b; opacity:1; }
+#root :is(button,a,input,select,textarea):focus-visible {
+  outline:2px solid #007d70; outline-offset:4px;
+}
+#root main#home .reveal:focus-within { opacity:1; transform:none; }
+#root main#home :is(.finish-selector button,.application-thumbnails button,.catalogue-category-list button) {
+  transition:border-color 180ms ease,background-color 180ms ease,box-shadow 180ms ease;
+}
+#root main#home :is(.finish-selector button,.application-thumbnails button)[aria-pressed='true'] {
+  border-color:#007d70; box-shadow:0 0 0 1px #007d70;
+}
+#root main#home :is(.application-actions,.calculator-actions) { align-items:center; gap:12px; }
+#root main#home :is(.application-actions,.calculator-actions) button { min-height:44px; }
+@media(hover:hover) {
+  #root main#home :is(.finish-selector button,.application-thumbnails button):hover {
+    border-color:#007d70;
+  }
+}
+@media(max-width:600px) {
+  #root main#home :is(.contact-form,.login-form,.calculator-fields,.application-filter,.finish-compare-select) :is(input,select,textarea) {
+    font-size:16px;
+  }
+  #root main#home :is(.application-actions,.calculator-actions) button { white-space:normal; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html:focus-within,html { scroll-behavior:auto !important; }
+  #root *,#root *::before,#root *::after {
+    animation-duration:.01ms !important; animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  #root main#home .reveal { opacity:1 !important; transform:none !important; }
+}

@@ -1,0 +1,58 @@
+.catalogue-applications{max-width:1360px;margin:auto;color:var(--site-text-color-153f34-cd5121)}
+.catalogue-applications>header{background:transparent!important;margin-bottom:28px;max-width:800px}
+.catalogue-applications h2{font-size:var(--site-text-size-clamp-30px-3-5vw-46px-8457f5);line-height:var(--site-text-line-height-1-1-bd4da1);letter-spacing:var(--site-text-letter-spacing-04em-20854c);margin:12px 0}
+.catalogue-applications header p,.application-note{font-size:var(--site-text-size-14px-5fbabb);line-height:var(--site-text-line-height-1-65-b71188);color:var(--site-text-color-647369-ada2f9)}
+.application-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:36px;align-items:start}
+.application-preview{margin:0;min-width:0}
+.application-preview>img{display:block;width:100%;height:clamp(380px,46vw,650px);object-fit:contain;background:#f4f6f2;border-radius:8px}
+.application-preview figcaption{font-size:var(--site-text-size-11px-26f6fb);line-height:var(--site-text-line-height-1-6-430e4d);color:var(--site-text-color-6a756e-0409d7);margin-top:10px}
+.application-filter{display:grid;gap:8px;color:var(--site-text-color-5f6e64-9f44b8);font-size:var(--site-text-size-12px-3a2909)}
+.application-filter select{border:1px solid #d7dfd8;border-radius:5px;background:#fff;color:var(--site-text-color-153f34-cd5121);padding:12px;width:100%}
+.application-selection{margin:24px 0 18px}
+.application-selection h3{font-size:var(--site-text-size-26px-b41de5);margin:0 0 8px;line-height:var(--site-text-line-height-1-2-1c1141)}
+.application-selection p{font-size:var(--site-text-size-14px-5fbabb);color:var(--site-text-color-647369-ada2f9);margin:0}
+.application-actions{display:flex;flex-wrap:wrap;gap:10px}
+.application-actions button{border:1px solid #244f40;background:#244f40;color:var(--site-text-color-fff-2d802a);padding:12px 16px;border-radius:4px;cursor:pointer;font-size:var(--site-text-size-12px-3a2909)}
+.application-actions button+button{background:#fff;color:var(--site-text-color-244f40-e5929b)}
+.application-actions span{margin-left:8px}
+.application-note{margin:16px 0 24px;font-size:var(--site-text-size-12px-3a2909)}
+.application-thumbnails{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-height:420px;overflow:auto;padding:3px}
+.application-thumbnails button{min-width:0;text-align:var(--site-text-text-align-left-6a1892);background:#fff;padding:0 0 8px;border:1px solid #dfe6df;border-radius:5px;overflow:hidden;cursor:pointer}
+.application-thumbnails button[aria-pressed=true]{border:2px solid #31715b;background:#eff5f0}
+.application-thumbnails img{display:block;width:100%;height:105px;object-fit:cover}
+.application-thumbnails span{display:block;padding:8px 8px 0;font-size:var(--site-text-size-11px-26f6fb);line-height:var(--site-text-line-height-1-4-bd7bd3);color:var(--site-text-color-244f40-e5929b)}
+.catalogue-applications button:focus-visible,.catalogue-applications select:focus-visible{outline:2px solid #d17d37;outline-offset:3px}
+@media(max-width:800px){.application-layout{grid-template-columns:minmax(0,1fr);gap:24px}.application-preview>img{height:420px}.application-thumbnails{max-height:none}.application-thumbnails button{min-height:44px}}
+
+/* Screen-balanced application browser. */
+main#home[data-page="products"][data-tile-view="visualizer"] > .products.section-wrap {
+  padding-top:22px;
+  padding-bottom:30px;
+  background:linear-gradient(90deg,rgba(238,236,228,.78) 0%,rgba(255,255,255,.66) 42%,rgba(233,240,235,.74) 100%),url('/images/ventozza/showroom-visualizer-background.png') center / cover no-repeat;
+}
+main#home .catalogue-applications { max-width:1240px; }
+main#home .catalogue-applications>header { max-width:none; margin-bottom:20px; }
+main#home .catalogue-applications>header .eyebrow { font-size:var(--site-text-size-10px-2ca669); letter-spacing:var(--site-text-letter-spacing-14em-71986b); }
+main#home .catalogue-applications h2 { font-size:var(--site-text-size-clamp-26px-2-6vw-36px-f6b6a6) !important; line-height:var(--site-text-line-height-1-18-1c6af3); margin:10px 0; letter-spacing:var(--site-text-letter-spacing-035em-8b3067); }
+main#home .catalogue-applications header p { font-size:var(--site-text-size-13px-377ddf); line-height:var(--site-text-line-height-1-6-430e4d); margin:0; }
+main#home .application-layout { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px; }
+main#home .application-preview>img { height:clamp(340px,48dvh,500px); }
+main#home .application-preview figcaption { font-size:var(--site-text-size-10px-2ca669); margin-top:7px; }
+main#home .application-filter { gap:6px; font-size:var(--site-text-size-11px-26f6fb); }
+main#home .application-filter select { min-height:40px; padding:9px 12px; font-size:var(--site-text-size-13px-377ddf); }
+main#home .application-selection { margin:16px 0 12px; }
+main#home .application-selection h3 { font-size:var(--site-text-size-clamp-21px-1-9vw-27px-3bb586) !important; line-height:var(--site-text-line-height-1-25-ad78f6); margin-bottom:6px; }
+main#home .application-selection p { font-size:var(--site-text-size-12px-3a2909); }
+main#home .application-actions { gap:8px; }
+main#home .application-actions button { padding:10px 12px; font-size:var(--site-text-size-11px-26f6fb); min-height:40px; }
+main#home .application-note { margin:12px 0 14px; font-size:var(--site-text-size-11px-26f6fb); line-height:var(--site-text-line-height-1-6-430e4d); }
+main#home .application-thumbnails { grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; max-height:clamp(170px,24dvh,250px); overscroll-behavior:contain; scrollbar-width:thin; }
+main#home .application-thumbnails img { height:75px; }
+main#home .application-thumbnails span { font-size:var(--site-text-size-10px-2ca669); line-height:var(--site-text-line-height-1-4-bd7bd3); padding:6px 6px 0; }
+@media(max-width:800px) {
+  main#home .application-layout { grid-template-columns:minmax(0,1fr); gap:20px; }
+  main#home .application-preview>img { height:340px; }
+  main#home .application-thumbnails { max-height:240px; grid-template-columns:repeat(3,minmax(0,1fr)); }
+  main#home .application-actions button { min-height:44px; }
+  main#home .application-filter select { font-size:var(--site-text-size-16px-0c645d); }
+}

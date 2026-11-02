@@ -1,0 +1,49 @@
+/* Homepage hero matches the supplied white-text, image-first reference. */
+#root main#home .hero-image-showcase .hero-inner { padding-inline:clamp(60px,10vw,150px); justify-content:center; }
+#root main#home .hero-image-showcase .hero-copy {
+  position:relative; top:clamp(48px,6vh,64px); width:100%; max-width:1100px; padding:0;
+  margin:0 auto; background:transparent !important; border:0;
+  box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; text-align:center;
+}
+#root main#home .hero-image-showcase .hero-copy { isolation:isolate; }
+#root main#home .hero-image-showcase .hero-copy::before {
+  content:""; position:absolute; inset:-55px -8%; z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.23) 0%,rgba(0,0,0,.13) 42%,rgba(0,0,0,.04) 65%,transparent 85%);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+  mask-image:radial-gradient(ellipse at center,#000 25%,rgba(0,0,0,.85) 52%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 25%,rgba(0,0,0,.85) 52%,transparent 80%);
+  filter:blur(18px);
+  border:0; border-radius:0; box-shadow:none;
+}
+#root main#home .hero-image-showcase .hero-copy .eyebrow-light {
+  display:flex; justify-content:center; align-items:center; gap:12px;
+  color:#fff !important; font-size:12px !important; font-weight:600 !important;
+  letter-spacing:.09em !important; text-shadow:0 2px 12px #0007;
+}
+#root main#home .hero-image-showcase .eyebrow-light i { background:#fff !important; }
+#root main#home .hero-image-showcase .hero-copy h1 {
+  color:#fff !important; font-size:clamp(45px,calc(4.8vw + 1px),77px) !important;
+  font-family:Optima, Candara, 'Segoe UI', sans-serif !important;
+  line-height:1.1 !important; font-weight:500 !important;
+  letter-spacing:-.015em !important; max-width:1100px; margin:30px auto 22px;
+  text-shadow:0 2px 18px #0004;
+}
+#root main#home .hero-image-showcase .hero-copy h1 em { color:#fff !important; font-family:inherit !important; font-style:normal; font-weight:500 !important; }
+#root main#home .hero-image-showcase .hero-copy>p {
+  color:#fff !important; max-width:900px; margin:0 auto;
+  font-size:clamp(13px,calc(1.15vw - 1px),17px) !important; font-weight:500;
+  line-height:1.6; text-shadow:0 2px 12px #0008;
+}
+#root main#home .hero-image-showcase .hero-actions { display:flex; justify-content:center; margin-top:24px; }
+#root main#home .hero-image-showcase .hero-actions .button-light { display:inline-flex; gap:18px; align-items:center; color:#fff !important; background:transparent !important; font-size:14px; font-weight:600; padding:6px; }
+#root main#home .hero-image-showcase .hero-actions .button-light>span { display:grid; place-items:center; width:40px; height:40px; border-radius:50%; background:#fff; color:#58665e !important; text-shadow:none; }
+#root main#home .hero-image-showcase .hero-arrow { background:#fff; color:#53635a !important; width:58px; height:58px; }
+@media(max-width:600px) {
+  #root main#home .hero-image-showcase .hero-copy { top:36px; }
+  #root main#home .hero-image-showcase .hero-inner { padding-inline:46px; }
+  #root main#home .hero-image-showcase .hero-copy h1 { font-size:clamp(37px,calc(7.8vw + 1px),49px) !important; margin-top:22px; }
+  #root main#home .hero-image-showcase .hero-copy .eyebrow-light { font-size:10px !important; }
+  #root main#home .hero-image-showcase .hero-arrow { width:36px; height:36px; font-size:22px; }
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import './CertificatesPage.css'
 
@@ -6,17 +6,32 @@ const certificate = '/documents/ventozza-iso-9001-2015.pdf'
 
 export default function CertificatesPage() {
   const [open, setOpen] = useState(false)
+  const closeButton = useRef<HTMLButtonElement>(null)
   useEffect(() => {
     if (!open) return
-    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') setOpen(false) }
+    const previousFocus = document.activeElement as HTMLElement | null
+    closeButton.current?.focus()
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false)
+      if (event.key === 'Tab') {
+        const items = Array.from(document.querySelectorAll<HTMLElement>('.certificate-viewer a, .certificate-viewer button'))
+        const first = items[0], last = items[items.length - 1]
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+      }
+    }
     document.addEventListener('keydown', closeOnEscape)
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-    return () => { document.removeEventListener('keydown', closeOnEscape); document.body.style.overflow = previousOverflow }
+    return () => { document.removeEventListener('keydown', closeOnEscape); document.body.style.overflow = previousOverflow; previousFocus?.focus() }
   }, [open])
 
   return <section className="certificates certificates-page" id="certificates">
-    <div className="certificates-visual" aria-hidden="true" />
+    <header className="cert-quality-heading">
+      <span className="eyebrow"><i /> QUALITY &amp; CERTIFICATION</span>
+      <h2>Quality, documented.</h2>
+      <p>Explore the supplied quality management certificate.</p>
+    </header>
     {/* <div className="cert-page-head">
       <div className="cert-intro reveal">
         <div className="eyebrow"><i /> QUALITY &amp; DOCUMENTATION</div>
@@ -31,15 +46,19 @@ export default function CertificatesPage() {
       </div>
     </div> */}
 
-    <article className="cert-document reveal" style ={{ marginTop:-50 } as React.CSSProperties}>
-      <div className="cert-document-art" aria-hidden="true"><span>VENTOZZA</span><i>✳︎</i><small>QUALITY · MATERIAL · CARE</small></div>
+    <article className="cert-document reveal">
+      <figure className="cert-blurred-preview">
+        <button type="button" className="cert-preview-paper" onClick={() => setOpen(true)} aria-label="Open clear ISO 9001:2015 certificate"><img src="/images/ventozza/certificates/greenray-iso-9001-2015.jpg" alt="" aria-hidden="true" /></button>
+        <figcaption><b>Certificate preview</b><span>Click to view the clear certificate.</span></figcaption>
+      </figure>
       <div className="cert-document-copy">
-        <span className="eyebrow"><i /> COMPANY PROFILE DOCUMENT</span>
-        <h3>ISO 9001:2015<br/>Quality Management System</h3>
+        <span className="eyebrow">QUALITY MANAGEMENT SYSTEM</span>
+        <h3>ISO 9001:2015</h3>
         <p className="cert-holder"><b>Certificate holder</b><span>Greenray Granito Private Limited</span></p>
-        <p>Open the supplied certificate as a PDF in a focused viewer. It covers the manufacture, supply, import and export of vitrified, glazed vitrified, polished glazed vitrified, porcelain and ceramic tiles.</p>
+        <p>Manufacture, supply, import and export of vitrified, glazed vitrified, polished glazed vitrified, porcelain and ceramic tiles.</p>
         <dl className="cert-meta"><div><dt>Certificate reference</dt><dd>QMS/95F7/0925</dd></div><div><dt>Issue date</dt><dd>23 September 2025</dd></div><div><dt>Valid through</dt><dd>22 September 2028</dd></div></dl>
         <button className="cert-view-button" type="button" onClick={() => setOpen(true)}>VIEW CERTIFICATE <span aria-hidden="true">↗︎</span></button>
+        <small className="cert-pdf-label">PDF document</small>
       </div>
     </article>
 
@@ -50,8 +69,8 @@ export default function CertificatesPage() {
     </div>
     {open && createPortal(<div className="certificate-viewer-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false) }}>
       <section className="certificate-viewer" role="dialog" aria-modal="true" aria-label="ISO 9001:2015 certificate PDF">
-        <header><div><small>VENTOZZA · QUALITY DOCUMENTATION</small><b>ISO 9001:2015 Certificate</b></div><button type="button" onClick={() => setOpen(false)} aria-label="Close certificate">×</button></header>
-        <iframe src={`${certificate}#toolbar=0&navpanes=0`} title="ISO 9001:2015 certificate PDF" />
+        <header><div><small>VENTOZZA · QUALITY DOCUMENTATION</small><b>ISO 9001:2015 Certificate</b></div><div className="certificate-viewer-actions"><a href={certificate} target="_blank" rel="noreferrer">Open PDF ↗</a><button ref={closeButton} type="button" onClick={() => setOpen(false)} aria-label="Close certificate">×</button></div></header>
+        <div className="certificate-clear-document"><img src="/images/ventozza/certificates/greenray-iso-9001-2015.jpg" alt="ISO 9001:2015 quality management certificate issued to Greenray Granito Private Limited, reference QMS/95F7/0925" /></div>
       </section>
     </div>, document.body)}
   </section>

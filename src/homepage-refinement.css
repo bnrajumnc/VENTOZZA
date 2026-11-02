@@ -1,0 +1,45 @@
+/* Bright, restrained homepage typography. Other pages and footer are unchanged. */
+main#home[data-page='home'] > :is(.home-edit, .why-visit, .home-technology, .product-sizes-editorial) {
+  background-color: #fff !important;
+}
+main#home[data-page='home'] :is(.home-edit-heading h2, .why-visit-title h2, .home-technology-heading h2) {
+  font-size:var(--site-text-size-clamp-29px-3-2vw-44px-b0dc37) !important;
+  line-height:var(--site-text-line-height-1-15-e31df2) !important;
+  letter-spacing:var(--site-text-letter-spacing-035em-8b3067);
+  font-weight:var(--site-text-weight-500-60356f);
+  color:var(--site-color-home-heading);
+}
+main#home[data-page='home'] .product-sizes-content h2 {
+  font-size:var(--site-text-size-clamp-27px-3-3vw-46px-e6d472);
+  line-height:var(--site-text-line-height-1-08-ad5b89);
+}
+main#home[data-page='home'] .product-sizes-content header > span {
+  font-size:var(--site-text-size-clamp-28px-3-3vw-44px-607712);
+}
+main#home[data-page='home'] :is(.why-visit-heading > p, .home-technology-heading > p) {
+  font-size:var(--site-text-size-15px-a90797) !important;
+  line-height:var(--site-text-line-height-1-7-2e7701);
+  color:var(--site-color-home-copy);
+}
+main#home[data-page='home'] :is(.why-visit-card-title, .home-technology-card h3) {
+  font-size:var(--site-text-size-clamp-18px-1-6vw-23px-740bee) !important;
+  line-height:var(--site-text-line-height-1-35-318537) !important;
+  letter-spacing:var(--site-text-letter-spacing-02em-0fd8df);
+}
+main#home[data-page='home'] .home-technology-card p {
+  font-size:var(--site-text-size-14px-5fbabb);
+  line-height:var(--site-text-line-height-1-6-430e4d);
+}
+main#home[data-page='home'] .eyebrow {
+  font-size:var(--site-text-size-10px-2ca669);
+  letter-spacing:var(--site-text-letter-spacing-15em-049701);
+  line-height:var(--site-text-line-height-1-5-91cc08);
+}
+main#home[data-page='home'] :is(.under-link, .why-visit-link) {
+  font-size:var(--site-text-size-11px-26f6fb);
+  letter-spacing:var(--site-text-letter-spacing-1em-b91341);
+}
+@media (max-width: 700px) {
+  main#home[data-page='home'] :is(.home-edit-heading h2, .why-visit-title h2, .home-technology-heading h2) { font-size:var(--site-text-size-clamp-28px-7vw-35px-19c22c) !important; }
+  main#home[data-page='home'] .product-sizes-content h2 { font-size:var(--site-text-size-clamp-20px-5vw-30px-5b7a7c); }
+}

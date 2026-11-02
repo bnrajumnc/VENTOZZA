@@ -2,13 +2,20 @@ import { useEffect, useState, type ChangeEvent, type CSSProperties } from 'react
 import { visualizerLooks as tileLooks, visualizerRooms } from '../data/tileData'
 import './DigitalShowroom.css'
 
-type Props = { onEnquire: () => void }
+type Props = { onEnquire: (interest: string) => void; onBrowseCatalogues: (format: string) => void }
 type Surface = 'floor' | 'wall' | 'both'
 type Pattern = 'straight' | 'brick' | 'diagonal'
 const formats = ['1200 × 1800 mm', '800 × 1600 mm', '600 × 1200 mm', '600 × 600 mm', '300 × 600 mm']
+const formatCatalogueIds: Record<string, string> = {
+  '1200 × 1800 mm': '1200x1800',
+  '800 × 1600 mm': '800x1600',
+  '600 × 1200 mm': '600x1200',
+  '600 × 600 mm': '600x600',
+  '300 × 600 mm': '300x600',
+}
 const defaultDesign = { room: 0, look: 0, surface: 'floor' as Surface, pattern: 'straight' as Pattern, format: formats[2], strength: 76 }
 
-export default function DigitalShowroom({ onEnquire }: Props) {
+export default function DigitalShowroom({ onEnquire, onBrowseCatalogues }: Props) {
   const [room, setRoom] = useState(defaultDesign.room)
   const [look, setLook] = useState(defaultDesign.look)
   const [surface, setSurface] = useState<Surface>(defaultDesign.surface)
@@ -99,7 +106,7 @@ export default function DigitalShowroom({ onEnquire }: Props) {
         <section><div className="showroom-control-heading"><b>Choose a catalogue look</b><small>Select a finish to preview</small></div><div className="showroom-finishes">{tileLooks.map((item, index) => <button key={item.name} type="button" aria-pressed={look === index} className={look === index ? 'active' : ''} onClick={() => { setLook(index); setCompare(false) }}><img src={item.image} alt=""/><span>{item.name}</span>{look === index && <i>✓</i>}</button>)}</div></section>
         <section className="showroom-detail-controls"><label><span>Tile format</span><select value={format} onChange={(event) => setFormat(event.target.value)}>{formats.map((item) => <option key={item}>{item}</option>)}</select></label><label><span>Lay pattern</span><select value={pattern} onChange={(event) => setPattern(event.target.value as Pattern)}><option value="straight">Straight lay</option><option value="brick">Brick bond</option><option value="diagonal">Diagonal</option></select></label></section>
         <label className="showroom-strength"><span>Tile visibility <b>{strength}%</b></span><input type="range" min="30" max="100" value={strength} onChange={(event) => setStrength(Number(event.target.value))}/><small>Adjust to blend the finish with the room lighting.</small></label>
-        <div className="showroom-actions"><button type="button" className="showroom-save" onClick={saveDesign}>{saveStatus || 'Save this design'}</button><button type="button" className="showroom-reset" onClick={() => { setRoom(defaultDesign.room); setLook(defaultDesign.look); setSurface(defaultDesign.surface); setPattern(defaultDesign.pattern); setFormat(defaultDesign.format); setStrength(defaultDesign.strength); setCompare(false); setCompareAt(52); if (upload.startsWith('blob:')) URL.revokeObjectURL(upload); setUpload(''); setUploadError(''); setSaveStatus('Preview reset') }}>{'Reset preview'}</button><button type="button" className="showroom-enquire" onClick={onEnquire}>Ask about this tile <span>↗</span></button></div>
+        <div className="showroom-actions"><button type="button" className="showroom-save" onClick={saveDesign}>{saveStatus || 'Save this design'}</button><button type="button" className="showroom-reset" onClick={() => { setRoom(defaultDesign.room); setLook(defaultDesign.look); setSurface(defaultDesign.surface); setPattern(defaultDesign.pattern); setFormat(defaultDesign.format); setStrength(defaultDesign.strength); setCompare(false); setCompareAt(52); if (upload.startsWith('blob:')) URL.revokeObjectURL(upload); setUpload(''); setUploadError(''); setSaveStatus('Preview reset') }}>{'Reset preview'}</button><button type="button" className="showroom-enquire" onClick={() => onEnquire(`${tileLooks[look].name} · ${format} · ${surface} application · ${pattern} lay (digital showroom preview)`)}>Ask about this tile <span>↗</span></button><button type="button" className="showroom-catalogue" onClick={() => onBrowseCatalogues(formatCatalogueIds[format])}>BROWSE {format.replace(' mm', '')} CATALOGUES <span>↗</span></button></div>
         <p className="showroom-disclaimer">A visual guide, not a photorealistic render. Tile colour and finish can vary by lighting, device and batch; confirm product suitability with the VENTOZZA team.</p>
       </aside>
     </div>

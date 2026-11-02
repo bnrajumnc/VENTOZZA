@@ -5,21 +5,21 @@
   --teal: #087e6e;
 }
 
-body { font-size: 15px; line-height: 1.65; color: #203c33; }
-.topline { font-size: 9px; }
-.nav button { font-size: 14px; }
-.header-cta { font-size: 10px; letter-spacing: .08em; }
-.eyebrow { font-size: 10px; letter-spacing: .14em; }
+body { font-size:var(--site-text-size-15px-a90797); line-height:var(--site-text-line-height-1-65-b71188); color:var(--site-text-color-203c33-6df22a); }
+.topline { font-size:var(--site-text-size-9px-c8b605); }
+.nav button { font-size:var(--site-text-size-14px-5fbabb); }
+.header-cta { font-size:var(--site-text-size-10px-2ca669); letter-spacing:var(--site-text-letter-spacing-08em-cc3eb4); }
+.eyebrow { font-size:var(--site-text-size-10px-2ca669); letter-spacing:var(--site-text-letter-spacing-14em-71986b); }
 
 .hero h1 {
   max-width: 760px;
-  font-size: clamp(54px, 6.6vw, 88px);
-  line-height: 1.02;
-  letter-spacing: -.055em;
-  font-weight: 600;
+  font-size:var(--site-text-size-clamp-54px-6-6vw-88px-c422d8);
+  line-height:var(--site-text-line-height-1-02-bc494c);
+  letter-spacing:var(--site-text-letter-spacing-055em-77debb);
+  font-weight:var(--site-text-weight-600-64a878);
 }
-.hero-copy > p { max-width: 410px; font-size: 15px; line-height: 1.75; color: #f1f4f1; }
-.hero-about { font-size: 12px; }
+.hero-copy > p { max-width: 410px; font-size:var(--site-text-size-15px-a90797); line-height:var(--site-text-line-height-1-75-3cb5dc); color:var(--site-text-color-008875-94cfc8); }
+.hero-about { font-size:var(--site-text-size-12px-3a2909); }
 .hero-actions .hero-about {
   display: inline-flex;
   align-items: center;
@@ -28,11 +28,11 @@ body { font-size: 15px; line-height: 1.65; color: #203c33; }
   border: 1px solid rgb(255 255 255 / 82%);
   border-radius: 0;
   background: rgb(13 38 31 / 42%);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.2;
-  text-shadow: 0 1px 5px rgb(0 0 0 / 35%);
+  color:var(--site-text-color-fff-2d802a);
+  font-size:var(--site-text-size-12px-3a2909);
+  font-weight:var(--site-text-weight-600-64a878);
+  line-height:var(--site-text-line-height-1-2-1c1141);
+  text-shadow:var(--site-text-text-shadow-0-1px-5px-rgb-0-0-0-35-e0e01f);
   cursor: pointer;
   transition: background .2s ease, border-color .2s ease, transform .2s ease;
 }
@@ -41,117 +41,117 @@ body { font-size: 15px; line-height: 1.65; color: #203c33; }
 .hero-actions .hero-about:focus-visible {
   background: #fff;
   border-color: #fff;
-  color: #153f37;
-  text-shadow: none;
+  color:var(--site-text-color-153f37-fe8ae1);
+  text-shadow:var(--site-text-text-shadow-none-e236c2);
   transform: translateY(-2px);
 }
 .hero-actions .hero-about:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-.hero-caption, .slider-controls > span { font-size: 9px; }
+.hero-caption, .slider-controls > span { font-size:var(--site-text-size-9px-c8b605); }
 
-.intro-label { font-size: 10px; }
-.intro-band p { font-size: 14px; line-height: 1.7; color: #304b40; }
+.intro-label { font-size:var(--site-text-size-10px-2ca669); }
+.intro-band p { font-size:var(--site-text-size-14px-5fbabb); line-height:var(--site-text-line-height-1-7-2e7701); color:var(--site-text-color-304b40-b857aa); }
 .section-head h2, .sizes-head h2, .about-copy h2, .cert-intro h2, .contact-copy h2 {
-  font-size: clamp(42px, 4.8vw, 62px);
-  line-height: 1.04;
-  letter-spacing: -.05em;
-  font-weight: 600;
+  font-size:var(--site-text-size-clamp-42px-4-8vw-62px-3afec4);
+  line-height:var(--site-text-line-height-1-04-1ccc4a);
+  letter-spacing:var(--site-text-letter-spacing-05em-ba37a7);
+  font-weight:var(--site-text-weight-600-64a878);
 }
 .section-head h2 { margin-top: 18px; }
 .section-head-aside p, .about-copy > p, .sizes-head > p, .cert-intro > p, .contact-copy > p {
-  font-size: 15px;
-  line-height: 1.75;
-  color: #4f5d54;
+  font-size:var(--site-text-size-15px-a90797);
+  line-height:var(--site-text-line-height-1-75-3cb5dc);
+  color:var(--site-text-color-4f5d54-a4776e);
 }
-.sizes-head > p, .cert-intro > p, .contact-copy > p { color: #e1ebe3; }
-.under-link { font-size: 10px; font-weight: 700; }
+.sizes-head > p, .cert-intro > p, .contact-copy > p { color:var(--site-text-color-e1ebe3-442000); }
+.under-link { font-size:var(--site-text-size-10px-2ca669); font-weight:var(--site-text-weight-700-65cfcf); }
 
-.product-info > span { color: #596960; font-size: 10px; font-weight: 600; letter-spacing: .08em; }
-.product-info h3 { font-size: 21px; font-weight: 600; }
-.product-details { color: #4c5c53; font-size: 10px; font-weight: 600; }
-.format-strip { font-size: 11px; }
+.product-info > span { color:var(--site-text-color-596960-4f11d7); font-size:var(--site-text-size-10px-2ca669); font-weight:var(--site-text-weight-600-64a878); letter-spacing:var(--site-text-letter-spacing-08em-cc3eb4); }
+.product-info h3 { font-size:var(--site-text-size-21px-55c81d); font-weight:var(--site-text-weight-600-64a878); }
+.product-details { color:var(--site-text-color-4c5c53-8df26b); font-size:var(--site-text-size-10px-2ca669); font-weight:var(--site-text-weight-600-64a878); }
+.format-strip { font-size:var(--site-text-size-11px-26f6fb); }
 
-.size-index, .size-caption { color: #d0ded4; font-size: 10px; }
-.size-value { font-size: clamp(20px, 2vw, 25px); }
-.size-value small, .size-foot { color: #d0ded4; font-size: 9px; }
-.about-image > span { font-size: 9px; }
-.about-sign { color: #596a5f; font-size: 9px; }
+.size-index, .size-caption { color:var(--site-text-color-d0ded4-468584); font-size:var(--site-text-size-10px-2ca669); }
+.size-value { font-size:var(--site-text-size-clamp-20px-2vw-25px-a09ad6); }
+.size-value small, .size-foot { color:var(--site-text-color-d0ded4-468584); font-size:var(--site-text-size-9px-c8b605); }
+.about-image > span { font-size:var(--site-text-size-9px-c8b605); }
+.about-sign { color:var(--site-text-color-596a5f-f6a07b); font-size:var(--site-text-size-9px-c8b605); }
 
-.cert-item b { font-size: 17px; font-weight: 600; }
-.cert-item small { color: #d6e1d9; font-size: 12px; line-height: 1.55; }
-.cert-mark, .cert-footnote { color: #d0ded4; font-size: 10px; }
-.contact-detail > span { color: #c1d4c8; font-size: 10px; }
-.contact-detail a, .contact-detail p { font-size: 14px; }
-.contact-form label { color: #181c19; font-size: 12px; }
-.contact-form input, .contact-form textarea { font-size: 15px; }
-.form-success { font-size: 13px; }
-.button { font-size: 10px; letter-spacing: .07em; }
+.cert-item b { font-size:var(--site-text-size-17px-77dbde); font-weight:var(--site-text-weight-600-64a878); }
+.cert-item small { color:var(--site-text-color-d6e1d9-cbb2f9); font-size:var(--site-text-size-12px-3a2909); line-height:var(--site-text-line-height-1-55-b5727f); }
+.cert-mark, .cert-footnote { color:var(--site-text-color-d0ded4-468584); font-size:var(--site-text-size-10px-2ca669); }
+.contact-detail > span { color:var(--site-text-color-c1d4c8-47f305); font-size:var(--site-text-size-10px-2ca669); }
+.contact-detail a, .contact-detail p { font-size:var(--site-text-size-14px-5fbabb); }
+.contact-form label { color:var(--site-text-color-181c19-2b37d5); font-size:var(--site-text-size-12px-3a2909); }
+.contact-form input, .contact-form textarea { font-size:var(--site-text-size-15px-a90797); }
+.form-success { font-size:var(--site-text-size-13px-377ddf); }
+.button { font-size:var(--site-text-size-10px-2ca669); letter-spacing:var(--site-text-letter-spacing-07em-91b70c); }
 
-.footer-brand p, .footer-note p { color: #4f5d54; font-size: 13px; }
-.footer-links > span, .footer-note > span { font-size: 10px; }
-.footer-links a { color: #46584d; font-size: 13px; }
-.footer-note > a, .footer-bottom { color: #536258; font-size: 10px; }
+.footer-brand p, .footer-note p { color:var(--site-text-color-4f5d54-a4776e); font-size:var(--site-text-size-13px-377ddf); }
+.footer-links > span, .footer-note > span { font-size:var(--site-text-size-10px-2ca669); }
+.footer-links a { color:var(--site-text-color-46584d-060c06); font-size:var(--site-text-size-13px-377ddf); }
+.footer-note > a, .footer-bottom { color:var(--site-text-color-536258-8ee4dc); font-size:var(--site-text-size-10px-2ca669); }
 
 /* Raise utility and supporting copy sizes while keeping display headings unchanged. */
-.topline { font-size: 10px; }
-.hero-caption, .slider-controls > span { font-size: 10px; }
-.intro-label { font-size: 11px; }
-.under-link, .button { font-size: 12px; }
-.product-info > span { font-size: 12px; }
-.product-details { font-size: 12px; }
-.format-strip { font-size: 12px; }
-.size-index, .size-caption { font-size: 12px; }
-.size-value small, .size-foot { font-size: 10px; }
-.about-image > span, .about-sign { font-size: 10px; }
-.cert-mark, .cert-footnote { font-size: 11px; }
-.footer-links > span, .footer-note > span { font-size: 11px; }
-.footer-note > a, .footer-bottom { font-size: 11px; }
-.tile-tab { font-size: 13px; }
-.tiles-dropdown button { font-size: 13px !important; }
-.tile-view-heading > p, .size-view-intro > p { font-size: 14px; }
-.text-action, .catalogue-card button { font-size: 11px; }
-.catalogue-card > small, .about-principles article > span { font-size: 10px; }
-.catalogue-card p, .about-principles p { font-size: 13px; }
-.callback-form label, .callback-form > small { font-size: 12px; }
-.callback-dialog > p, .callback-thanks > p { font-size: 15px; }
-.callback-form input, .callback-form select { font-size: 15px; }
-.chat-note { font-size: 11px; }
-.nav button { font-size: 14px; }
-.nav .tiles-dropdown button { font-size: 13px !important; }
-.header-cta { font-size: 13px; }
+.topline { font-size:var(--site-text-size-10px-2ca669); }
+.hero-caption, .slider-controls > span { font-size:var(--site-text-size-10px-2ca669); }
+.intro-label { font-size:var(--site-text-size-11px-26f6fb); }
+.under-link, .button { font-size:var(--site-text-size-12px-3a2909); }
+.product-info > span { font-size:var(--site-text-size-12px-3a2909); }
+.product-details { font-size:var(--site-text-size-12px-3a2909); }
+.format-strip { font-size:var(--site-text-size-12px-3a2909); }
+.size-index, .size-caption { font-size:var(--site-text-size-12px-3a2909); }
+.size-value small, .size-foot { font-size:var(--site-text-size-10px-2ca669); }
+.about-image > span, .about-sign { font-size:var(--site-text-size-10px-2ca669); }
+.cert-mark, .cert-footnote { font-size:var(--site-text-size-11px-26f6fb); }
+.footer-links > span, .footer-note > span { font-size:var(--site-text-size-11px-26f6fb); }
+.footer-note > a, .footer-bottom { font-size:var(--site-text-size-11px-26f6fb); }
+.tile-tab { font-size:var(--site-text-size-13px-377ddf); }
+.tiles-dropdown button { font-size:var(--site-text-size-13px-377ddf) !important; }
+.tile-view-heading > p, .size-view-intro > p { font-size:var(--site-text-size-14px-5fbabb); }
+.text-action, .catalogue-card button { font-size:var(--site-text-size-11px-26f6fb); }
+.catalogue-card > small, .about-principles article > span { font-size:var(--site-text-size-10px-2ca669); }
+.catalogue-card p, .about-principles p { font-size:var(--site-text-size-13px-377ddf); }
+.callback-form label, .callback-form > small { font-size:var(--site-text-size-12px-3a2909); }
+.callback-dialog > p, .callback-thanks > p { font-size:var(--site-text-size-15px-a90797); }
+.callback-form input, .callback-form select { font-size:var(--site-text-size-15px-a90797); }
+.chat-note { font-size:var(--site-text-size-11px-26f6fb); }
+.nav button { font-size:var(--site-text-size-14px-5fbabb); }
+.nav .tiles-dropdown button { font-size:var(--site-text-size-13px-377ddf) !important; }
+.header-cta { font-size:var(--site-text-size-13px-377ddf); }
 
 @media (max-width: 700px) {
-  body { font-size: 14px; }
-  .topline { font-size: 9px; }
-  .nav button { font-size: 14px; }
-  .hero h1 { font-size: clamp(46px, 11vw, 60px); line-height: 1.04; }
-  .hero-copy > p { font-size: 14px; }
-  .hero-caption { font-size: 9px; }
-  .intro-label { font-size: 9px; }
-  .intro-band p { font-size: 12px; line-height: 1.65; }
+  body { font-size:var(--site-text-size-14px-5fbabb); }
+  .topline { font-size:var(--site-text-size-9px-c8b605); }
+  .nav button { font-size:var(--site-text-size-14px-5fbabb); }
+  .hero h1 { font-size:var(--site-text-size-clamp-46px-11vw-60px-f388e8); line-height:var(--site-text-line-height-1-04-1ccc4a); }
+  .hero-copy > p { font-size:var(--site-text-size-14px-5fbabb); }
+  .hero-caption { font-size:var(--site-text-size-9px-c8b605); }
+  .intro-label { font-size:var(--site-text-size-9px-c8b605); }
+  .intro-band p { font-size:var(--site-text-size-12px-3a2909); line-height:var(--site-text-line-height-1-65-b71188); }
   .section-head h2, .sizes-head h2, .about-copy h2, .cert-intro h2, .contact-copy h2 {
-    font-size: clamp(38px, 9vw, 46px);
-    line-height: 1.06;
+    font-size:var(--site-text-size-clamp-38px-9vw-46px-b2671a);
+    line-height:var(--site-text-line-height-1-06-af87b0);
   }
-  .eyebrow { font-size: 10px; }
-  .section-head-aside p, .about-copy > p, .sizes-head > p, .cert-intro > p, .contact-copy > p { font-size: 14px; line-height: 1.7; }
-  .product-info > span, .product-details { font-size: 11px; }
-  .product-info h3 { font-size: 18px; }
-  .size-index, .size-caption { font-size: 11px; }
-  .size-value { font-size: 19px; }
-  .size-foot { font-size: 9px; }
-  .about-image > span { font-size: 9px; }
-  .cert-item b { font-size: 15px; }
-  .cert-item small { font-size: 11px; }
-  .cert-footnote { font-size: 10px; }
-  .contact-detail > span { font-size: 9px; }
-  .contact-detail a, .contact-detail p { font-size: 13px; }
-  .contact-form label { font-size: 12px; }
-  .contact-form input, .contact-form textarea { font-size: 14px; }
-  .footer-brand p, .footer-note p, .footer-links a { font-size: 12px; }
-  .footer-bottom { font-size: 9px; }
-  .tile-tab { font-size: 12px; }
-  .tile-view-heading > p, .size-view-intro > p, .catalogue-card p, .about-principles p { font-size: 13px; }
-  .callback-form label, .callback-form > small { font-size: 11px; }
+  .eyebrow { font-size:var(--site-text-size-10px-2ca669); }
+  .section-head-aside p, .about-copy > p, .sizes-head > p, .cert-intro > p, .contact-copy > p { font-size:var(--site-text-size-14px-5fbabb); line-height:var(--site-text-line-height-1-7-2e7701); }
+  .product-info > span, .product-details { font-size:var(--site-text-size-11px-26f6fb); }
+  .product-info h3 { font-size:var(--site-text-size-18px-325b0c); }
+  .size-index, .size-caption { font-size:var(--site-text-size-11px-26f6fb); }
+  .size-value { font-size:var(--site-text-size-19px-c61544); }
+  .size-foot { font-size:var(--site-text-size-9px-c8b605); }
+  .about-image > span { font-size:var(--site-text-size-9px-c8b605); }
+  .cert-item b { font-size:var(--site-text-size-15px-a90797); }
+  .cert-item small { font-size:var(--site-text-size-11px-26f6fb); }
+  .cert-footnote { font-size:var(--site-text-size-10px-2ca669); }
+  .contact-detail > span { font-size:var(--site-text-size-9px-c8b605); }
+  .contact-detail a, .contact-detail p { font-size:var(--site-text-size-13px-377ddf); }
+  .contact-form label { font-size:var(--site-text-size-12px-3a2909); }
+  .contact-form input, .contact-form textarea { font-size:var(--site-text-size-14px-5fbabb); }
+  .footer-brand p, .footer-note p, .footer-links a { font-size:var(--site-text-size-12px-3a2909); }
+  .footer-bottom { font-size:var(--site-text-size-9px-c8b605); }
+  .tile-tab { font-size:var(--site-text-size-12px-3a2909); }
+  .tile-view-heading > p, .size-view-intro > p, .catalogue-card p, .about-principles p { font-size:var(--site-text-size-13px-377ddf); }
+  .callback-form label, .callback-form > small { font-size:var(--site-text-size-11px-26f6fb); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -160,29 +160,29 @@ body { font-size: 15px; line-height: 1.65; color: #203c33; }
 
 /* Shared readable content scale: page headings keep their hierarchy, while
    paragraph copy uses one consistent size throughout the site. */
-main p { font-size: 15px !important; line-height: 1.7; }
-main small { font-size: 12px; }
+main p { font-size:var(--site-text-size-15px-a90797) !important; line-height:var(--site-text-line-height-1-7-2e7701); }
+main small { font-size:var(--site-text-size-12px-3a2909); }
 
 /* Footer contrast is intentionally overridden after the global light-theme
    type rules so the copy remains legible on the deep-green footer. */
 .footer .footer-brand p,
-.footer .footer-note p { color: #e0ebe4 !important; font-size: 15px !important; line-height: 1.7; }
+.footer .footer-note p { color:var(--site-text-color-e0ebe4-06eb0e) !important; font-size:var(--site-text-size-15px-a90797) !important; line-height:var(--site-text-line-height-1-7-2e7701); }
 .footer .footer-links > span,
-.footer .footer-note > span { color: #fff; font-size: 14px; }
+.footer .footer-note > span { color:var(--site-text-color-fff-2d802a); font-size:var(--site-text-size-14px-5fbabb); }
 .footer .footer-links a,
-.footer .footer-contact a { color: #e0ebe4 !important; font-size: 15px !important; }
-.footer .footer-contact p { color: #e0ebe4 !important; font-size: 14px !important; }
+.footer .footer-contact a { color:var(--site-text-color-e0ebe4-06eb0e) !important; font-size:var(--site-text-size-15px-a90797) !important; }
+.footer .footer-contact p { color:var(--site-text-color-e0ebe4-06eb0e) !important; font-size:var(--site-text-size-14px-5fbabb) !important; }
 .footer .footer-contact p b,
-.footer .footer-addresses p b { color: #fff; }
+.footer .footer-addresses p b { color:var(--site-text-color-fff-2d802a); }
 .footer .footer-bottom,
-.footer .footer-bottom a { color: #d4e2d9 !important; font-size: 12px !important; }
+.footer .footer-bottom a { color:var(--site-text-color-d4e2d9-7064a1) !important; font-size:var(--site-text-size-12px-3a2909) !important; }
 @media (max-width: 700px) {
-  main p { font-size: 14px !important; }
+  main p { font-size:var(--site-text-size-14px-5fbabb) !important; }
   .footer .footer-brand p,
   .footer .footer-note p,
   .footer .footer-contact p,
   .footer .footer-links a,
-  .footer .footer-contact a { font-size: 14px !important; }
+  .footer .footer-contact a { font-size:var(--site-text-size-14px-5fbabb) !important; }
   .footer .footer-bottom,
-  .footer .footer-bottom a { font-size: 11px !important; }
+  .footer .footer-bottom a { font-size:var(--site-text-size-11px-26f6fb) !important; }
 }

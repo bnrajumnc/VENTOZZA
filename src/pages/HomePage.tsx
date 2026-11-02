@@ -1,32 +1,137 @@
-import type { ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import './HomePage.css'
-import RecentStories from './RecentStories'
-import { tileSizeOptions } from '../data/tileData'
+import ProductSizesSection from './ProductSizesSection'
+import { ventozzaEdit as editCollections } from '../data/ventozzaEdit'
+import { findYourFitContent } from '../data/homepageContent'
 
-type Slide = { eyebrow: string; title: ReactNode; body: string; image: string; note: string }
-type Props = { slide: Slide; activeSlide: number; slideCount: number; onMoveSlide: (step: number) => void; onNavigate: (page: 'about' | 'contact') => void; onTiles: (view: 'overview' | 'look-feel' | 'size') => void; onCatalogueSize: (format: string) => void }
+type Slide = { eyebrow: string; title: ReactNode; body: string; image: string; alt: string; note: string }
+type Props = { slide: Slide; activeSlide: number; slideCount: number; onMoveSlide: (step: number) => void; onNavigate: (page: 'about' | 'contact') => void; onTiles: (view: 'overview' | 'look-feel' | 'size' | 'visualizer') => void; onCatalogueSize: (format: string) => void }
 const Arrow = ({ diagonal = false }: { diagonal?: boolean }) => <span aria-hidden="true">{diagonal ? '↗︎' : '→'}</span>
-const catalogueFilterIds: Record<string, string> = {
-  '1200 × 1800 mm': '1200x1800', '800 × 1600 mm': '800x1600', '800 × 800 mm': '800x800',
-  '600 × 1200 mm': '600-full-body', '600 × 600 mm': '600x600', '300 × 600 mm': '300x600',
-  '300 × 450 mm': '300x450', '200 × 1200 mm': '200x1200',
-  'Step & riser': 'step-riser',
-}
-const featuredFormats = [
-  { dimensions: '600 × 1200 mm', title: 'PGVT Random', group: '600-full-body', image: '/images/ventozza/catalogue-covers/600-full-body-02-full-body.webp', alt: 'Cover image from the VENTOZZA 600 × 1200 full body catalogue' },
-  { dimensions: '800 × 1600 mm', title: 'Large-format collection', group: '800x1600', image: '/images/ventozza/catalogue-covers/800x1600-04-glossy-800-1600.webp', alt: 'Cover image from the VENTOZZA 800 × 1600 glossy catalogue' },
-  { dimensions: '1200 × 1800 mm', title: 'Large-format collection', group: '1200x1800', image: '/images/ventozza/catalogue-covers/1200x1800-02-opulenza.webp', alt: 'Cover image from the VENTOZZA 1200 × 1800 Opulenza catalogue' },
-  { dimensions: '300 × 600 mm', title: 'Nature Series', group: '300x600', image: '/images/ventozza/catalogue-covers/300x600-11-nature-series.webp', alt: 'Cover image from the VENTOZZA 300 × 600 Nature Series catalogue' },
-]
+
 
 export default function HomePage({ slide, activeSlide, slideCount, onMoveSlide, onNavigate, onTiles, onCatalogueSize }: Props) {
+  const editTrack = useRef<HTMLDivElement>(null)
+  const [activeEdit, setActiveEdit] = useState(0)
+  const [editHovered, setEditHovered] = useState(false)
+  const [editFocused, setEditFocused] = useState(false)
+  const showEdit = (index: number) => {
+    const track = editTrack.current
+    const card = track?.querySelectorAll<HTMLElement>('.home-edit-card')[index]
+    if (!track || !card) return
+    track.scrollTo({ left: track.scrollLeft + card.getBoundingClientRect().left - track.getBoundingClientRect().left - (track.clientWidth - card.offsetWidth) / 2, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+  }
+  const moveEdit = (direction: number) => {
+    showEdit((activeEdit + direction + editCollections.length) % editCollections.length)
+  }
+  useEffect(() => {
+    if (editHovered || editFocused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = window.setInterval(() => {
+      if (!document.hidden) showEdit((activeEdit + 1) % editCollections.length)
+    }, 4000)
+    return () => window.clearInterval(timer)
+  }, [activeEdit, editHovered, editFocused])
+  useEffect(() => {
+    const track = editTrack.current
+    const centerCard = track?.querySelectorAll<HTMLElement>('.home-edit-card')[2]
+    if (!track || !centerCard) return
+    const trackLeft = track.getBoundingClientRect().left
+    const cardLeft = centerCard.getBoundingClientRect().left
+    track.scrollLeft += cardLeft - trackLeft - (track.clientWidth - centerCard.offsetWidth) / 2
+    setActiveEdit(2)
+  }, [])
+  const syncEdit = () => {
+    const track = editTrack.current
+    if (!track) return
+    const cards = Array.from(track.querySelectorAll<HTMLElement>('.home-edit-card'))
+    const center = track.getBoundingClientRect().left + track.clientWidth / 2
+    const nearest = cards.reduce((best, card, index) => {
+      const cardCenter = card.getBoundingClientRect().left + card.offsetWidth / 2
+      const bestCenter = cards[best].getBoundingClientRect().left + cards[best].offsetWidth / 2
+      return Math.abs(cardCenter - center) < Math.abs(bestCenter - center) ? index : best
+    }, 0)
+    setActiveEdit(nearest)
+  }
   return <>
-    <section className="hero" aria-label="Featured VENTOZZA tiles"><div className="hero-backdrop" key={activeSlide} style={{ backgroundImage: `url("${slide.image}")` }} /><div className="hero-shade" /><div className="hero-inner"><div className="hero-copy" key={`copy-${activeSlide}`}><div className="eyebrow eyebrow-light"><i />{slide.eyebrow}</div><h1>{slide.title}</h1><p>{slide.body}</p><div className="hero-actions"><button className="button button-light" onClick={() => onTiles('overview')}>Explore our tiles <Arrow diagonal /></button><button className="hero-about" onClick={() => onNavigate('about')}>A little about us <Arrow /></button></div></div><div className="hero-stamp"><span>MADE FOR<br/>YOUR SPACE</span><b>✳︎</b></div><div className="hero-bottom"><span className="hero-caption">{slide.note}</span><div className="slider-controls"><button onClick={() => onMoveSlide(-1)} aria-label="Previous slide">←</button><span>0{activeSlide+1}<i/>0{slideCount}</span><button onClick={() => onMoveSlide(1)} aria-label="Next slide">→</button></div></div></div></section>
-    <section className="intro-band"><div className="intro-label">TILES FOR<br/>REAL SPACES.</div><span className="intro-flower">✳︎</span><p>Wall tiles. Floor tiles. Styles, sizes and finishes.<br/>A clear place to start your tile search.</p><button className="circle-link" aria-label="Learn about VENTOZZA" onClick={() => onNavigate('about')}>↘︎</button></section>
-    <section className="why-visit section-wrap"><div className="home-section-heading reveal"><div><div className="eyebrow"><i/> A BETTER WAY TO CHOOSE</div><h2>Why visit <em>us?</em></h2></div><p>Explore the surfaces, compare the details and get practical guidance from a team focused on tiles.</p></div><div className="why-visit-grid"><button type="button" className="why-visit-card why-visit-card-feature reveal" onClick={()=>onNavigate('contact')}><img src="/images/ventozza/catalogue-art/why-visit-01.webp" alt="Bright modern bathroom finished with ceramic wall tiles" loading="lazy"/><span className="why-visit-shade"/><div className="why-visit-copy"><small>PERSONAL GUIDANCE</small><strong>Talk through your project with our tile team.</strong><span className="why-visit-link">LET’S TALK <Arrow diagonal/></span></div></button><button type="button" className="why-visit-card reveal" onClick={()=>onTiles('look-feel')}><img src="/images/ventozza/catalogue-art/why-visit-02.webp" alt="Colourful ceramic tile samples showing varied patterns and finishes" loading="lazy"/><span className="why-visit-shade"/><div className="why-visit-copy"><small>SEE THE FINISH</small><strong>Compare tile colours, patterns and textures.</strong><span className="why-visit-link">EXPLORE FINISHES <Arrow diagonal/></span></div></button><button type="button" className="why-visit-card reveal" onClick={()=>onNavigate('contact')}><img src="/images/ventozza/catalogue-art/why-visit-03.webp" alt="Outdoor seating beside a textured tiled feature wall" loading="lazy"/><span className="why-visit-shade"/><div className="why-visit-copy"><small>PROJECT SUPPORT</small><strong>Get help finding a suitable tile format.</strong><span className="why-visit-link">CONTACT OUR TEAM <Arrow diagonal/></span></div></button></div></section>
-    <section className="home-featured"><div className="home-featured-copy reveal"><div className="eyebrow eyebrow-light"><i/> THE VENTOZZA EDIT</div><h2>Surfaces with<br/>a point of <em>view.</em></h2><p>Explore stone-inspired character, expressive pattern and quiet, modern texture.</p><button className="button button-light" onClick={()=>onTiles('overview')}>BROWSE TILE RANGE <Arrow diagonal/></button><span className="home-featured-note">DESIGN YOUR SPACE · ONE SURFACE AT A TIME</span></div><div className="home-featured-grid">{featuredFormats.map((format)=><button type="button" className={`home-featured-card home-featured-card`} key={format.group} onClick={()=>onCatalogueSize(format.group)} aria-label={`Browse ${format.dimensions} ${format.title} catalogue`}><img src={format.image} alt={format.alt} loading="eager"/><span className="home-featured"></span><span className="home-featured-name"><small>{format.dimensions}</small><b>{format.title}</b></span><span className="home-featured-arrow"><Arrow diagonal/></span></button>)}</div></section>
-    <section className="home-format-teaser"><div className="home-format-heading"><div className="eyebrow"><i/> FORMAT MAKES A DIFFERENCE</div><h2>Find your fit.</h2><p>See each catalogue format beside a room image that shows its character.</p></div><div className="home-format-sizes">{tileSizeOptions.map((option)=><button type="button" className="home-format-card" key={option.dimensions} onClick={()=>onCatalogueSize(catalogueFilterIds[option.dimensions])}><img src={option.image} alt={`${option.dimensions} tile format shown in the catalogue`} loading="lazy"/><span><b>{option.dimensions.replace(' mm','')}</b><small>{option.name}</small></span></button>)}</div><button type="button" className="circle-link" aria-label="Browse all tile sizes" onClick={()=>onTiles('size')}>↗︎</button></section>
-    <section className="home-application-guide section-wrap"><div className="home-application-intro reveal"><div className="eyebrow"><i/> A FORMAT FOR THE PROJECT</div><h2>Made for the way<br/>you use a <em>space.</em></h2><p>The right format brings proportion, practicality and a considered finish together. Explore VENTOZZA catalogue ranges by application.</p><span className="home-application-note">SIZES · SURFACES · EVERYDAY SPACES</span></div><div className="home-application-grid"><button type="button" className="home-application-card" onClick={()=>onCatalogueSize('1200x1800')}><img src="/images/ventozza/catalogue-art/size-1200x1800.webp" alt="Large format marble-look tile displayed in a room" loading="lazy"/><span className="home-application-shade"/><span className="home-application-number"> LARGE FORMAT</span><div className="home-application-copy"><b>Expansive surfaces</b><small>1200 × 1800 · 800 × 1600 mm</small><i>EXPLORE FORMATS <Arrow diagonal/></i></div></button><button type="button" className="home-application-card" onClick={()=>onCatalogueSize('200x1200')}><img src="/images/ventozza/catalogue-art/size-200x1200.webp" alt="Warm wood-look tile planks from the catalogue" loading="lazy"/><span className="home-application-shade"/><span className="home-application-number"> WOOD LOOK</span><div className="home-application-copy"><b>Plank formats</b><small>200 × 1200 · 150 × 900 mm</small><i>EXPLORE FORMATS <Arrow diagonal/></i></div></button><button type="button" className="home-application-card" onClick={()=>onCatalogueSize('300x600')}><img src="/images/ventozza/catalogue-art/size-300x600.webp" alt="Decorative ceramic wall tile from the catalogue" loading="lazy"/><span className="home-application-shade"/><span className="home-application-number"> WALL TILES</span><div className="home-application-copy"><b>Colour &amp; character</b><small>300 × 600 · 300 × 450 mm</small><i>EXPLORE FORMATS <Arrow diagonal/></i></div></button><button type="button" className="home-application-card" onClick={()=>onCatalogueSize('step-riser')}><img src="/images/ventozza/catalogue-art/size-step-riser.webp" alt="Tile step and riser application from the catalogue" loading="lazy"/><span className="home-application-shade"/><span className="home-application-number">04 / DETAILING</span><div className="home-application-copy"><b>Steps &amp; transitions</b><small>Dedicated application brochure</small><i>EXPLORE FORMATS <Arrow diagonal/></i></div></button></div><div className="home-application-backdrop" aria-hidden="true"/></section>
-    <RecentStories/>
+    <section className="hero hero-image-showcase" aria-label="Featured VENTOZZA tiles">
+      <div className="hero-backdrop" key={`hero-image-${activeSlide}`} role="img" aria-label={slide.alt} style={{ backgroundImage: `url("${slide.image}")` }} />
+      <div className="hero-inner">
+        <div className="hero-copy" key={`copy-${activeSlide}`}>
+          <h1>{slide.title}</h1>
+          <p>{slide.body}</p>
+        </div>
+        <div className="hero-bottom">
+          <div className="hero-progress" role="tablist" aria-label="Choose a featured slide">
+            {Array.from({ length: slideCount }, (_, index) => <button key={index} type="button" role="tab" aria-label={`Show slide ${index + 1}`} aria-selected={index === activeSlide} className={index === activeSlide ? 'active' : ''} onClick={() => onMoveSlide(index - activeSlide)} />)}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="home-edit is-visible" aria-labelledby="home-edit-title" onMouseEnter={() => setEditHovered(true)} onMouseLeave={() => setEditHovered(false)} onFocusCapture={() => setEditFocused(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setEditFocused(false) }}>
+      <div className="home-edit-heading reveal">
+        <div><div className="eyebrow"><i/> THE VENTOZZA EDIT</div><h2 id="home-edit-title">Surfaces in <em>motion.</em></h2></div>
+        <button type="button" className="under-link" onClick={() => onTiles('overview')}>EXPLORE COLLECTIONS <Arrow/></button>
+      </div>
+      <div className="home-edit-viewport">
+        <div className="home-edit-track" ref={editTrack} onScroll={syncEdit}>
+          {editCollections.map((collection, index) => <button type="button" className={`home-edit-card${collection.landscape ? ' is-landscape' : ''}${index === activeEdit ? ' is-active' : ''}`} key={collection.title} onClick={() => collection.format ? onCatalogueSize(collection.format) : onTiles('look-feel')} aria-label={`Explore ${collection.title}, ${collection.size} mm`}>
+            <img src={collection.image} alt={collection.alt} loading="lazy" decoding="async"/>
+          </button>)}
+        </div>
+      </div>
+      <div className="home-edit-controls">
+        <div className="home-edit-position" role="progressbar" aria-label="Collection position" aria-valuemin={1} aria-valuemax={editCollections.length} aria-valuenow={activeEdit + 1}><span style={{ left: `${activeEdit / editCollections.length * 100}%`, width: `${100 / editCollections.length}%` }}/></div>
+        <div className="home-edit-arrows"><button type="button" aria-label="Previous collection" onClick={() => moveEdit(-1)}>‹</button><button type="button" aria-label="Next collection" onClick={() => moveEdit(1)}>›</button></div>
+      </div>
+    </section>
+    <section className="home-format-teaser find-fit-exact find-fit-editable" aria-labelledby="find-fit-editable-title">
+      <img src={findYourFitContent.image} alt={findYourFitContent.alt} loading="lazy" decoding="async" />
+      <div className="find-fit-editable-heading"><span>{findYourFitContent.eyebrow}</span><h2 id="find-fit-editable-title">{findYourFitContent.heading}</h2></div>
+      <button type="button" className="find-fit-exact-link" onClick={() => onTiles('size')}>{findYourFitContent.link}<Arrow /></button>
+    </section>
+    <ProductSizesSection onTiles={onTiles} />
+    <section className="why-visit section-wrap why-visit-reference">
+      <div className="why-visit-heading reveal">
+        <div className="why-visit-title"><div className="eyebrow"><i/> A BETTER WAY TO CHOOSE</div><h2>Why visit <em>us?</em></h2></div>
+        <p>Explore the surfaces, compare the details and get practical guidance from a team focused on tiles.</p>
+      </div>
+      <div className="why-visit-grid why-visit-cinematic">
+        <button type="button" className="why-visit-card why-visit-feature reveal" onClick={()=>onNavigate('contact')}>
+          <span className="why-visit-image"><img src="/images/ventozza/catalogue-art/why-visit-reference-01.jpg" alt="A tile consultant and homeowner comparing samples over a project plan" loading="lazy"/></span>
+          <span className="why-visit-copy"><small>PERSONAL GUIDANCE</small><span className="why-visit-card-title">Talk through your project with our tile team.</span><span className="why-visit-description">Bring your plans. Explore options with people who understand your project.</span><span className="why-visit-link">LET’S TALK <Arrow/></span></span>
+        </button>
+        <div className="why-visit-stack">
+          <button type="button" className="why-visit-card why-visit-stacked reveal" onClick={()=>onTiles('look-feel')}>
+            <span className="why-visit-image"><img src="/images/ventozza/catalogue-art/why-visit-reference-02.jpg" alt="Hands comparing several tile colours and finishes" loading="lazy"/></span>
+            <span className="why-visit-copy"><small>SEE THE FINISH</small><span className="why-visit-card-title">Compare tile colours, patterns and textures.</span><span className="why-visit-link">EXPLORE FINISHES <Arrow/></span></span>
+          </button>
+          <button type="button" className="why-visit-card why-visit-stacked reveal" onClick={()=>onNavigate('contact')}>
+            <span className="why-visit-image"><img src="/images/ventozza/catalogue-art/why-visit-reference-03.jpg" alt="Tile samples being measured against an architectural floor plan" loading="lazy"/></span>
+            <span className="why-visit-copy"><small>PROJECT SUPPORT</small><span className="why-visit-card-title">Get help finding a suitable tile format.</span><span className="why-visit-link">CONTACT OUR TEAM <Arrow/></span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section className="home-technology section-wrap" aria-labelledby="home-technology-title">
+      <div className="home-technology-heading reveal">
+        <div className="eyebrow"><i/> THE TECHNOLOGY</div>
+        <h2 id="home-technology-title">See It Before You Select It</h2>
+        <p>Explore tile applications in room settings, then open the matching product catalogue.</p>
+      </div>
+      <div className="home-technology-grid">
+        <article className="home-technology-card reveal">
+          <img src="/images/ventozza/catalogue-art/showroom-room-living.webp" alt="Living room tile visualizer preview with a marble-look floor" loading="lazy"/>
+          <div><h3>Choose Your Format</h3><p>Find the tile size for your project.</p></div>
+        </article>
+        <article className="home-technology-card reveal">
+          <img src="/images/ventozza/catalogue-art/about-technology.webp" alt="Digital showroom scene for previewing tile finishes in an interior" loading="lazy"/>
+          <div><h3>Explore Room Ideas</h3><p>See illustrated tile applications.</p></div>
+        </article>
+        <article className="home-technology-card reveal">
+          <img src="/images/ventozza/catalogue-art/showroom-room-kitchen.webp" alt="Kitchen tile visualization for comparing surface selections" loading="lazy"/>
+          <div><h3>Explore the Catalogue</h3><p>Confirm designs and speak to our team.</p></div>
+        </article>
+      </div>
+      <button className="home-technology-link under-link" onClick={()=>onTiles('visualizer')}>OPEN DIGITAL SHOWROOM <Arrow diagonal/></button>
+    </section>
   </>
 }

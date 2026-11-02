@@ -33,19 +33,28 @@ export default function ContactPage() {
     }
   }
 
-  return <section className="contact" id="contact">
+  return <section className="contact contact-structured" id="contact">
     <div className="contact-copy reveal">
       <div className="eyebrow eyebrow-light"><i /> VENTOZZA · TILE ENQUIRIES</div>
       <h2>Let’s bring<br />your space to <em>life.</em></h2>
       <p>Talk with our sales team about tile styles, sizes, finishes and project requirements.</p>
       <div className="contact-person">
-        <span>YOUR VENTOZZA CONTACT</span><strong>H. Narayana Rao</strong>
-        <small>Vice President – Sales &amp; Marketing</small><small>Request a call back using the enquiry form.</small>
-        <a href="mailto:sales@ventozzasurfaces.com">sales@ventozzasurfaces.com ↗︎</a>
+        <span className="contact-channel-icon" aria-hidden="true">✉</span>
+        <span>SALES &amp; PROJECT ENQUIRIES</span>
+        <small>Project guidance, product details and availability.</small>
+        <a href="mailto:sales@ventozzasurfaces.com"><span aria-hidden="true">✉</span> sales@ventozzasurfaces.com <b aria-hidden="true">↗</b></a>
       </div>
-      <div className="contact-offices">
-        <article><span>REGISTERED OFFICE</span><p>10-3-71/3/A, 3rd Floor,<br />Teachers Colony, East Marredpally,<br />Secunderabad – 500026,<br />Telangana, India</p></article>
-        <article><span>CORPORATE OFFICE</span><p>Siromani 142, Ground Floor,<br />G-15, Near Eden Ceramic,<br />NH-8A, Lalpar, Morbi-2,<br />Gujarat, India</p></article>
+      <div className="contact-offices" aria-label="Our offices">
+        <article>
+          <div className="contact-office-heading"><span>REGISTERED OFFICE</span><h3>Secunderabad</h3><small>Telangana · India</small></div>
+          <address>10-3-71/3/A, 3rd Floor,<br />Teachers Colony, East Marredpally,<br />Secunderabad – 500026,<br />Telangana, India</address>
+          <a className="contact-map-link" href="https://maps.google.com/?q=10-3-71%2F3%2FA%2C+Teachers+Colony%2C+East+Marredpally%2C+Secunderabad+500026" target="_blank" rel="noreferrer">VIEW ON MAP <span aria-hidden="true">↗</span></a>
+        </article>
+        <article>
+          <div className="contact-office-heading"><span>CORPORATE OFFICE</span><h3>Morbi</h3><small>Gujarat · India</small></div>
+          <address>Siromani 142, Ground Floor,<br />G-15, Near Eden Ceramic,<br />NH-8A, Lalpar, Morbi-2,<br />Gujarat, India</address>
+          <a className="contact-map-link" href="https://maps.google.com/?q=Siromani+142%2C+G-15%2C+Near+Eden+Ceramic%2C+NH-8A%2C+Lalpar%2C+Morbi%2C+Gujarat" target="_blank" rel="noreferrer">VIEW ON MAP <span aria-hidden="true">↗</span></a>
+        </article>
       </div>
     </div>
     <form className="contact-form reveal" onSubmit={submit}>
@@ -57,7 +66,7 @@ export default function ContactPage() {
       <button className="button button-light" type="submit" disabled={sending}>{sending ? 'SENDING…' : 'SEND A TILE ENQUIRY'} <span aria-hidden="true">↗︎</span></button>
       {sent && <p className="form-success" role="status">Your enquiry has been sent to {enquiryRecipient}.</p>}
       {error && <p className="form-error" role="alert">{error}</p>}
-      <small>Testing enquiries are routed to {enquiryRecipient}. First-time delivery requires activating the inbox through FormSubmit.</small>
+      {/* <small>Testing enquiries are routed to {enquiryRecipient}. First-time delivery requires activating the inbox through FormSubmit.</small> */}
     </form>
   </section>
 }

@@ -1,0 +1,114 @@
+/* Shared section rhythm and native scrolling, without intercepting wheel/touch. */
+:root {
+  --section-breathing-room: clamp(28px, 4vw, 56px);
+}
+/* Collection page: a clean white surface, with a compact start below navigation. */
+main#home[data-page='products'] > .products.section-wrap {
+  background: #fff !important;
+  background-image: none !important;
+  padding-top: clamp(28px, 4vw, 52px);
+}
+/* The visualizer gets its own generated stone backdrop; the general product
+   page rule above intentionally keeps the other catalogue views white. */
+main#home[data-page='products'][data-tile-view='visualizer'] > .products.section-wrap {
+  position: relative;
+  isolation: isolate;
+  background-color: #f4f1e9 !important;
+  background-image: linear-gradient(90deg, rgba(238,236,228,.48) 0%, rgba(255,255,255,.42) 42%, rgba(233,240,235,.5) 100%), url('/images/ventozza/showroom-visualizer-background.png') !important;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+main#home[data-page='products'] .all-tiles-library,
+main#home[data-page='products'] .all-tiles-library-heading,
+main#home[data-page='products'] .all-tiles-library-card,
+main#home[data-page='products'] .all-tiles-library-copy {
+  background: #fff !important;
+  background-image: none !important;
+}
+main#home[data-page='products'] .all-tiles-library-heading { margin-top: 0; }
+/* A low-opacity stone layer adds depth without fading product photography. */
+main#home[data-page='products'][data-tile-view='overview'] > .products.section-wrap {
+  position: relative;
+  isolation: isolate;
+  background: #f6f8f6 !important;
+}
+main#home[data-page='products'][data-tile-view='overview'] > .products::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: url('/images/ventozza/about-reference/marble-600x1200.png') center top / 1200px auto repeat;
+  opacity: .09;
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 85%, transparent);
+}
+main#home[data-page='products'] .all-tiles-library,
+main#home[data-page='products'] .all-tiles-library-heading {
+  background: transparent !important;
+}
+main#home[data-page='products'] .all-tiles-library-card {
+  background: rgb(255 255 255 / 86%) !important;
+  border-color: rgb(167 185 174 / 30%);
+  box-shadow: 0 5px 20px rgb(25 57 45 / 4%);
+}
+main#home[data-page='products'] .all-tiles-library-copy {
+  background: rgb(255 255 255 / 76%) !important;
+}
+main#home[data-page='products'] .all-tiles-library-card {
+  transition: opacity .6s ease, transform .6s cubic-bezier(.22, 1, .36, 1), box-shadow .25s ease;
+}
+main#home[data-page='products'] .all-tiles-library-card.reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+}
+main#home[data-page='products'] .all-tiles-library-card.reveal.is-visible { opacity: 1; transform: none; }
+main#home[data-page='products'] .all-tiles-library-card img { transition: transform .55s cubic-bezier(.22, 1, .36, 1); }
+@media (hover: hover) {
+  main#home[data-page='products'] .all-tiles-library-card:hover img { transform: scale(1.035); }
+}
+html { scroll-behavior: smooth; }
+main#home[data-page='home'] > section + section {
+  margin-block-start: var(--section-breathing-room);
+}
+#root main#home[data-page='about'] .about-reference-page > :is(header, section, .about-reference-brand-panels) + :is(section, .about-reference-brand-panels),
+#root main#home[data-page='about'] .about-reference-brand-panels > section + section {
+  margin-block-start: 0;
+}
+/* About uses compact padding on each side of a section boundary, without extra margins. */
+#root main#home[data-page='about'] .about-reference-page .about-reference-section,
+#root main#home[data-page='about'] #about-roadmap.expansion-roadmap {
+  padding-block: clamp(24px, 2.5vw, 36px);
+}
+main#home :is(section[id], h2[id], h3[id]) {
+  scroll-margin-top: 112px;
+}
+/* One-time reveals use only opacity and translation to avoid layout shifts. */
+main#home .reveal {
+  transition-property: opacity, transform;
+  transition-duration: 650ms;
+  transition-timing-function: cubic-bezier(.22, 1, .36, 1);
+  transition-delay: 0ms;
+}
+main#home .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+}
+main#home .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (max-width: 700px) {
+  main#home :is(section[id], h2[id], h3[id]) { scroll-margin-top: 88px; }
+  main#home .reveal { transition-duration: 450ms; }
+  main#home .reveal:not(.is-visible) { transform: translate3d(0, 10px, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  main#home[data-page='products'] .all-tiles-library-card.reveal:not(.is-visible) { opacity: 1; transform: none; }
+  html { scroll-behavior: auto !important; }
+  main#home .reveal, main#home .reveal:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+    transition: none !important;
+  }
+}

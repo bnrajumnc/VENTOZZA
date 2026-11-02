@@ -1,6 +1,6 @@
 // Temporary testing destination. Change this one value to restore the public
 // sales inbox after testing; contact and callback forms share this endpoint.
-export const enquiryRecipient = 'iampranaymusapuri@gmail.com'
+export const enquiryRecipient = 'sales@ventozzasurfaces.com'
 
 /** Sends contact and callback requests through FormSubmit's AJAX endpoint. */
 export async function submitEnquiry(fields: Record<string, string>) {

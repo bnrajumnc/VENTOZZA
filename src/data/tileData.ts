@@ -23,6 +23,23 @@ export const products = [
   { name: 'Honeycomb', code: 'GLOSSY SERIES · DECOR TILES', size: '300 × 450 MM', finish: 'Botanical · geometric', image: '/images/ventozza/catalogue-art/product-honeycomb.webp', alt: 'Botanical honeycomb tile pattern shown in the catalogue' },
 ]
 
+export const suppliedSurfaceGallery = [
+  { title: 'Decorative geometry', note: 'Decor collection', image: '/images/ventozza/about-reference/decorative-tile-mix.png' },
+  { title: 'Patagonia Classic & Crystal', note: 'Endless surface designs', image: '/images/ventozza/about-reference/patagonia-classic-crystal.png' },
+  { title: 'El Mirabel Natural', note: 'Carving collection · 600 × 1200 mm', image: '/images/ventozza/about-reference/el-mirabel-natural.png' },
+  { title: 'El Elmira White', note: 'Carving collection · 600 × 1200 mm', image: '/images/ventozza/about-reference/el-elmira-white.png' },
+  { title: 'Ikka Taupe', note: 'Carving collection · 600 × 1200 mm', image: '/images/ventozza/about-reference/ikka-taupe.png' },
+  { title: 'Warm marble', note: 'Stone-inspired finish', image: '/images/ventozza/about-reference/warm-marble-pair.png' },
+  { title: 'Decor tile series', note: 'Patterned wall surfaces', image: '/images/ventozza/about-reference/decor-tile-series.png' },
+  { title: 'Beige marble', note: 'Natural variation', image: '/images/ventozza/about-reference/beige-marble-pair.png' },
+  { title: 'Dark marble', note: 'Deep stone character', image: '/images/ventozza/about-reference/dark-marble-pair.png' },
+  { title: 'White and gold marble', note: 'Veined surface design', image: '/images/ventozza/about-reference/white-gold-marble-pair.png' },
+  { title: 'Blue onyx', note: 'Expressive colour and movement', image: '/images/ventozza/about-reference/blue-onyx-pair.png' },
+  { title: '600 × 1200 mm', note: 'Catalogue format', image: '/images/ventozza/about-reference/marble-600x1200.png' },
+  { title: 'White gold surface', note: 'Light stone finish', image: '/images/ventozza/about-reference/white-gold-surface.png' },
+  { title: 'White marble veins', note: 'Fine linear detail', image: '/images/ventozza/about-reference/white-marble-veins.png' },
+]
+
 export const sizes = catalogueSizeLabels.map((size, index) => ({ size, label: 'Format shown in the supplied catalogue library', number: String(index + 1).padStart(2, '0') }))
 
 export const tileViews = [
@@ -65,7 +82,7 @@ export const tileLooks = [
 // from the E-catalogue product cards and finish gallery.
 export const visualizerRooms = [
   { name: 'Living room', image: '/images/ventozza/marble-living-room.png' },
-  { name: 'Kitchen', image: '/images/ventozza/kitchen-showroom-enhanced.png' },
+  { name: 'Kitchen', image: '/images/ventozza/brand-reference/bright-kitchen-with-tile-floor.png' },
   { name: 'Bathroom', image: '/images/ventozza/catalogue-art/showroom-room-bathroom.webp' },
 ]
 
@@ -90,8 +107,6 @@ export const tileFormats: CatalogueFormat[] = [
 
 export const company = {
   website: 'https://www.ventozzasurfaces.com',
-  contactName: 'H. Narayana Rao',
-  role: 'Vice President – Sales & Marketing',
   email: 'sales@ventozzasurfaces.com',
   registeredOffice: ['10-3-71/3/A, 3rd Floor,', 'Teachers Colony, East Marredpally,', 'Secunderabad – 500026,', 'Telangana, India'],
   corporateOffice: ['Siromani 142, Ground Floor,', 'G-15, Near Eden Ceramic,', 'NH-8A, Lalpar, Morbi-2,', 'Gujarat, India'],

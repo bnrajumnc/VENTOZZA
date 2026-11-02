@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { catalogueItems } from '../data/catalogues'
+import { tileLooks } from '../data/tileData'
 import './CataloguesPage.css'
 
 const filters = [
@@ -17,6 +18,19 @@ const filters = [
   { id: '600x600', label: '600 × 600 mm' },
   { id: '800x800', label: '800 × 800 mm' },
   { id: 'brochure', label: 'Special brochures' },
+]
+
+const formatShowcase = [
+  { id: '1200x1800', size: '1200 × 1800 mm', name: 'Large-format porcelain', image: '/images/ventozza/catalogue-art/size-1200x1800.webp', texture: '/images/ventozza/ivory-marble-texture-enhanced.png', finish: 'Marble look · polished' },
+  { id: '800x1600', size: '800 × 1600 mm', name: 'Statement surfaces', image: '/images/ventozza/catalogue-art/size-800x1600.webp', texture: '/images/ventozza/cream-marble-texture.png', finish: 'Stone look · matt' },
+  { id: '800x800', size: '800 × 800 mm', name: 'Square format porcelain', image: '/images/ventozza/catalogue-art/size-800x800.webp', texture: '/images/ventozza/ivory-marble-texture-enhanced.png', finish: 'Marble look · polished' },
+  { id: '600-full-body', size: '600 × 1200 & 600 × 600 mm', name: 'Full Body porcelain', image: '/images/ventozza/catalogue-art/size-600x1200.webp', texture: '/images/ventozza/silver-marble-slab.png', finish: 'Full body · polished / matt' },
+  { id: '600x1200', size: '600 × 1200 mm', name: 'Large-format porcelain', image: '/images/ventozza/catalogue-art/size-600x1200.webp', texture: '/images/ventozza/ivory-marble-texture-enhanced.png', finish: 'Marble look · polished' },
+  { id: '600x600', size: '600 × 600 mm', name: 'Square format porcelain', image: '/images/ventozza/catalogue-art/size-600x600.webp', texture: '/images/ventozza/cream-marble-texture.png', finish: 'Full body · glossy / matt' },
+  { id: '300x600', size: '300 × 600 mm', name: 'Decorative wall tile', image: '/images/ventozza/catalogue-art/size-300x600.webp', texture: '/images/ventozza/catalogue-art/product-kitchen-collection.webp', finish: 'Decorative · glossy' },
+  { id: '300x450', size: '300 × 450 mm', name: 'Decorative wall tile', image: '/images/ventozza/catalogue-art/size-300x450.webp', texture: '/images/ventozza/catalogue-art/product-fish-flower.webp', finish: 'Patterned · glossy' },
+  { id: '200x1200', size: '200 × 1200 mm', name: 'Wood-look plank', image: '/images/ventozza/catalogue-art/size-200x1200.webp', texture: '/images/ventozza/catalogue-art/showroom-look-rustic.webp', finish: 'Wood look · natural' },
+  { id: 'step-riser', size: 'Step & riser formats', name: 'Full Body step solutions', image: '/images/ventozza/catalogue-art/size-step-riser.webp', texture: '/images/ventozza/catalogue-art/size-step-riser.webp', finish: 'Step · riser · full body' },
 ]
 
 type Props = {
@@ -82,29 +96,26 @@ export default function CataloguesPage({
     <div className="catalogues-page">
       <header className="catalogues-page-heading">
         <span className="eyebrow">
-          <i /> VENTOZZA · DIGITAL CATALOGUE LIBRARY
+          <i /> OUR SPECIALTIES
         </span>
 
         <h3>
-          View and Download Our
-          <br />
-          Catalogues
+          Sizes &amp; Finishes We Specialize In
         </h3>
 
         <p>
-          Explore our tile collections by size, finish and application.
-          View a catalogue here or download its PDF directly from the site.
+          Project-ready formats for residential and commercial spaces.
         </p>
       </header>
 
-      <div className="catalogues-browser">
+      <div className="catalogue-format-explorer">
         <aside className="catalogues-sidebar" aria-label="Catalogue categories">
           <div className="catalogues-sidebar-title">
-            BROWSE CATALOGUES
+            TILE SIZES · MM
           </div>
 
           <nav className="catalogue-category-list">
-            {filters.map((filter) => (
+            {filters.filter((filter) => filter.id !== 'brochure').map((filter) => (
               <button
                 key={filter.id}
                 type="button"
@@ -124,37 +135,47 @@ export default function CataloguesPage({
           </nav>
         </aside>
 
-        <section
-          className="catalogues-results"
-          aria-label="Available catalogues"
-        >
-          <div className="catalogues-toolbar">
-            <div className="catalogues-results-count">
-              {shownCatalogues.length}{' '}
-              {shownCatalogues.length === 1 ? 'CATALOGUE' : 'CATALOGUES'}
-            </div>
-
-            <label className="catalogue-search">
-              <span aria-hidden="true">⌕</span>
-
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search catalogues"
-                aria-label="Search catalogues"
-              />
-
-              {query && (
-                <button
-                  type="button"
-                  onClick={() => setQuery('')}
-                  aria-label="Clear search"
-                >
-                  ×
-                </button>
-              )}
-            </label>
-          </div>
+        <div className="catalogue-content-column">
+        <section className="catalogue-format-stage" aria-label="Selected tile format">
+          {(() => {
+            const selectedFormat = formatShowcase.find((format) => format.id === activeFormat) ?? formatShowcase[0]
+            const featuredCatalogue = shownCatalogues[0] ?? catalogueItems.find((item) => item.group === selectedFormat.id)
+            return <>
+              <div className="catalogue-format-scene" key={selectedFormat.id}>
+                <img src={selectedFormat.image} alt="" />
+                <div className="catalogue-format-slab" style={{ backgroundImage: `url("${selectedFormat.texture}")` }} role="img" aria-label={`${selectedFormat.size} tile surface sample`}>
+                  <span>{selectedFormat.size.replace(' mm', '')}</span>
+                </div>
+                <div className="catalogue-format-scene-note">VENTOZZA · SURFACE STUDY</div>
+              </div>
+              <div className="catalogue-format-details">
+                <span className="eyebrow"><i /> FORMAT {String(Math.max(1, formatShowcase.findIndex((format) => format.id === selectedFormat.id) + 1)).padStart(2, '0')} · {selectedFormat.name.toUpperCase()}</span>
+                <h4>{selectedFormat.size}</h4>
+                <p>{selectedFormat.finish}. Explore the format in the catalogue and compare designs for your project.</p>
+                <div className="catalogue-finish-swatches" aria-label="Available finish references">
+                  {tileLooks.slice(0, 3).map((finish) => <span key={finish.name}><img src={finish.image} alt=""/><small>{finish.name}</small></span>)}
+                </div>
+                <div className="catalogue-feature-actions">
+                  {featuredCatalogue ? <>
+                    <button type="button" onClick={() => setViewingItemId(featuredCatalogue.id)}>EXPLORE THE CATALOGUE <span aria-hidden="true">↗</span></button>
+                    <a href={featuredCatalogue.pdfUrl} download={featuredCatalogue.fileName}>DOWNLOAD PDF</a>
+                  </> : <span className="catalogue-format-unavailable">Ask our team about this format.</span>}
+                </div>
+                <small className="catalogue-format-count">{shownCatalogues.length} {shownCatalogues.length === 1 ? 'catalogue' : 'catalogues'} available in this selection</small>
+              </div>
+            </>
+          })()}
+        </section>
+      <section className="catalogues-library" aria-label="Catalogue library">
+        <div className="catalogues-library-heading">
+          <div><span className="eyebrow"><i /> DIGITAL CATALOGUE LIBRARY</span><h4>Browse the collection.</h4></div>
+          <label className="catalogue-search">
+            <span aria-hidden="true">⌕</span>
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search catalogues" aria-label="Search catalogues" />
+            {query && <button type="button" onClick={() => setQuery('')} aria-label="Clear search">×</button>}
+          </label>
+        </div>
+        <div className="catalogues-results-count">{shownCatalogues.length} {shownCatalogues.length === 1 ? 'CATALOGUE' : 'CATALOGUES'}</div>
 
           {shownCatalogues.length ? (
             <div className="catalogues-grid">
@@ -267,7 +288,8 @@ export default function CataloguesPage({
               </button>
             </div>
           )}
-        </section>
+      </section>
+        </div>
       </div>
 
       {viewingItem &&

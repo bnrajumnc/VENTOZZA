@@ -117,7 +117,7 @@ export default function SiteFooter({
               handleTileNavigation(event, 'visualizer')
             }
           >
-            Digital Visualizer
+            Digital Showroom
           </a>
 
           <a
@@ -172,13 +172,9 @@ export default function SiteFooter({
 
         {/* Office addresses */}
         <div className="footer-note footer-addresses">
-          <span style={{marginBottom: '-15px' }}>REGISTERED OFFICE:</span>
+          <span>REGISTERED OFFICE</span>
 
           <p>
-            {/* <b style={{ fontSize: '16px' }}>
-              Registered Office:
-            </b> */}
-            <br />
             10-3-71/3/A, 3rd Floor,
             <br />
             Teachers Colony, East Marredpally,
@@ -187,12 +183,8 @@ export default function SiteFooter({
             <br />
             Telangana, India
           </p>
-          <span style={{ marginTop: '20px',marginBottom: '-15px' }}>CORPORATE OFFICE:</span>
+          <span>CORPORATE OFFICE</span>
           <p>
-            {/* <b style={{ fontSize: '16px' }}>
-              Corporate Office:
-            </b> */}
-            <br />
             Siromani 142, Ground Floor,
             <br />
             G-15, Near Eden Ceramic,
@@ -209,12 +201,6 @@ export default function SiteFooter({
 
           <p className="footer-company">
             VENTOZZA SURFACES
-          </p>
-
-          <p>
-            <b>H. Narayana Rao</b>
-            <br />
-            Vice President – Sales &amp; Marketing
           </p>
 
           <a href="mailto:sales@ventozzasurfaces.com">

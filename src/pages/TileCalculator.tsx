@@ -30,7 +30,6 @@ export default function TileCalculator({ onEnquire }: Props) {
       <div className="calculator-note"><span>01</span><p>Measure length and width in metres. For more than one room, calculate each space separately.</p></div>
       <div className="calculator-tile-art">
         <img src="/images/ventozza/catalogue-art/calculator-background-fullbody.webp" alt="Terrazzo Full Body tile from the VENTOZZA 600 × 1200 catalogue shown in a living room" />
-        <span className="calculator-art-tag">600 × 1200 · FULL BODY</span>
         <div><small>FORMAT IN A REAL SPACE</small><b>Room to plan.<br />Tile format to match.</b></div>
       </div>
     </div>

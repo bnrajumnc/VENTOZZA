@@ -1,7 +1,7 @@
 .login-page { min-height:clamp(520px,72vh,760px); }
 .login-card { max-width:720px; }
-.login-card-heading p { font-size:15px; line-height:1.65; }
-.login-form label { font-size:13px; }
-.login-form input { font-size:15px; }
-.login-switch { font-size:13px; }
+.login-card-heading p { font-size:var(--site-text-size-15px-a90797); line-height:var(--site-text-line-height-1-65-b71188); }
+.login-form label { font-size:var(--site-text-size-13px-377ddf); }
+.login-form input { font-size:var(--site-text-size-15px-a90797); }
+.login-switch { font-size:var(--site-text-size-13px-377ddf); }
 @media(max-width:700px){.login-page{min-height:calc(100vh - 66px)}.login-card{padding:25px 19px}}

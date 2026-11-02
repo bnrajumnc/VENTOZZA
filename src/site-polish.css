@@ -5,16 +5,16 @@
   --teal: #008875;
 }
 
-body { color: #183e34; font-size: 15px; line-height: 1.58; }
-main p { color: #304b40; }
-.eyebrow { color: #FF7911; font-size: 12px; }
+body { color:var(--site-text-color-183e34-0e7a34); font-size:var(--site-text-size-15px-a90797); line-height:var(--site-text-line-height-1-58-f96a01); }
+main p { color:var(--site-text-color-304b40-b857aa); }
+.eyebrow { color:var(--site-text-color-ff7911-b2b093); font-size:var(--site-text-size-12px-3a2909); }
 .section-head-aside p,
 .about-copy > p,
 .sizes-head > p,
 .cert-intro > p,
-.contact-copy > p { color: #e4eee7; }
+.contact-copy > p { color:var(--site-text-color-e4eee7-eae1f4); }
 .about-copy > p,
-.section-head-aside p { color: #304b40; }
+.section-head-aside p { color:var(--site-text-color-304b40-b857aa); }
 
 .header .logo img { width: clamp(185px, 15vw, 224px); height: auto; }
 .footer .footer-brand img { width: clamp(185px, 17vw, 220px); height: auto; }
@@ -24,7 +24,7 @@ main p { color: #304b40; }
 .footer .footer-links { gap: 7px; }
 .footer .footer-links > span,
 .footer .footer-note > span { margin-bottom: 1px; }
-.footer .footer-note p { margin: 6px 0 10px; line-height: 1.52; }
+.footer .footer-note p { margin: 6px 0 10px; line-height:var(--site-text-line-height-1-52-65c917); }
 .footer .footer-contact a,
 .footer .footer-links a,
 .footer .footer-bottom a,
@@ -32,21 +32,21 @@ main p { color: #304b40; }
 .footer .footer-contact a:hover,
 .footer .footer-links a:hover,
 .footer .footer-bottom a:hover,
-.footer-sizes a:hover { color: #FF7911 !important; text-decoration: underline; text-underline-offset: 3px; }
+.footer-sizes a:hover { color:var(--site-text-color-ff7911-b2b093) !important; text-decoration:var(--site-text-text-decoration-underline-7974bb); text-underline-offset: 3px; }
 .footer .footer-contact a:hover,
 .footer .footer-links a:hover,
 .footer-sizes a:hover { transform: translateX(3px); }
 .footer a:focus-visible { outline: 2px solid #FF7911; outline-offset: 3px; }
 
-.contact-form label { color: #304b40; font-size: 14px; font-weight: 600; }
+.contact-form label { color:var(--site-text-color-304b40-b857aa); font-size:var(--site-text-size-14px-5fbabb); font-weight:var(--site-text-weight-600-64a878); }
 .contact-form small,
-.callback-form > small { color: #304b40; font-size: 12px; line-height: 1.55; }
+.callback-form > small { color:var(--site-text-color-304b40-b857aa); font-size:var(--site-text-size-12px-3a2909); line-height:var(--site-text-line-height-1-55-b5727f); }
 .contact-form button:disabled,
 .callback-form button:disabled { opacity: .7; cursor: wait; }
 .form-success,
-.form-error { font-size: 14px; line-height: 1.5; }
-.form-success { color: #08745f; }
-.form-error { margin: 0; color: #9d3429; }
+.form-error { font-size:var(--site-text-size-14px-5fbabb); line-height:var(--site-text-line-height-1-5-91cc08); }
+.form-success { color:var(--site-text-color-08745f-cd13e7); }
+.form-error { margin: 0; color:var(--site-text-color-9d3429-3b694d); }
 
 @media (max-width: 1050px) {
   .header .logo img { width: 190px; }
@@ -60,14 +60,11 @@ main p { color: #304b40; }
 
 /* Site-wide readability pass: retain each section's chosen palette and lift
    text luminance gently without replacing its color. */
-body { line-height: 1.55; }
-main p { line-height: 1.6; font-weight: 500; }
+body { line-height:var(--site-text-line-height-1-55-b5727f); }
+main p { line-height:var(--site-text-line-height-1-6-430e4d); font-weight:var(--site-text-weight-500-60356f); }
 main :is(h1, h2, h3, h4, p, small, li),
 .footer :is(p, small, span) { filter: brightness(1.12); }
-main a, .header :is(a, button), .footer :is(a, button) { text-shadow: 0 0 .35px currentColor; }
-/* Keep the home hero headline in its original display style, in white for contrast. */
-main#home[data-page="home"] > .hero h1,
-main#home[data-page="home"] > .hero h1 em { color: #fff; }
+main a, .header :is(a, button), .footer :is(a, button) { text-shadow:var(--site-text-text-shadow-0-0-35px-currentcolor-9db277); }
 .section-wrap { padding-top: clamp(40px, 4.2vw, 56px); padding-bottom: clamp(40px, 4.2vw, 56px); }
 .section-head { margin-bottom: 22px; }
 .why-visit { padding-top: clamp(44px, 5vw, 64px); padding-bottom: clamp(46px, 5vw, 66px); }
