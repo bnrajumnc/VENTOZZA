@@ -229,7 +229,7 @@ export default function SiteFooter({
       {/* Footer bottom */}
       <div className="footer-bottom">
         <span>© 2026 VENTOZZA. ALL RIGHTS RESERVED.</span>
-        <span>TILE ENQUIRIES · WALL &amp; FLOOR</span>
+        {/* <span>TILE ENQUIRIES · WALL &amp; FLOOR</span> */}
       </div>
     </footer>
   )

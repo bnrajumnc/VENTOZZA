@@ -160,6 +160,26 @@ function App() {
     { id: 1, role: 'assistant', text: 'Hello! I’m the VENTOZZA tile guide. Ask me about tile sizes, finishes or choosing tiles for a room.' },
   ])
 
+  useEffect(() => {
+    if (!headerSearchOpen) return
+
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      const target = event.target
+      if (target instanceof Element && target.closest('.header-search-panel, .header-tools > .header-icon-button')) return
+      setHeaderSearchOpen(false)
+    }
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setHeaderSearchOpen(false)
+    }
+
+    document.addEventListener('pointerdown', closeOnOutsidePointer)
+    document.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.removeEventListener('pointerdown', closeOnOutsidePointer)
+      document.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [headerSearchOpen])
+
   const navigateTo = (page: Page) => {
     if (page !== activePage) window.history.pushState(null, '', `#${page}`)
     setActivePage(page)
@@ -425,7 +445,7 @@ function App() {
         </nav>
         <div className="header-tools">
           <button className="header-icon-button" type="button" aria-label={headerSearchOpen ? 'Close search' : 'Search tiles'} aria-expanded={headerSearchOpen} onClick={() => setHeaderSearchOpen((open) => !open)}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.2" /><path d="m16 16 5 5" /></svg></button>
-          <button className="where-to-buy" type="button" aria-label="Where to buy — contact us" title="Where to buy" onClick={() => navigateTo('contact')}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg></button>
+          <a className="where-to-buy" href="https://www.google.com/maps/search/?api=1&query=10-3-71%2F3%2FA%2C%20Teachers%20Colony%2C%20East%20Marredpally%2C%20Secunderabad%20500026" target="_blank" rel="noopener noreferrer" aria-label="Open VENTOZZA registered office in Google Maps" title="View VENTOZZA location on Google Maps"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg></a>
           {/* Temporarily hidden account access icon; restore this button when login is needed. */}
           {/* <button className="header-icon-button" type="button" aria-label="Login" onClick={() => navigateTo('login')}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="9" r="3" /><path d="M6.5 18c1.1-2.2 3-3.3 5.5-3.3s4.4 1.1 5.5 3.3" /></svg></button> */}
           {headerSearchOpen && <form className="header-search-panel" onSubmit={submitTileSearch}><label htmlFor="header-tile-search">Search VENTOZZA tiles</label><div><input id="header-tile-search" type="search" value={headerSearch} onChange={(event) => setHeaderSearch(event.target.value)} onKeyDown={(event) => { if (event.key === 'Escape') setHeaderSearchOpen(false) }} placeholder="Try a tile name, size or finish" autoFocus /><button type="submit" aria-label="Search tiles">→</button></div><small>Search tile names, codes, finishes and displayed sizes.</small></form>}

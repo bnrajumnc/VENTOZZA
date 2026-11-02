@@ -114,7 +114,7 @@ body { font-size:var(--site-text-size-15px-a90797); line-height:var(--site-text-
 .callback-form label, .callback-form > small { font-size:var(--site-text-size-12px-3a2909); }
 .callback-dialog > p, .callback-thanks > p { font-size:var(--site-text-size-15px-a90797); }
 .callback-form input, .callback-form select { font-size:var(--site-text-size-15px-a90797); }
-.chat-note { font-size:var(--site-text-size-11px-26f6fb); }
+.chat-note { font-size:10px }
 .nav button { font-size:var(--site-text-size-14px-5fbabb); }
 .nav .tiles-dropdown button { font-size:var(--site-text-size-13px-377ddf) !important; }
 .header-cta { font-size:var(--site-text-size-13px-377ddf); }

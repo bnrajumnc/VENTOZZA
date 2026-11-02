@@ -38,7 +38,7 @@ body { color:var(--site-text-color-153f37-fe8ae1); background: #f7f6f1; font-siz
 .eyebrow-light { color:var(--site-text-color-f7f6f1-69328c); }
 .eyebrow-light i { background: #087e6e; }
 .hero h1 { text-shadow:var(--site-text-text-shadow-0-2px-24px-153f3766-a4bb1f); }
-.hero-copy > p { max-width: 520px; color:var(--site-text-color-f7f6f1-69328c); font-size:var(--site-text-size-18px-325b0c); line-height:var(--site-text-line-height-1-7-2e7701); }
+.hero-copy > p { max-width: 520px; color:#173b34; font-size:var(--site-text-size-18px-325b0c); line-height:var(--site-text-line-height-1-7-2e7701); }
 .button { font-size:var(--site-text-size-13px-377ddf); font-weight:var(--site-text-weight-700-65cfcf); }
 .button-light { background: #f5f3ed; color:var(--site-text-color-153f37-fe8ae1); }
 .button-light:hover { background: #fff; }

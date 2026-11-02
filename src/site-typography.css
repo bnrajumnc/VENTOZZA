@@ -24,6 +24,12 @@
   --site-font-family: 'Poppins', sans-serif;
   --site-font-family-display: var(--site-font-family);
   --site-body-font: var(--site-font-family);
+  --site-chat-panel-width: 340px;
+  --site-chat-panel-height: 440px;
+  --site-chat-panel-min-height: 300px;
+  --site-chat-heading-size: 11px;
+  --site-chat-body-size: 13px;
+  --site-chat-ui-size: 10px;
   --display: var(--site-font-family-display);
   --serif: var(--site-font-family-display);
 
@@ -40,22 +46,22 @@
   --site-border-soft: #e6e4df;
   /* Text and shared chrome colors: edit these roles once for every page. */
   --site-color-heading: #921638;
-  --site-color-text: #303236;
-  --site-color-text-secondary: #303236;
-  --site-color-text-muted: #484b50;
+  --site-color-text: #000000;
+  --site-color-text-secondary: #000000;
+  --site-color-text-muted: #000;
   --site-color-text-inverse: #f7f6f1;
   --site-color-eyebrow: #007d70;
   --site-color-link: var(--site-color-primary);
   --site-color-link-hover: var(--site-color-secondary);
   --site-color-header-surface: rgb(255 255 255 / 94%);
   --site-color-header-text: var(--site-color-primary);
-  --site-color-header-hover: var(--site-color-secondary);
+  --site-color-header-hover: var(--site-color-heading);
   --site-color-header-active: var(--site-color-primary);
   --site-color-header-dropdown: #ffffff;
   --site-color-header-dropdown-hover: #edf4f0;
   --site-color-header-border: rgb(23 63 54 / 12%);
   --site-color-footer-text: #e7eee8;
-  --site-color-footer-heading: #f2c47b;
+  --site-color-footer-heading: #ff7911;
   --site-color-footer-hover: #ff7911;
   --site-radius-small: 4px;
   --site-radius-card: 8px;

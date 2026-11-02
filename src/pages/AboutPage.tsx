@@ -3,8 +3,9 @@ import './AboutPage.css'
 import ExpansionRoadmap from './ExpansionRoadmap'
 
 const promoters = [
-  { name: 'Vijay Kumar N. Jakhaniya', role: 'Director / Promoter' },
-  { name: 'P. Vishal Kumar', role: 'Director / Promoter' },
+  { name: 'Vijay Kumar N. Jakhaniya', role: 'Director / Promoter', initials: 'VJ' },
+  { name: 'P. Vishal Kumar', role: 'Director / Promoter', initials: 'PV' },
+  { name: 'H. Narayana Rao', role: 'Vice President – Sales & Marketing', initials: 'HN' },
 ]
 
 const team = [
@@ -140,7 +141,7 @@ export default function AboutPage() {
         </div>
         <div className="about-reference-promoters">
           <h3>Directors / Promoters</h3>
-          {promoters.map((person, index) => <article key={person.name}><i className="team-promoter-initials" aria-hidden="true">{index === 0 ? 'VJ' : 'PV'}</i><div className="team-promoter-details"><b>{person.name}</b><span>{person.role}</span></div></article>)}
+          {promoters.map((person) => <article className={person.initials === 'HN' ? 'team-vice-president' : undefined} key={person.name}><i className="team-promoter-initials" aria-hidden="true">{person.initials}</i><div className="team-promoter-details"><b>{person.name}</b><span>{person.role}</span></div></article>)}
         </div>
         <div className="about-reference-team-grid" aria-label="Core team directory">
           {team.map((person) => <article key={person.name}><span aria-hidden="true">{person.name.split(/\s+/).slice(0, 2).map(part => part[0]).join('')}</span><b>{person.name}</b><small>{person.role}</small></article>)}

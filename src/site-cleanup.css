@@ -4,6 +4,57 @@
 }
 body { overflow-wrap:break-word; }
 main#home { min-width:0; }
+#root .callback-tab {
+  top:43%; bottom:auto; padding:12px 7px;
+  font-size:10px; letter-spacing:.09em; line-height:1.4;
+}
+#root .callback-tab:hover { padding-top:12px; }
+@media(max-width:700px) {
+  #root .callback-tab { top:auto; bottom:115px; padding:10px 6px; font-size:9px; }
+}
+#root .header .where-to-buy,
+#root .header .where-to-buy svg {
+  color:#ff7911 !important;
+}
+#root .header .where-to-buy svg { stroke:currentColor; }
+#root main#home #about-team .about-reference-team-grid article > small {
+  color:#242424 !important;
+}
+#root main#home #about-team .about-reference-team-grid {
+  grid-template-columns:repeat(3,minmax(0,max-content));
+  justify-content:center; gap:12px;
+}
+#root main#home #about-team .about-reference-team-grid article {
+  min-height:80px; padding:14px 16px; column-gap:12px;
+}
+@media(max-width:1000px) {
+  #root main#home #about-team .about-reference-team-grid { grid-template-columns:repeat(2,minmax(0,max-content)); }
+}
+@media(max-width:650px) {
+  #root main#home #about-team .about-reference-team-grid { grid-template-columns:minmax(0,max-content); }
+}
+#root main#home #about-team .team-promoter-details > span {
+  color:#242424 !important; font-size:13px !important; font-weight:500; line-height:1.5;
+}
+#root main#home #about-team .about-reference-promoters article {
+  min-height:84px; padding:16px 20px; gap:16px; justify-content:center; align-items:center;
+  width:fit-content; max-width:100%; justify-self:center;
+}
+#root main#home #about-team .team-promoter-initials {
+  flex-basis:44px; width:44px; height:44px; font-size:18px; border-radius:7px;
+}
+#root main#home #about-team .team-promoter-details { gap:5px; text-align:center; }
+#root main#home #about-team .team-promoter-details > b { font-size:16px !important; line-height:1.4; }
+#root main#home #about-team .about-reference-promoters {
+  grid-template-columns:repeat(2,minmax(0,max-content)); justify-content:center;
+}
+#root main#home #about-team .about-reference-promoters .team-vice-president {
+  grid-column:1 / -1; justify-self:center; width:fit-content; max-width:100%;
+}
+@media(max-width:760px) {
+  #root main#home #about-team .about-reference-promoters { grid-template-columns:minmax(0,1fr); }
+  #root main#home #about-team .about-reference-promoters .team-vice-president { width:fit-content; }
+}
 #root main#home[data-page='products'][data-tile-view='overview'] > .products.section-wrap {
   background:linear-gradient(90deg,rgba(255,255,255,.83),rgba(255,255,255,.62)),url('/images/ventozza/collection-colourful-tiles-background.png') center top / 100% auto repeat-y !important;
 }
@@ -336,4 +387,151 @@ main#home[data-page='products'][data-tile-view='size'] .tile-size-note {
   footer.footer .footer-contact > a[href^="https://"] {
     font-size:var(--site-text-size-14px-5fbabb) !important;
   }
+}
+
+/* Compact callback dialog so the complete form fits without an inner scrollbar. */
+.callback-dialog {
+  width:min(520px,100%);
+  max-height:calc(100dvh - 28px);
+  overflow-y:auto;
+  padding:22px 30px 20px;
+}
+.callback-dialog h2 {
+  margin:9px 36px 6px 0;
+  font-size:clamp(30px,4vw,38px);
+  line-height:1.05;
+}
+.callback-dialog > p,
+.callback-thanks > p {
+  margin:0;
+  font-size:14px;
+  line-height:1.42;
+}
+.callback-form {
+  gap:10px;
+  margin-top:14px;
+}
+.callback-form label {
+  gap:4px;
+  font-size:12px;
+  line-height:1.3;
+}
+.callback-form input,
+.callback-form select {
+  min-height:42px;
+  padding:9px 11px;
+  font-size:14px;
+}
+.callback-form .button {
+  min-height:48px;
+  padding:12px 18px;
+  font-size:12px;
+}
+.callback-form > small {
+  font-size:10px;
+  line-height:1.35;
+}
+.callback-close { top:10px; right:11px; }
+@media (max-width: 600px) {
+  .callback-overlay { padding:12px; }
+  .callback-dialog { max-height:calc(100dvh - 24px); padding:20px 22px 18px; }
+  .callback-dialog h2 { font-size:clamp(28px,7vw,34px); }
+  .callback-form { gap:9px; margin-top:12px; }
+}
+
+/* Use the shared burgundy hover token for navbar underline and text hover. */
+#root footer.footer .footer-contact {
+  display:flex; flex-direction:column; align-items:stretch;
+  min-width:0; min-height:0; height:auto; padding:20px 18px; gap:0;
+}
+#root footer.footer .footer-contact > a {
+  display:block; width:100%; max-width:100%; min-width:0;
+  box-sizing:border-box; padding:10px 0;
+  font-size:13px !important; line-height:1.55 !important;
+  letter-spacing:normal !important; font-weight:500;
+  white-space:normal !important; word-break:normal; overflow-wrap:anywhere !important;
+}
+#root footer.footer .footer-contact .footer-company { margin:8px 0 2px; }
+#root footer.footer .footer-contact > a:last-child { margin-bottom:0; }
+
+/* Give footer contact links enough room to remain on one line at every breakpoint. */
+#root footer.footer .footer-contact {
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+}
+#root footer.footer .footer-contact > a[href^="mailto:"],
+#root footer.footer .footer-contact > a[href^="https://"] {
+  white-space:nowrap !important;
+  overflow-wrap:normal !important;
+  word-break:keep-all !important;
+  font-size:clamp(10px, 1vw, 13px) !important;
+  letter-spacing:normal !important;
+}
+@media (min-width:1280px) {
+  #root footer.footer .footer-main {
+    grid-template-columns:minmax(190px,1.25fr) minmax(105px,.55fr) minmax(165px,.82fr) minmax(190px,.9fr) minmax(320px,1.3fr);
+  }
+  #root footer.footer .footer-contact {
+    position:relative;
+    left:clamp(-42px, -2.2vw, -24px);
+    width:calc(100% + clamp(24px, 2.2vw, 42px));
+  }
+}
+@media (min-width:701px) and (max-width:1279px) {
+  #root footer.footer .footer-main { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  #root footer.footer .footer-brand { grid-column:span 2; }
+  #root footer.footer .footer-contact { grid-column:1/-1; }
+}
+@media (max-width:700px) {
+  #root footer.footer .footer-contact { grid-column:1/-1; padding:18px 20px; }
+  #root footer.footer .footer-contact > a[href^="mailto:"],
+  #root footer.footer .footer-contact > a[href^="https://"] {
+    font-size:clamp(10px, 3.3vw, 12px) !important;
+  }
+}
+
+/* Keep the tile guide compact, readable and easy to dismiss. */
+#root .chat-panel {
+  width:min(var(--site-chat-panel-width), calc(100vw - 28px));
+  height:min(var(--site-chat-panel-height), calc(100dvh - 110px));
+  min-height:min(var(--site-chat-panel-min-height), calc(100dvh - 130px));
+}
+#root .chat-header { padding:13px 15px; }
+#root .chat-header b,
+#root .chat-header span { font-size:var(--site-chat-heading-size); }
+#root .chat-header button {
+  flex:0 0 auto;
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  border:1px solid #d5ddd6;
+  border-radius:50%;
+  background:#f5f7f5;
+  color:var(--site-color-ink) !important;
+  font-size:19px;
+  line-height:1;
+  cursor:pointer;
+}
+#root .chat-header button:hover { background:#e8eeea; border-color:#bccac0; }
+#root .chat-messages { padding:13px; gap:8px; }
+#root .chat-message { padding:9px 11px; font-size:var(--site-chat-body-size); }
+#root .chat-actions button,
+#root .chat-prompts button { padding:6px 9px; font-size:var(--site-chat-ui-size); }
+#root .chat-form { padding:8px 10px; gap:7px; }
+#root .chat-form input { padding:9px 12px; font-size:var(--site-chat-body-size); }
+#root .chat-form button { flex:0 0 38px; width:38px; height:38px; }
+#root .chat-note { padding:0 12px 9px; font-size:10px; line-height:1.4; }
+@media (max-width:700px) {
+  /* Keep the round top control clear of the fixed vertical call-back tab. */
+  #root .back-to-top { right:62px; bottom:80px; width:43px; height:43px; }
+  #root .chat-panel {
+    width:min(var(--site-chat-panel-width), calc(100vw - 24px));
+    height:min(420px, calc(100dvh - 90px));
+    min-height:min(280px, calc(100dvh - 110px));
+  }
+}
+.header .nav button::after {
+  background-color:var(--site-color-header-hover) !important;
 }
