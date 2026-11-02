@@ -233,23 +233,28 @@ function App() {
       visualizer: 'Digital Tile Showroom', calculator: 'Tile Quantity Calculator', catalogues: 'Tile Catalogues',
     }
     const pageTitles: Record<Page, string> = {
-      home: 'Residentials/Commercials project spaces', products: viewTitles[tileView] ?? 'Tile Collection',
+      home: 'Ceramic Tiles for Walls and Floors', products: viewTitles[tileView] ?? 'Tile Collection',
       about: 'About VENTOZZA Surfaces', certificates: 'Tile Quality & Certificates', contact: 'Contact VENTOZZA',
     }
     const pageDescriptions: Record<Page, string> = {
-      home: 'Explore VENTOZZA ceramic tile collections, catalogue formats, room inspiration and tile selection tools.',
+      home: 'EXPLORE VENTOZZA Residentials/Commercials Project Spaces',
       products: 'Browse VENTOZZA ceramic tile designs, sizes, finishes and downloadable product catalogues.',
       about: 'Learn about VENTOZZA Surfaces, its tile expertise, offices and company profile.',
       certificates: 'Request VENTOZZA product specifications, quality certificates and tile care information.',
       contact: 'Contact the VENTOZZA tile team for product information, availability and project enquiries.',
     }
-    document.title = `${pageTitles[activePage]} | VENTOZZA`
+    const title = activePage === 'home' ? 'VENTOZZA — Ceramic Tiles for Walls and Floors' : `${pageTitles[activePage]} | VENTOZZA`
+    document.title = title
     const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
     if (description) description.content = pageDescriptions[activePage]
     const openGraphTitle = document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
-    if (openGraphTitle) openGraphTitle.content = `${pageTitles[activePage]} | VENTOZZA`
+    if (openGraphTitle) openGraphTitle.content = title
     const openGraphDescription = document.querySelector<HTMLMetaElement>('meta[property="og:description"]')
     if (openGraphDescription) openGraphDescription.content = pageDescriptions[activePage]
+    const twitterTitle = document.querySelector<HTMLMetaElement>('meta[name="twitter:title"]')
+    if (twitterTitle) twitterTitle.content = title
+    const twitterDescription = document.querySelector<HTMLMetaElement>('meta[name="twitter:description"]')
+    if (twitterDescription) twitterDescription.content = pageDescriptions[activePage]
   }, [activePage, tileView])
 
   useEffect(() => {

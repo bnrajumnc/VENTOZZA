@@ -1,4 +1,18 @@
 main#home[data-tile-view='look-feel']>.products.section-wrap{padding-top:28px;padding-bottom:40px;background:#fff!important}
+#root main#home[data-page='products'][data-tile-view='look-feel'] > .products.section-wrap {
+  background:linear-gradient(90deg,rgba(255,255,255,.70),rgba(255,255,255,.36)),url('/images/ventozza/look-feel-premium-background.png') right top/cover no-repeat !important;
+}
+#root main#home[data-tile-view='look-feel'] .finish-details {
+  background:rgba(255,255,255,.90); border-color:#dce5df;
+  box-shadow:0 10px 32px rgba(30,54,45,.06);
+}
+#root main#home[data-tile-view='look-feel'] .finish-selector button { background:rgba(255,255,255,.92); }
+#root main#home[data-tile-view='look-feel'] .finish-selector button[aria-pressed='true'] { background:#edf5f0; }
+@media(max-width:800px) {
+  #root main#home[data-page='products'][data-tile-view='look-feel'] > .products.section-wrap {
+    background:linear-gradient(180deg,rgba(255,255,255,.50),rgba(255,255,255,.82)),url('/images/ventozza/look-feel-premium-background.png') 70% top/auto 100% no-repeat !important;
+  }
+}
 .finish-explorer{max-width:1320px;margin:auto;color:var(--site-text-color-153f34-cd5121);font-family:var(--site-text-family-poppins-sans-serif-aeeb0e)}
 .finish-header{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:26px;background:transparent!important}
 main#home .finish-header h2{font-size:var(--site-text-size-clamp-29px-3vw-42px-81a70a);line-height:var(--site-text-line-height-1-15-e31df2);letter-spacing:var(--site-text-letter-spacing-035em-8b3067);margin:12px 0;font-weight:var(--site-text-weight-500-60356f)}

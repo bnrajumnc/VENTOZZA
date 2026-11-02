@@ -50,7 +50,6 @@ export default function AboutPage() {
     return () => window.clearInterval(timer)
   }, [activeFormatIndex, formatPaused])
 
-  const moveFormatSlide = (step: number) => setActiveFormatIndex((current) => (current + step + sizeFormats.length) % sizeFormats.length)
 
   return <div className="about-reference-page" id="about">
     <header className="about-reference-hero reveal" id="about-overview">
@@ -186,11 +185,9 @@ export default function AboutPage() {
               </div>
             </article>
             <div className="about-reference-specialty-controls" aria-label="Tile format slides">
-              <button className="about-reference-specialty-arrow" type="button" onClick={() => moveFormatSlide(-1)} aria-label="Previous tile format">←</button>
               <div className="about-reference-specialty-dots" role="tablist" aria-label="Choose a tile format">
                 {sizeFormats.map((item, index) => <button key={item.format} type="button" role="tab" aria-label={`Show ${item.format}`} aria-selected={index === activeFormatIndex} className={index === activeFormatIndex ? 'active' : ''} onClick={() => setActiveFormatIndex(index)} />)}
               </div>
-              <button className="about-reference-specialty-arrow" type="button" onClick={() => moveFormatSlide(1)} aria-label="Next tile format">→</button>
             </div>
           </div>
         </div>
