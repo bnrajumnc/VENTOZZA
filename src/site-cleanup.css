@@ -18,7 +18,10 @@ main#home { min-width:0; }
 }
 #root .header .where-to-buy svg { stroke:currentColor; }
 #root main#home #about-team .about-reference-team-grid article > small {
-  color:#242424 !important;
+  color:#242424 !important; font-size:14px !important; line-height:1.5 !important;
+}
+#root main#home #about-team .about-reference-team-grid article > b {
+  color:#153f37 !important; font-size:16px !important; line-height:1.4 !important;
 }
 #root main#home #about-team .about-reference-team-grid {
   grid-template-columns:repeat(3,minmax(0,max-content));
