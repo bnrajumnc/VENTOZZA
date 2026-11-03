@@ -20,7 +20,6 @@
   --site-color-roadmap-ink: #153f34;
   --site-color-roadmap-muted: #65716b;
   --exp-paper: #fafbf7;
-
   --site-font-family: 'Poppins', sans-serif;
   --site-font-family-display: var(--site-font-family);
   --site-body-font: var(--site-font-family);
@@ -32,7 +31,6 @@
   --site-chat-ui-size: 10px;
   --display: var(--site-font-family-display);
   --serif: var(--site-font-family-display);
-
   /* Colors — adjust the shared brand palette here. */
   --site-color-primary: #153f37;
   --site-color-secondary: #087e6e;
@@ -68,7 +66,6 @@
   --site-shadow-card: 0 8px 24px rgb(26 43 36 / 6%);
   --site-shadow-card-hover: 0 16px 34px rgb(26 43 36 / 11%);
   --site-transition: 220ms cubic-bezier(.2, .7, .2, 1);
-
   /* Legacy aliases keep existing components tied to the same palette. */
   --green: var(--site-color-primary);
   --teal: var(--site-color-secondary);
@@ -78,7 +75,6 @@
   --coral: var(--site-color-accent-soft);
   --orange-accent: var(--site-color-accent);
   --sunshine: #f9a31b;
-
   /* Sizes */
   --site-font-size-body: 15px;
   --site-font-size-lead: 18px;
@@ -95,7 +91,6 @@
   --site-font-size-feature-title: clamp(21px, 2vw, 27px);
   --site-font-size-feature-copy: 15px;
   --site-font-size-control: 14px;
-
   /* Weights */
   --site-font-weight-body: 400;
   --site-font-weight-label: 700;
@@ -108,7 +103,6 @@
   --site-font-weight-h6: 600;
   --site-font-weight-control: 500;
   --site-font-weight-caption: 400;
-
   /* Reading rhythm and spacing */
   --site-line-height-body: 1.7;
   --site-line-height-heading: 1.18;
@@ -121,28 +115,39 @@
   --site-letter-spacing-label: .14em;
   --site-letter-spacing-control: .02em;
 }
-
-:root { font-family:var(--site-font-family); color:var(--site-color-ink); }
-
+:root {
+  font-family: var(--site-font-family);
+  color: var(--site-color-ink);
+}
 /* Keep shared site chrome on the same editable typography system. */
 body .header,
 body .header *,
 body footer.footer,
 body footer.footer * {
-  font-family:var(--site-font-family) !important;
+  font-family: var(--site-font-family) !important;
 }
-
 /* Shared text roles. Hero light copy keeps its explicit light styling. */
-body { color:var(--site-color-text) !important; }
-body :is(h1, h2, h3, h4, h5, h6) { color:var(--site-color-heading); }
-body :is(p, li, dd, dt, blockquote) { color:var(--site-color-text-secondary); }
-body :is(.eyebrow, [class*="eyebrow"]):not(.eyebrow-light) { color:var(--site-color-eyebrow) !important; }
-body a { color:var(--site-color-link); }
-body a:hover, body a:focus-visible { color:var(--site-color-link-hover); }
-
+body {
+  color: var(--site-color-text) !important;
+}
+body :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--site-color-heading);
+}
+body :is(p, li, dd, dt, blockquote) {
+  color: var(--site-color-text-secondary);
+}
+body :is(.eyebrow, [class*="eyebrow"]):not(.eyebrow-light) {
+  color: var(--site-color-eyebrow) !important;
+}
+body a {
+  color: var(--site-color-link);
+}
+body a:hover, body a:focus-visible {
+  color: var(--site-color-link-hover);
+}
 /* Header typography, colors, dropdowns, and icon controls. */
 body .header {
-  color:var(--site-color-header-text) !important;
+  color: var(--site-color-header-text) !important;
   background-color: var(--site-color-header-surface) !important;
   border-bottom-color: var(--site-color-header-border) !important;
 }
@@ -150,31 +155,44 @@ body .header .nav > button,
 body .header .nav-products > button,
 body .header .header-icon-button,
 body .header .where-to-buy {
-  color:var(--site-color-header-text) !important;
-  font-family:var(--site-font-family) !important;
-  font-size:var(--site-font-size-nav) !important;
-  font-weight:var(--site-font-weight-nav) !important;
+  color: var(--site-color-header-text) !important;
+  font-family: var(--site-font-family) !important;
+  font-size: var(--site-font-size-nav) !important;
+  font-weight: var(--site-font-weight-nav) !important;
 }
 body .header .nav > button:hover,
 body .header .nav-products > button:hover,
-body .header .nav > button:focus-visible { color:var(--site-color-header-hover) !important; }
-body .header .nav > button.nav-active { color:var(--site-color-header-active) !important; }
-body .header .tiles-dropdown { background-color: var(--site-color-header-dropdown) !important; }
+body .header .nav > button:focus-visible {
+  color: var(--site-color-header-hover) !important;
+}
+body .header .nav > button.nav-active {
+  color: var(--site-color-header-active) !important;
+}
+body .header .tiles-dropdown {
+  background-color: var(--site-color-header-dropdown) !important;
+}
 body .header .tiles-dropdown button {
-  color:var(--site-color-header-text) !important;
-  font-family:var(--site-font-family) !important;
+  color: var(--site-color-header-text) !important;
+  font-family: var(--site-font-family) !important;
 }
 body .header .tiles-dropdown button:hover,
 body .header .tiles-dropdown button.submenu-active {
-  color:var(--site-color-header-text) !important;
+  color: var(--site-color-header-text) !important;
   background-color: var(--site-color-header-dropdown-hover) !important;
 }
-
 /* Footer text gets its own contrast-safe roles while sharing global type. */
-body footer.footer, body footer.footer * { font-family:var(--site-font-family) !important; }
-body footer.footer :is(p, small, a, b, strong) { color:var(--site-color-footer-text) !important; }
-body footer.footer :is(.footer-links > span, .footer-note > span) { color:var(--site-color-footer-heading) !important; }
-body footer.footer a:hover, body footer.footer a:focus-visible { color:var(--site-color-footer-hover) !important; }
+body footer.footer, body footer.footer * {
+  font-family: var(--site-font-family) !important;
+}
+body footer.footer :is(p, small, a, b, strong) {
+  color: var(--site-color-footer-text) !important;
+}
+body footer.footer :is(.footer-links > span, .footer-note > span) {
+  color: var(--site-color-footer-heading) !important;
+}
+body footer.footer a:hover, body footer.footer a:focus-visible {
+  color: var(--site-color-footer-hover) !important;
+}
 /* Central registry for literal text-style values migrated from page/component styles. */
 :root {
   --site-text-family-poppins-sans-serif-6d4cb2: 'Poppins', sans-serif;
@@ -843,14 +861,10 @@ body footer.footer a:hover, body footer.footer a:focus-visible { color:var(--sit
   --site-text-font-shorthand-500-16px-var-display-0e979c: 500 16px var(--display);
   --site-text-font-shorthand-500-19px-var-display-8628eb: 500 19px var(--display);
   --site-text-font-shorthand-6px-var-sans-835f05: 6px var(--sans);
-
   /* Additional shorthand presets used by compact component rules. */
   --site-text-font-shorthand-600-17px-1-25-var-display-3a04ae: 600 17px/1.25 var(--display);
   --site-text-font-shorthand-500-23px-1-15-var-display-7b49fd: 500 23px/1.15 var(--display);
   --site-text-font-shorthand-600-13px-var-site-font-family-f3d0ab: 600 13px var(--site-font-family);
   --site-text-font-shorthand-500-23px-1-1-var-display-1e2b59: 500 23px/1.1 var(--display);
   --site-text-font-shorthand-var-site-text-font-inherit-4484b7-d6230b: var(--site-text-font-inherit-4484b7);
-
-
-
 }

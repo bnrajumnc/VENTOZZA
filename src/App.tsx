@@ -98,21 +98,211 @@ const getTileReply = (question: string, previousQuestion = ''): Pick<ChatMessage
   const matchedFormat = findChatFormat(message)
   const previousFormat = findChatFormat(previous)
   const relevantFormat = matchedFormat ?? previousFormat
-  if (/^(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(message)) return { text: 'Hello! I’m the VENTOZZA tile guide. I can help with catalogue formats, room ideas, finishes, quantity estimates and product documents. What are you working on?', actions: [{ label: 'Find a tile size', page: 'products', tileView: 'size' }, { label: 'Open visualizer', page: 'products', tileView: 'visualizer' }, { label: 'Calculate quantity', page: 'products', tileView: 'calculator' }] }
-  if (/visuali[sz]|showroom|preview|upload my room/.test(message)) return { text: 'The Digital Showroom is a catalogue-linked application gallery. Filter by tile format, view generated room illustrations and open matching catalogues. It does not apply tiles to an uploaded room. Confirm exact designs, colours and suitability with our team.', actions: [{ label: 'Open digital showroom', page: 'products', tileView: 'visualizer' }, { label: 'Browse tile finishes', page: 'products', tileView: 'look-feel' }] }
-  if (/calculat|how many|quantity|pieces|tiles needed|wastage/.test(message)) return { text: matchedFormat ? `For ${matchedFormat.size}, each tile covers about ${Number(matchedFormat.key.slice(0, matchedFormat.key.indexOf('x'))) * Number(matchedFormat.key.slice(matchedFormat.key.indexOf('x') + 1)) / 1_000_000} m². The calculator uses your room dimensions and extra allowance to estimate pieces; confirm box coverage and installation requirements with your tile professional.` : 'The calculator estimates tile pieces from room length × width, selected tile format and an extra allowance for cuts. Enter the room dimensions in metres and choose a tile size to see an estimate. Want to open it?', actions: [{ label: 'Open tile calculator', page: 'products', tileView: 'calculator' }, ...(matchedFormat ? [{ label: `Browse ${matchedFormat.size}`, page: 'products' as Page, tileView: 'catalogues' as TileView, catalogueFormat: matchedFormat.groups[0] }] : [{ label: 'Browse available sizes', page: 'products' as Page, tileView: 'size' as TileView }])] }
-  if (matchedFormat && !/catalog|brochure|download|pdf|kitchen|bath|shower|finish|texture|pattern|look|style|colour|color|glossy|matte|rustic|carving|calculate|quantity|pieces|how many|good for|suitable|room|wall|floor/.test(message)) return { text: `${matchedFormat.size} is listed in the VENTOZZA catalogue. ${matchedFormat.details} Would you like to see those catalogues or estimate how many tiles your room may need?`, actions: [{ label: `View ${matchedFormat.size} catalogues`, page: 'products', tileView: 'catalogues', catalogueFormat: matchedFormat.groups[0] }, { label: 'Calculate quantity', page: 'products', tileView: 'calculator' }] }
-  if (/catalog|brochure|download|pdf/.test(message)) return { text: relevantFormat ? `I can take you directly to the ${relevantFormat.size} brochures. Open a catalogue to preview its PDF here, or use Download to save it.` : 'The e-catalogue library keeps the supplied brochure names and lets you preview PDFs on the site or download them. Which tile size or catalogue name should I look for?', actions: relevantFormat ? [{ label: `View ${relevantFormat.size} catalogues`, page: 'products', tileView: 'catalogues', catalogueFormat: relevantFormat.groups[0] }, { label: 'Browse all catalogues', page: 'products', tileView: 'catalogues' }] : [{ label: 'Browse catalogues', page: 'products', tileView: 'catalogues' }, { label: 'See tile sizes', page: 'products', tileView: 'size' }] }
-  if (/what sizes|which sizes|sizes.*offer|size range|all sizes|available sizes|tile sizes|formats/.test(message)) return { text: 'The catalogue lists 1200 × 1800, 800 × 1600, 800 × 800, 600 × 1200, 600 × 600, 300 × 600, 300 × 450, 200 × 1200, 600 × 1200, and 150 × 900 mm, plus step-and-riser formats. Tell me one size and I’ll point you to its catalogue.', actions: [{ label: 'Browse sizes', page: 'products', tileView: 'size' }, { label: 'Browse catalogues', page: 'products', tileView: 'catalogues' }] }
-  if (/kitchen/.test(message)) return { text: relevantFormat ? `For a kitchen, ${relevantFormat.size} is a listed format. The best choice depends on whether it is for a wall or floor, the layout and cleaning needs. The catalogue can show designs available in that size.` : 'For kitchens, consider easy-to-clean wall tiles for the splashback and a floor finish suited to the application. The catalogue includes patterned, marble-look, subway/kitkat, terrazzo and other wall looks. The visualizer includes a kitchen scene.', actions: [{ label: 'Preview a kitchen', page: 'products', tileView: 'visualizer' }, ...(relevantFormat ? [{ label: `See ${relevantFormat.size} catalogues`, page: 'products' as Page, tileView: 'catalogues' as TileView, catalogueFormat: relevantFormat.groups[0] }] : [{ label: 'Explore tile looks', page: 'products' as Page, tileView: 'look-feel' as TileView }])] }
-  if (/bath(room)?|shower/.test(message)) return { text: relevantFormat ? `For a bathroom, ${relevantFormat.size} is a listed format. Check the tile’s intended application and slip requirements before selecting it for a wet floor; its catalogue shows the designs and finishes.` : 'Bathrooms often pair a wall feature with a floor finish selected for the application and slip requirements. Explore marble-look, mosaic, Moroccan, terrazzo and subway styles, then confirm suitability and care guidance with the team.', actions: [{ label: 'Preview a bathroom', page: 'products', tileView: 'visualizer' }, { label: 'Explore tile looks', page: 'products', tileView: 'look-feel' }] }
-  if (/finish|texture|pattern|look|style|colour|color|glossy|matte|rustic|carving/.test(message)) return { text: relevantFormat ? `${relevantFormat.size} has catalogue ranges in several styles. ${relevantFormat.details} Compare the catalogue covers and confirm the exact finish with the tile team.` : 'The Look & feel section groups surfaces by character, including glossy, matte, rustic and carving styles. Use catalogue images to compare patterns, and check the exact finish with the team before deciding.', actions: [{ label: 'Explore Look & feel', page: 'products', tileView: 'look-feel' }, ...(relevantFormat ? [{ label: `Browse ${relevantFormat.size}`, page: 'products' as Page, tileView: 'catalogues' as TileView, catalogueFormat: relevantFormat.groups[0] }] : [{ label: 'Browse catalogues', page: 'products' as Page, tileView: 'catalogues' as TileView }])] }
-  if (/bedroom|living|lounge|hall|interior|floor|wall|outdoor|balcony|parking|stair/.test(message)) return { text: relevantFormat ? `For that space, ${relevantFormat.size} is one catalogue-listed option. The best choice depends on the area, installation surface, desired look and maintenance needs. I can show the matching catalogue.` : 'Start with how the space is used, then compare colour, finish, tile scale and maintenance. The catalogue covers indoor and outdoor applications, from living spaces and balconies to parking and stairs.', actions: [{ label: 'Browse tile range', page: 'products', tileView: 'overview' }, ...(relevantFormat ? [{ label: `See ${relevantFormat.size} catalogues`, page: 'products' as Page, tileView: 'catalogues' as TileView, catalogueFormat: relevantFormat.groups[0] }] : [{ label: 'Open visualizer', page: 'products' as Page, tileView: 'visualizer' as TileView }])] }
-  if (/cert|technical|document|install|care|clean/.test(message)) return { text: 'The Certificates page explains the available quality documentation and how to request product specifications, certificates or test reports. Installation and care can depend on the selected tile and application, so include the product name in your enquiry.', actions: [{ label: 'Open certificates', page: 'certificates' }, { label: 'Contact the team', page: 'contact' }] }
-  if (/where|address|visit|location|buy|dealer|store|office/.test(message)) return { text: 'The Contact page lists VENTOZZA’s registered office in Secunderabad and corporate office in Morbi, Gujarat. Please contact the team before visiting to confirm the right location and product availability.', actions: [{ label: 'View contact details', page: 'contact' }, { label: 'Request a call back', page: 'contact' }] }
-  if (/price|cost|rate|available|stock|order|contact|team|callback|call back/.test(message)) return { text: 'Pricing and live stock aren’t shown in this site guide. Send an enquiry with the tile name or catalogue format, project location and approximate quantity, and the team can follow up with current details.', actions: [{ label: 'Send an enquiry', page: 'contact' }, { label: 'Request a call back', page: 'contact' }] }
-  if (/\b(thanks|thank you|thankyou)\b/.test(message)) return { text: previousFormat ? `You’re welcome! I can also help you browse the ${previousFormat.size} catalogue or estimate a quantity.` : 'You’re welcome! Ask me about a tile size, room, finish or catalogue whenever you need.', actions: previousFormat ? [{ label: `Browse ${previousFormat.size}`, page: 'products', tileView: 'catalogues', catalogueFormat: previousFormat.groups[0] }, { label: 'Calculate quantity', page: 'products', tileView: 'calculator' }] : [{ label: 'Browse tile sizes', page: 'products', tileView: 'size' }, { label: 'View catalogues', page: 'products', tileView: 'catalogues' }] }
-  return { text: 'I can guide you through tile applications, finishes, catalogue sizes, quantity estimates, the digital showroom and product documents. For a tailored suggestion, tell me the room (for example, kitchen or bathroom), whether you need wall or floor tiles, and any size or style you have in mind.', actions: [{ label: 'Browse tile sizes', page: 'products', tileView: 'size' }, { label: 'Explore finishes', page: 'products', tileView: 'look-feel' }, { label: 'Ask the team', page: 'contact' }] }
+  if (/^(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(message)) {
+    return {
+      text: 'Hello! I’m the VENTOZZA tile guide. I can help with catalogue formats, room ideas, finishes, quantity estimates and product documents. What are you working on?',
+      actions: [
+        { label: 'Find a tile size', page: 'products', tileView: 'size' },
+        { label: 'Open visualizer', page: 'products', tileView: 'visualizer' },
+        { label: 'Calculate quantity', page: 'products', tileView: 'calculator' },
+      ],
+    }
+  }
+  if (/visuali[sz]|showroom|preview|upload my room/.test(message)) {
+    return {
+      text: 'The Digital Showroom is a catalogue-linked application gallery. Filter by tile format, view generated room illustrations and open matching catalogues. It does not apply tiles to an uploaded room. Confirm exact designs, colours and suitability with our team.',
+      actions: [
+        { label: 'Open digital showroom', page: 'products', tileView: 'visualizer' },
+        { label: 'Browse tile finishes', page: 'products', tileView: 'look-feel' },
+      ],
+    }
+  }
+  if (/calculat|how many|quantity|pieces|tiles needed|wastage/.test(message)) {
+    const tileArea = matchedFormat
+      ? Number(matchedFormat.key.slice(0, matchedFormat.key.indexOf('x'))) *
+      Number(matchedFormat.key.slice(matchedFormat.key.indexOf('x') + 1)) / 1_000_000
+      : null
+    const formatActions: ChatAction[] = matchedFormat
+      ? [{
+        label: `Browse ${matchedFormat.size}`,
+        page: 'products',
+        tileView: 'catalogues',
+        catalogueFormat: matchedFormat.groups[0],
+      }]
+      : [{ label: 'Browse available sizes', page: 'products', tileView: 'size' }]
+
+    return {
+      text: matchedFormat && tileArea !== null
+        ? `For ${matchedFormat.size}, each tile covers about ${tileArea} m². The calculator uses your room dimensions and extra allowance to estimate pieces; confirm box coverage and installation requirements with your tile professional.`
+        : 'The calculator estimates tile pieces from room length × width, selected tile format and an extra allowance for cuts. Enter the room dimensions in metres and choose a tile size to see an estimate. Want to open it?',
+      actions: [
+        { label: 'Open tile calculator', page: 'products', tileView: 'calculator' },
+        ...formatActions,
+      ],
+    }
+  }
+  if (matchedFormat && !/catalog|brochure|download|pdf|kitchen|bath|shower|finish|texture|pattern|look|style|colour|color|glossy|matte|rustic|carving|calculate|quantity|pieces|how many|good for|suitable|room|wall|floor/.test(message)) {
+    return {
+      text: `${matchedFormat.size} is listed in the VENTOZZA catalogue. ${matchedFormat.details} Would you like to see those catalogues or estimate how many tiles your room may need?`,
+      actions: [
+        {
+          label: `View ${matchedFormat.size} catalogues`,
+          page: 'products',
+          tileView: 'catalogues',
+          catalogueFormat: matchedFormat.groups[0],
+        },
+        { label: 'Calculate quantity', page: 'products', tileView: 'calculator' },
+      ],
+    }
+  }
+  if (/catalog|brochure|download|pdf/.test(message)) {
+    return {
+      text: relevantFormat
+        ? `I can take you directly to the ${relevantFormat.size} brochures. Open a catalogue to preview its PDF here, or use Download to save it.`
+        : 'The e-catalogue library keeps the supplied brochure names and lets you preview PDFs on the site or download them. Which tile size or catalogue name should I look for?',
+      actions: relevantFormat
+        ? [
+          {
+            label: `View ${relevantFormat.size} catalogues`,
+            page: 'products',
+            tileView: 'catalogues',
+            catalogueFormat: relevantFormat.groups[0],
+          },
+          { label: 'Browse all catalogues', page: 'products', tileView: 'catalogues' },
+        ]
+        : [
+          { label: 'Browse catalogues', page: 'products', tileView: 'catalogues' },
+          { label: 'See tile sizes', page: 'products', tileView: 'size' },
+        ],
+    }
+  }
+  if (/what sizes|which sizes|sizes.*offer|size range|all sizes|available sizes|tile sizes|formats/.test(message)) {
+    return {
+      text: 'The catalogue lists 1200 × 1800, 800 × 1600, 800 × 800, 600 × 1200, 600 × 600, 300 × 600, 300 × 450, 200 × 1200, 600 × 1200, and 150 × 900 mm, plus step-and-riser formats. Tell me one size and I’ll point you to its catalogue.',
+      actions: [
+        { label: 'Browse sizes', page: 'products', tileView: 'size' },
+        { label: 'Browse catalogues', page: 'products', tileView: 'catalogues' },
+      ],
+    }
+  }
+  if (/kitchen/.test(message)) {
+    const kitchenActions: ChatAction[] = relevantFormat
+      ? [{
+        label: `See ${relevantFormat.size} catalogues`,
+        page: 'products',
+        tileView: 'catalogues',
+        catalogueFormat: relevantFormat.groups[0],
+      }]
+      : [{ label: 'Explore tile looks', page: 'products', tileView: 'look-feel' }]
+
+    return {
+      text: relevantFormat
+        ? `For a kitchen, ${relevantFormat.size} is a listed format. The best choice depends on whether it is for a wall or floor, the layout and cleaning needs. The catalogue can show designs available in that size.`
+        : 'For kitchens, consider easy-to-clean wall tiles for the splashback and a floor finish suited to the application. The catalogue includes patterned, marble-look, subway/kitkat, terrazzo and other wall looks. The visualizer includes a kitchen scene.',
+      actions: [{ label: 'Preview a kitchen', page: 'products', tileView: 'visualizer' }, ...kitchenActions],
+    }
+  }
+  if (/bath(room)?|shower/.test(message)) {
+    return {
+      text: relevantFormat
+        ? `For a bathroom, ${relevantFormat.size} is a listed format. Check the tile’s intended application and slip requirements before selecting it for a wet floor; its catalogue shows the designs and finishes.`
+        : 'Bathrooms often pair a wall feature with a floor finish selected for the application and slip requirements. Explore marble-look, mosaic, Moroccan, terrazzo and subway styles, then confirm suitability and care guidance with the team.',
+      actions: [
+        { label: 'Preview a bathroom', page: 'products', tileView: 'visualizer' },
+        { label: 'Explore tile looks', page: 'products', tileView: 'look-feel' },
+      ],
+    }
+  }
+  if (/finish|texture|pattern|look|style|colour|color|glossy|matte|rustic|carving/.test(message)) {
+    const finishActions: ChatAction[] = relevantFormat
+      ? [{
+        label: `Browse ${relevantFormat.size}`,
+        page: 'products',
+        tileView: 'catalogues',
+        catalogueFormat: relevantFormat.groups[0],
+      }]
+      : [{ label: 'Browse catalogues', page: 'products', tileView: 'catalogues' }]
+
+    return {
+      text: relevantFormat
+        ? `${relevantFormat.size} has catalogue ranges in several styles. ${relevantFormat.details} Compare the catalogue covers and confirm the exact finish with the tile team.`
+        : 'The Look & feel section groups surfaces by character, including glossy, matte, rustic and carving styles. Use catalogue images to compare patterns, and check the exact finish with the team before deciding.',
+      actions: [{ label: 'Explore Look & feel', page: 'products', tileView: 'look-feel' }, ...finishActions],
+    }
+  }
+  if (/bedroom|living|lounge|hall|interior|floor|wall|outdoor|balcony|parking|stair/.test(message)) {
+    const spaceActions: ChatAction[] = relevantFormat
+      ? [{
+        label: `See ${relevantFormat.size} catalogues`,
+        page: 'products',
+        tileView: 'catalogues',
+        catalogueFormat: relevantFormat.groups[0],
+      }]
+      : [{ label: 'Open visualizer', page: 'products', tileView: 'visualizer' }]
+
+    return {
+      text: relevantFormat
+        ? `For that space, ${relevantFormat.size} is one catalogue-listed option. The best choice depends on the area, installation surface, desired look and maintenance needs. I can show the matching catalogue.`
+        : 'Start with how the space is used, then compare colour, finish, tile scale and maintenance. The catalogue covers indoor and outdoor applications, from living spaces and balconies to parking and stairs.',
+      actions: [{ label: 'Browse tile range', page: 'products', tileView: 'overview' }, ...spaceActions],
+    }
+  }
+  if (/cert|technical|document|install|care|clean/.test(message)) {
+    return {
+      text: 'The Certificates page explains the available quality documentation and how to request product specifications, certificates or test reports. Installation and care can depend on the selected tile and application, so include the product name in your enquiry.',
+      actions: [
+        { label: 'Open certificates', page: 'certificates' },
+        { label: 'Contact the team', page: 'contact' },
+      ],
+    }
+  }
+  if (/where|address|visit|location|buy|dealer|store|office/.test(message)) {
+    return {
+      text: 'The Contact page lists VENTOZZA’s registered office in Secunderabad and corporate office in Morbi, Gujarat. Please contact the team before visiting to confirm the right location and product availability.',
+      actions: [
+        { label: 'View contact details', page: 'contact' },
+        { label: 'Request a call back', page: 'contact' },
+      ],
+    }
+  }
+  if (/price|cost|rate|available|stock|order|contact|team|callback|call back/.test(message)) {
+    return {
+      text: 'Pricing and live stock aren’t shown in this site guide. Send an enquiry with the tile name or catalogue format, project location and approximate quantity, and the team can follow up with current details.',
+      actions: [
+        { label: 'Send an enquiry', page: 'contact' },
+        { label: 'Request a call back', page: 'contact' },
+      ],
+    }
+  }
+  if (/\b(thanks|thank you|thankyou)\b/.test(message)) {
+    return {
+      text: previousFormat
+        ? `You’re welcome! I can also help you browse the ${previousFormat.size} catalogue or estimate a quantity.`
+        : 'You’re welcome! Ask me about a tile size, room, finish or catalogue whenever you need.',
+      actions: previousFormat
+        ? [
+          {
+            label: `Browse ${previousFormat.size}`,
+            page: 'products',
+            tileView: 'catalogues',
+            catalogueFormat: previousFormat.groups[0],
+          },
+          { label: 'Calculate quantity', page: 'products', tileView: 'calculator' },
+        ]
+        : [
+          { label: 'Browse tile sizes', page: 'products', tileView: 'size' },
+          { label: 'View catalogues', page: 'products', tileView: 'catalogues' },
+        ],
+    }
+  }
+  return {
+    text: 'I can guide you through tile applications, finishes, catalogue sizes, quantity estimates, the digital showroom and product documents. For a tailored suggestion, tell me the room (for example, kitchen or bathroom), whether you need wall or floor tiles, and any size or style you have in mind.',
+    actions: [
+      { label: 'Browse tile sizes', page: 'products', tileView: 'size' },
+      { label: 'Explore finishes', page: 'products', tileView: 'look-feel' },
+      { label: 'Ask the team', page: 'contact' },
+    ],
+  }
 }
 
 const pageFromHash = (): Page => {
@@ -135,6 +325,7 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
 
 function App() {
   const [activeSlide, setActiveSlide] = useState(0)
+  const heroAutoplayPausedUntil = useRef(0)
   const [menuOpen, setMenuOpen] = useState(false)
   const [tilesMenuOpen, setTilesMenuOpen] = useState(false)
   const [visualizerMenuOpen, setVisualizerMenuOpen] = useState(false)
@@ -242,7 +433,9 @@ function App() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const timer = window.setInterval(() => {
-      if (!document.hidden) setActiveSlide((current) => (current + 1) % slides.length)
+      if (!document.hidden && Date.now() >= heroAutoplayPausedUntil.current) {
+        setActiveSlide((current) => (current + 1) % slides.length)
+      }
     }, 6500)
     return () => window.clearInterval(timer)
   }, [activePage])
@@ -303,13 +496,27 @@ function App() {
 
   useEffect(() => {
     let observer: IntersectionObserver | undefined
+    let initialVisibilityFrame = 0
+    const activeView = document.querySelector<HTMLElement>(`main#home[data-page="${activePage}"]`)
+    const revealElements = () => {
+      activeView?.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)').forEach((element) => {
+        const bounds = element.getBoundingClientRect()
+        if (bounds.bottom > 0 && bounds.top < window.innerHeight && bounds.right > 0 && bounds.left < window.innerWidth) {
+          element.classList.add('is-visible')
+        }
+      })
+    }
+
     const frame = window.requestAnimationFrame(() => {
-      const activeView = document.querySelector<HTMLElement>(`main#home[data-page="${activePage}"]`)
       // Animate leaf sections only: nested reveal layers delay content and compound opacity.
       activeView?.querySelectorAll<HTMLElement>('section:not(.hero):not(.reveal)').forEach((section) => {
         if (!section.querySelector('section, .reveal')) section.classList.add('reveal')
       })
       const elements = activeView?.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)') ?? []
+
+      // Show first-viewport content immediately. This avoids a blank first visit while
+      // the browser is still starting layout, image loading, and intersection observers.
+      revealElements()
 
       // Reveal content immediately in older browsers that do not support IO.
       if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -326,10 +533,20 @@ function App() {
         })
       }, { threshold: 0.01, rootMargin: '0px 0px -24px 0px' })
       elements.forEach((element) => observer?.observe(element))
+      // Recheck after the first paint and when the page is restored from browser cache.
+      initialVisibilityFrame = window.requestAnimationFrame(revealElements)
+      window.addEventListener('pageshow', revealElements)
+      // Keep the reveal fail-safe on every route if the observer misses a late layout shift.
+      window.addEventListener('scroll', revealElements, { passive: true })
+      window.addEventListener('resize', revealElements, { passive: true })
     })
 
     return () => {
       window.cancelAnimationFrame(frame)
+      window.cancelAnimationFrame(initialVisibilityFrame)
+      window.removeEventListener('pageshow', revealElements)
+      window.removeEventListener('scroll', revealElements)
+      window.removeEventListener('resize', revealElements)
       observer?.disconnect()
     }
   }, [activePage, tileView, navigationRevision])
@@ -395,18 +612,40 @@ function App() {
     navigateToTileView('overview')
   }
 
-  const moveSlide = (step: number) => setActiveSlide((current) => (current + step + slides.length) % slides.length)
+  const pauseHeroAutoplay = () => { heroAutoplayPausedUntil.current = Date.now() + 10000 }
+  const moveSlide = (step: number) => {
+    pauseHeroAutoplay()
+    setActiveSlide((current) => (current + step + slides.length) % slides.length)
+  }
   const slide = slides[activeSlide]
 
   return (
     <>
       {/* <div className="topline"><span>VENTOZZA · A TILE-FOCUSED COMPANY</span><span>Find your tile <a href="#products" onClick={(event) => { event.preventDefault(); navigateTo('products') }}>Explore <Arrow diagonal /></a></span><span className="topline-right">TILES FOR HOME & PROJECTS</span></div> */}
       <header className={activePage === 'home' ? (headerScrolled ? 'header header-home-scrolled' : 'header header-transparent') : 'header'}>
-        <button className="menu-button" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
-        <a className="logo" href="#home" aria-label="VENTOZZA home" onClick={(event) => { event.preventDefault(); navigateTo('home') }}><img src={ventozzaLogo} alt="VENTOZZA" /></a>
+
+
+        <button className="menu-button" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
+
+          <span />
+
+          <span /></button>
+
+
+        <a className="logo" href="#home" aria-label="VENTOZZA home" onClick={(event) => { event.preventDefault(); navigateTo('home') }}>
+
+          <img src={ventozzaLogo} alt="VENTOZZA" /></a>
+
+
         <nav className={menuOpen ? 'nav nav-open' : 'nav'} aria-label="Main navigation">
+
+
           <button className={activePage === 'home' ? 'nav-active' : ''} aria-current={activePage === 'home' ? 'page' : undefined} onClick={() => navigateTo('home')}>Home</button>
+
+
           <button className={activePage === 'about' ? 'nav-active' : ''} aria-current={activePage === 'about' ? 'page' : undefined} onClick={() => navigateTo('about')}>About Us</button>
+
+
           <div
             className={`nav-products ${tilesMenuOpen ? 'menu-open mobile-open' : ''}`}
             onMouseEnter={() => {
@@ -417,11 +656,19 @@ function App() {
             }}
             onMouseLeave={() => setTilesMenuOpen(false)}
           >
-            <button className={activePage === 'products' && !['visualizer', 'calculator'].includes(tileView) ? 'nav-active' : ''} aria-expanded={tilesMenuOpen} onClick={() => { if (window.matchMedia('(max-width: 700px)').matches) setTilesMenuOpen((open) => !open); else navigateToTileView('overview') }}>E-Catalogue <span className="nav-chevron">⌄</span></button>
+
+
+            <button className={activePage === 'products' && !['visualizer', 'calculator'].includes(tileView) ? 'nav-active' : ''} aria-expanded={tilesMenuOpen} onClick={() => { if (window.matchMedia('(max-width: 700px)').matches) setTilesMenuOpen((open) => !open); else navigateToTileView('overview') }}>E-Catalogue
+
+              <span className="nav-chevron">⌄</span></button>
+
+
             <div className="tiles-dropdown" aria-label="E-Eatalogue tile categories">
               {tileViews.filter((view) => !['visualizer', 'calculator'].includes(view.id)).map((view) => <button key={view.id} className={tileView === view.id ? 'submenu-active' : ''} onClick={() => navigateToTileView(view.id)}>{view.label}</button>)}
             </div>
           </div>
+
+
           <div
             className={`nav-products nav-visualizer ${visualizerMenuOpen ? 'menu-open mobile-open' : ''}`}
             onMouseEnter={() => {
@@ -432,34 +679,80 @@ function App() {
             }}
             onMouseLeave={() => setVisualizerMenuOpen(false)}
           >
-            <button className={activePage === 'products' && ['visualizer', 'calculator'].includes(tileView) ? 'nav-active' : ''} aria-expanded={visualizerMenuOpen} onClick={() => { if (window.matchMedia('(max-width: 700px)').matches) setVisualizerMenuOpen((open) => !open); else navigateToTileView('visualizer') }}>Digital Showroom <span className="nav-chevron">⌄</span></button>
+
+
+            <button className={activePage === 'products' && ['visualizer', 'calculator'].includes(tileView) ? 'nav-active' : ''} aria-expanded={visualizerMenuOpen} onClick={() => { if (window.matchMedia('(max-width: 700px)').matches) setVisualizerMenuOpen((open) => !open); else navigateToTileView('visualizer') }}>Digital Showroom
+
+              <span className="nav-chevron">⌄</span></button>
+
+
             <div className="tiles-dropdown" aria-label="Digital showroom tools">
+
+
               <button className={tileView === 'visualizer' ? 'submenu-active' : ''} onClick={() => navigateToTileView('visualizer')}>Digital showroom</button>
               {/* Temporarily hidden; keep available here to re-enable later. */}
               {/* <button className="visualizer-unavailable" type="button" onClick={() => { setCallbackInterest('Virtual space creator enquiry'); setCallbackOpen(true) }}>Virtual space creator</button> */}
+
+
               <button className={tileView === 'calculator' ? 'submenu-active' : ''} onClick={() => navigateToTileView('calculator')}>Tile calculator</button>
             </div>
           </div>
+
+
           <button className={activePage === 'certificates' ? 'nav-active' : ''} aria-current={activePage === 'certificates' ? 'page' : undefined} onClick={() => navigateTo('certificates')}>Certificates</button>
+
+
           <button className={activePage === 'contact' ? 'nav-active' : ''} aria-current={activePage === 'contact' ? 'page' : undefined} onClick={() => navigateTo('contact')}>Contact Us</button>
         </nav>
+
+
         <div className="header-tools">
-          <button className="header-icon-button" type="button" aria-label={headerSearchOpen ? 'Close search' : 'Search tiles'} aria-expanded={headerSearchOpen} onClick={() => setHeaderSearchOpen((open) => !open)}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.2" /><path d="m16 16 5 5" /></svg></button>
-          <a className="where-to-buy" href="https://www.google.com/maps/search/?api=1&query=10-3-71%2F3%2FA%2C%20Teachers%20Colony%2C%20East%20Marredpally%2C%20Secunderabad%20500026" target="_blank" rel="noopener noreferrer" aria-label="Open VENTOZZA registered office in Google Maps" title="View VENTOZZA location on Google Maps"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg></a>
+
+
+          <button className="header-icon-button" type="button" aria-label={headerSearchOpen ? 'Close search' : 'Search tiles'} aria-expanded={headerSearchOpen} onClick={() => setHeaderSearchOpen((open) => !open)}>
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+
+              <circle cx="10.8" cy="10.8" r="7.2" />
+
+              <path d="m16 16 5 5" /></svg></button>
+
+
+          <a className="where-to-buy" href="https://www.google.com/maps/search/?api=1&query=10-3-71%2F3%2FA%2C%20Teachers%20Colony%2C%20East%20Marredpally%2C%20Secunderabad%20500026" target="_blank" rel="noopener noreferrer" aria-label="Open VENTOZZA registered office in Google Maps" title="View VENTOZZA location on Google Maps">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+
+              <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+
+              <circle cx="12" cy="10" r="2.5" /></svg></a>
           {/* Temporarily hidden account access icon; restore this button when login is needed. */}
           {/* <button className="header-icon-button" type="button" aria-label="Login" onClick={() => navigateTo('login')}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="9" r="3" /><path d="M6.5 18c1.1-2.2 3-3.3 5.5-3.3s4.4 1.1 5.5 3.3" /></svg></button> */}
-          {headerSearchOpen && <form className="header-search-panel" onSubmit={submitTileSearch}><label htmlFor="header-tile-search">Search VENTOZZA tiles</label><div><input id="header-tile-search" type="search" value={headerSearch} onChange={(event) => setHeaderSearch(event.target.value)} onKeyDown={(event) => { if (event.key === 'Escape') setHeaderSearchOpen(false) }} placeholder="Try a tile name, size or finish" autoFocus /><button type="submit" aria-label="Search tiles">→</button></div><small>Search tile names, codes, finishes and displayed sizes.</small></form>}
+          {headerSearchOpen && <form className="header-search-panel" onSubmit={submitTileSearch}>
+
+            <label htmlFor="header-tile-search">Search VENTOZZA tiles</label>
+
+            <div>
+
+              <input id="header-tile-search" type="search" value={headerSearch} onChange={(event) => setHeaderSearch(event.target.value)} onKeyDown={(event) => { if (event.key === 'Escape') setHeaderSearchOpen(false) }} placeholder="Try a tile name, size or finish" autoFocus />
+
+              <button type="submit" aria-label="Search tiles">→</button></div>
+
+            <small>Search tile names, codes, finishes and displayed sizes.</small></form>}
         </div>
       </header>
 
       <main id="home" data-page={activePage} data-tile-view={tileView} onClick={handlePageLink}>
-        {activePage === 'home' && <HomePage slide={slide} activeSlide={activeSlide} slideCount={slides.length} onMoveSlide={moveSlide} onNavigate={navigateTo} onTiles={navigateToTileView} onCatalogueSize={(format) => navigateToTileView('catalogues', format)} />}
+        {activePage === 'home' && <HomePage slide={slide} activeSlide={activeSlide} slideCount={slides.length} onMoveSlide={moveSlide} onHeroInteraction={pauseHeroAutoplay} onNavigate={navigateTo} onTiles={navigateToTileView} onCatalogueSize={(format) => navigateToTileView('catalogues', format)} />}
 
         {activePage === 'products' && <ProductsPage tileView={tileView} views={tileViews} productSearch={productSearch} sizeOptions={tileSizeOptions} looks={tileLooks} initialCatalogueFormat={initialCatalogueFormat} onSelect={navigateToTileView} onEnquire={(interest) => { setCallbackInterest(interest); setCallbackOpen(true) }} onClearSearch={() => { setProductSearch(''); setHeaderSearch('') }} onNavigateContact={() => navigateTo('contact')} />}
 
         {activePage === 'about' && <AboutPage />}
 
+
+
         <CertificatesPage />
+
+
 
         <ContactPage />
 
@@ -468,13 +761,111 @@ function App() {
       <SiteFooter onNavigate={navigateTo} onNavigateTiles={navigateToTileView} />
 
       <button className="callback-tab" type="button" onClick={() => { setCallbackSent(false); setCallbackError(''); setCallbackOpen(true) }}>REQUEST A CALL BACK</button>
-      {callbackOpen && <div className="callback-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setCallbackOpen(false) }}><section className="callback-dialog" role="dialog" aria-modal="true" aria-labelledby="callback-title"><button className="callback-close" type="button" aria-label="Close callback form" onClick={() => setCallbackOpen(false)}>×</button>{callbackSent ? <div className="callback-thanks"><span className="eyebrow"><i /> REQUEST SENT</span><h2 id="callback-title">Thank you.</h2><p>Your callback request has been sent to the VENTOZZA team. We’ll be in touch.</p><button className="button button-light" onClick={() => setCallbackOpen(false)}>DONE <Arrow /></button></div> : <><span className="eyebrow"><i /> TILE ENQUIRY</span><h2 id="callback-title">Request a call back.</h2><p>Tell us how to reach you and what tile information you need.</p><form className="callback-form" onSubmit={submitCallbackRequest}><label>Your name<input name="name" autoComplete="name" placeholder="Name" required /></label><label>Phone number<input name="phone" type="tel" autoComplete="tel" placeholder="+91 98765 43210" pattern="[+0-9()\\s-]{8,20}" title="Enter a valid phone number" required /></label><label>What would you like to discuss?<select name="interest" defaultValue={callbackInterest}><option>{callbackInterest}</option><option>Tile sizes and finishes</option><option>Catalogue request</option><option>Product availability</option></select></label><button className="button button-light" type="submit" disabled={callbackSending}>{callbackSending ? 'SENDING…' : 'SEND CALLBACK REQUEST'} <Arrow diagonal /></button>{callbackError && <p className="form-error" role="alert">{callbackError}</p>}<small>Form delivery is handled by FormSubmit; submissions may be retained for up to 30 days.</small></form></>}</section></div>}
+      {callbackOpen && <div className="callback-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setCallbackOpen(false) }}>
 
-      {showTop && <button className="back-to-top" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Back to top"><span aria-hidden="true">↑</span><small>TOP</small></button>}
+        <section className="callback-dialog" role="dialog" aria-modal="true" aria-labelledby="callback-title">
+
+          <button className="callback-close" type="button" aria-label="Close callback form" onClick={() => setCallbackOpen(false)}>×</button>{callbackSent ? <div className="callback-thanks">
+
+            <span className="eyebrow">
+
+              <i /> REQUEST SENT</span>
+
+            <h2 id="callback-title">Thank you.</h2>
+
+            <p>Your callback request has been sent to the VENTOZZA team. We’ll be in touch.</p>
+
+            <button className="button button-light" onClick={() => setCallbackOpen(false)}>DONE
+
+              <Arrow /></button></div> : <><span className="eyebrow">
+
+                <i /> TILE ENQUIRY</span><h2 id="callback-title">Request a call back.</h2><p>Tell us how to reach you and what tile information you need.</p><form className="callback-form" onSubmit={submitCallbackRequest}>
+
+              <label>Your name
+
+                <input name="name" autoComplete="name" placeholder="Name" required /></label>
+
+              <label>Phone number
+
+                <input name="phone" type="tel" autoComplete="tel" placeholder="+91 98765 43210" pattern="[+0-9()\\s-]{8,20}" title="Enter a valid phone number" required /></label>
+
+              <label>What would you like to discuss?
+
+                <select name="interest" defaultValue={callbackInterest}>
+
+                  <option>{callbackInterest}</option>
+
+                  <option>Tile sizes and finishes</option>
+
+                  <option>Catalogue request</option>
+
+                  <option>Product availability</option></select></label>
+
+              <button className="button button-light" type="submit" disabled={callbackSending}>{callbackSending ? 'SENDING…' : 'SEND CALLBACK REQUEST'}
+
+                <Arrow diagonal /></button>{callbackError && <p className="form-error" role="alert">{callbackError}</p>}
+
+              <small>Form delivery is handled by FormSubmit; submissions may be retained for up to 30 days.</small></form></>}</section></div>}
+
+      {showTop && <button className="back-to-top" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Back to top">
+
+        <span aria-hidden="true">↑</span>
+
+        <small>TOP</small></button>}
 
       <aside className="chat-widget" aria-label="VENTOZZA tile guide">
-        {chatOpen && <section className="chat-panel" aria-label="Tile guide chat"><header className="chat-header"><div><b>VENTOZZA TILE GUIDE</b><span><i className="chat-status-dot"/>Interactive tile help</span></div><button type="button" onClick={() => setChatOpen(false)} aria-label="Close chat">×</button></header><div className="chat-messages" role="log" aria-live="polite" aria-relevant="additions">{chatMessages.map((message) => <div className={`chat-message chat-${message.role}`} key={message.id}><p>{message.text}</p>{message.actions && <div className="chat-actions">{message.actions.map((action) => <button type="button" key={action.label} onClick={() => useChatAction(action)}>{action.label}<span aria-hidden="true">↗</span></button>)}</div>}</div>)}{chatMessages.length === 1 && <div className="chat-welcome-prompts"><span>POPULAR QUESTIONS</span><div className="chat-prompts"><button type="button" onClick={() => sendQuickPrompt('What tile sizes do you offer?')}>Tile sizes</button><button type="button" onClick={() => sendQuickPrompt('How do I use the visualizer?')}>Digital showroom</button><button type="button" onClick={() => sendQuickPrompt('How do I calculate quantity?')}>Tile calculator</button><button type="button" onClick={() => sendQuickPrompt('What tile finish is right for my bathroom?')}>Bathroom ideas</button><button type="button" onClick={() => sendQuickPrompt('Where can I find tile certificates?')}>Certificates</button><button type="button" onClick={() => sendQuickPrompt('How do I view a catalogue?')}>Catalogues</button></div></div>}<div ref={chatEndRef} /></div><form className="chat-form" onSubmit={sendChatMessage}><input value={chatInput} onChange={(event) => setChatInput(event.target.value)} placeholder="Ask about sizes, rooms, finishes…" aria-label="Ask the tile guide" /><button type="submit" aria-label="Send message" disabled={!chatInput.trim()}>→</button></form><p className="chat-note">Guidance is based on site information. Confirm product suitability, availability and pricing with our team.</p></section>}
-        <button className="chat-launcher" type="button" onClick={() => setChatOpen((open) => !open)} aria-expanded={chatOpen} aria-label={chatOpen ? 'Close tile guide' : 'Open tile guide'}><span className="chat-launcher-icon" aria-hidden="true">{chatOpen ? '×' : '✳︎'}</span><span>{chatOpen ? 'Close' : 'Guide'}</span></button>
+        {chatOpen && <section className="chat-panel" aria-label="Tile guide chat">
+
+          <header className="chat-header">
+
+            <div>
+
+              <b>VENTOZZA TILE GUIDE</b>
+
+              <span>
+
+                <i className="chat-status-dot" />Interactive tile help</span></div>
+
+            <button type="button" onClick={() => setChatOpen(false)} aria-label="Close chat">×</button></header>
+
+          <div className="chat-messages" role="log" aria-live="polite" aria-relevant="additions">{chatMessages.map((message) => <div className={`chat-message chat-${message.role}`} key={message.id}>
+
+            <p>{message.text}</p>{message.actions && <div className="chat-actions">{message.actions.map((action) => <button type="button" key={action.label} onClick={() => useChatAction(action)}>{action.label}
+
+              <span aria-hidden="true">↗</span></button>)}</div>}</div>)}{chatMessages.length === 1 && <div className="chat-welcome-prompts">
+
+                <span>POPULAR QUESTIONS</span>
+
+                <div className="chat-prompts">
+
+                  <button type="button" onClick={() => sendQuickPrompt('What tile sizes do you offer?')}>Tile sizes</button>
+
+                  <button type="button" onClick={() => sendQuickPrompt('How do I use the visualizer?')}>Digital showroom</button>
+
+                  <button type="button" onClick={() => sendQuickPrompt('How do I calculate quantity?')}>Tile calculator</button>
+
+                  <button type="button" onClick={() => sendQuickPrompt('What tile finish is right for my bathroom?')}>Bathroom ideas</button>
+
+                  <button type="button" onClick={() => sendQuickPrompt('Where can I find tile certificates?')}>Certificates</button>
+
+                  <button type="button" onClick={() => sendQuickPrompt('How do I view a catalogue?')}>Catalogues</button></div></div>}
+
+            <div ref={chatEndRef} /></div>
+
+          <form className="chat-form" onSubmit={sendChatMessage}>
+
+            <input value={chatInput} onChange={(event) => setChatInput(event.target.value)} placeholder="Ask about sizes, rooms, finishes…" aria-label="Ask the tile guide" />
+
+            <button type="submit" aria-label="Send message" disabled={!chatInput.trim()}>→</button></form>
+
+          <p className="chat-note">Guidance is based on site information. Confirm product suitability, availability and pricing with our team.</p></section>}
+
+
+        <button className="chat-launcher" type="button" onClick={() => setChatOpen((open) => !open)} aria-expanded={chatOpen} aria-label={chatOpen ? 'Close tile guide' : 'Open tile guide'}>
+
+          <span className="chat-launcher-icon" aria-hidden="true">{chatOpen ? '×' : '✳︎'}</span>
+
+          <span>{chatOpen ? 'Close' : 'Guide'}</span></button>
       </aside>
 
     </>

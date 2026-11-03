@@ -111,7 +111,9 @@ main#home[data-page='products'] .all-tiles-library-copy {
   background: #fff !important;
   background-image: none !important;
 }
-main#home[data-page='products'] .all-tiles-library-heading { margin-top: 0; }
+main#home[data-page='products'] .all-tiles-library-heading {
+  margin-top: 0;
+}
 /* A low-opacity stone layer adds depth without fading product photography. */
 main#home[data-page='products'][data-tile-view='overview'] > .products.section-wrap {
   position: relative;
@@ -147,12 +149,21 @@ main#home[data-page='products'] .all-tiles-library-card.reveal:not(.is-visible) 
   opacity: 0;
   transform: translate3d(0, 16px, 0);
 }
-main#home[data-page='products'] .all-tiles-library-card.reveal.is-visible { opacity: 1; transform: none; }
-main#home[data-page='products'] .all-tiles-library-card img { transition: transform .55s cubic-bezier(.22, 1, .36, 1); }
-@media (hover: hover) {
-  main#home[data-page='products'] .all-tiles-library-card:hover img { transform: scale(1.035); }
+main#home[data-page='products'] .all-tiles-library-card.reveal.is-visible {
+  opacity: 1;
+  transform: none;
 }
-html { scroll-behavior: smooth; }
+main#home[data-page='products'] .all-tiles-library-card img {
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+@media (hover: hover) {
+  main#home[data-page='products'] .all-tiles-library-card:hover img {
+    transform: scale(1.035);
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
 main#home[data-page='home'] > section + section {
   margin-block-start: var(--section-breathing-room);
 }
@@ -184,13 +195,24 @@ main#home .reveal.is-visible {
   transform: none;
 }
 @media (max-width: 700px) {
-  main#home :is(section[id], h2[id], h3[id]) { scroll-margin-top: 88px; }
-  main#home .reveal { transition-duration: 450ms; }
-  main#home .reveal:not(.is-visible) { transform: translate3d(0, 10px, 0); }
+  main#home :is(section[id], h2[id], h3[id]) {
+    scroll-margin-top: 88px;
+  }
+  main#home .reveal {
+    transition-duration: 450ms;
+  }
+  main#home .reveal:not(.is-visible) {
+    transform: translate3d(0, 10px, 0);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  main#home[data-page='products'] .all-tiles-library-card.reveal:not(.is-visible) { opacity: 1; transform: none; }
-  html { scroll-behavior: auto !important; }
+  main#home[data-page='products'] .all-tiles-library-card.reveal:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
   main#home .reveal, main#home .reveal:not(.is-visible) {
     opacity: 1;
     transform: none;

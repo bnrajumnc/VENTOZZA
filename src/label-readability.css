@@ -32,12 +32,14 @@
 }
 /* White labels remain readable on the photographic homepage hero. */
 #root main#home .hero-image-showcase .hero-copy .eyebrow-light {
-  color:#fff !important;
-  font-size:13px !important;
-  font-weight:600 !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
 }
-@media(max-width:600px) {
-  :root { --readable-label-size:12px; }
+@media (max-width:600px) {
+  :root {
+    --readable-label-size: 12px;
+  }
 }
 :root #root main#home .catalogues-sidebar-title {
   color: #007d70 !important;

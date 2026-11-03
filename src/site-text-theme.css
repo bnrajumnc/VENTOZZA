@@ -1,107 +1,195 @@
 /* Final site-wide text roles. Edit site-typography.css to change the palette. */
 #root main#home :is(h1,h2,h3,h4,h5,h6) {
-  color:var(--site-color-heading) !important;
-  font-family:var(--site-font-family) !important;
-  letter-spacing:var(--site-text-letter-spacing-035em-8b3067) !important;
+  color: var(--site-color-heading) !important;
+  font-family: var(--site-font-family) !important;
+  letter-spacing: var(--site-text-letter-spacing-035em-8b3067) !important;
 }
-#root main#home h1 { font-size:var(--site-font-size-h1) !important; font-weight:var(--site-font-weight-h1) !important; line-height:var(--site-line-height-heading) !important; }
-#root main#home h2 { font-size:var(--site-font-size-h2) !important; font-weight:var(--site-font-weight-h2) !important; line-height:var(--site-line-height-h2) !important; }
-#root main#home h3 { font-size:var(--site-font-size-h3) !important; font-weight:var(--site-font-weight-h3) !important; line-height:var(--site-text-line-height-1-25-ad78f6) !important; }
-#root main#home :is(h1,h2,h3,h4) :is(em,b,strong,span) { color:var(--site-text-color-inherit-a1e5f1) !important; font-family:var(--site-text-family-inherit-22a103) !important; font-size:var(--site-text-size-inherit-fa43ec) !important; font-weight:var(--site-text-weight-inherit-51fe59) !important; }
-#root main#home :is(p,li,address,dd,dt,blockquote,label,figcaption) { color:var(--site-color-text) !important; }
+#root main#home h1 {
+  font-size: var(--site-font-size-h1) !important;
+  font-weight: var(--site-font-weight-h1) !important;
+  line-height: var(--site-line-height-heading) !important;
+}
+#root main#home h2 {
+  font-size: var(--site-font-size-h2) !important;
+  font-weight: var(--site-font-weight-h2) !important;
+  line-height: var(--site-line-height-h2) !important;
+}
+#root main#home h3 {
+  font-size: var(--site-font-size-h3) !important;
+  font-weight: var(--site-font-weight-h3) !important;
+  line-height: var(--site-text-line-height-1-25-ad78f6) !important;
+}
+#root main#home :is(h1,h2,h3,h4) :is(em,b,strong,span) {
+  color: var(--site-text-color-inherit-a1e5f1) !important;
+  font-family: var(--site-text-family-inherit-22a103) !important;
+  font-size: var(--site-text-size-inherit-fa43ec) !important;
+  font-weight: var(--site-text-weight-inherit-51fe59) !important;
+}
+#root main#home :is(p,li,address,dd,dt,blockquote,label,figcaption) {
+  color: var(--site-color-text) !important;
+}
 #root main#home :is(.eyebrow,[class*='eyebrow'],.about-reference-kicker,.expansion-eyebrow,.expansion-phase-label,.finish-detail-label,.application-filter,.find-fit-editable-heading>span,.product-sizes-content header>span,.contact-office-heading>span,.cert-holder>b,.about-reference-specialty-slide-copy>small) {
-  color:var(--site-color-eyebrow) !important;
+  color: var(--site-color-eyebrow) !important;
 }
-#root main#home :is(.eyebrow,[class*='eyebrow']) i { background:var(--site-color-eyebrow) !important; }
+#root main#home :is(.eyebrow,[class*='eyebrow']) i {
+  background: var(--site-color-eyebrow) !important;
+}
 /* Titles rendered as spans/bold text share the heading role. */
-#root main#home :is(.why-visit-card-title,.expansion-region-name,.team-promoter-details>b,.about-reference-team-grid article>b,.catalogue-card-copy h4,.finish-selector b,.all-tiles-library-copy>b) { color:var(--site-color-heading) !important; }
-#root main#home :is(.about-reference-team-grid article>small,.team-promoter-details>span,.application-note,.finish-caption,.calculator-disclaimer,.cert-meta dt,.contact-person small) { color:var(--site-color-text-muted) !important; }
+#root main#home :is(.why-visit-card-title,.expansion-region-name,.team-promoter-details>b,.about-reference-team-grid article>b,.catalogue-card-copy h4,.finish-selector b,.all-tiles-library-copy>b) {
+  color: var(--site-color-heading) !important;
+}
+#root main#home :is(.about-reference-team-grid article>small,.team-promoter-details>span,.application-note,.finish-caption,.calculator-disclaimer,.cert-meta dt,.contact-person small) {
+  color: var(--site-color-text-muted) !important;
+}
 /* Maintain legibility for captions placed directly over photographs. */
-#root main#home :is(.home-edit-card-copy,.hero-bottom,.calculator-tile-art>div,.why-visit-image-caption) :is(b,small,span,p) { color:var(--site-text-color-fff-2d802a) !important; }
+#root main#home :is(.home-edit-card-copy,.hero-bottom,.calculator-tile-art>div,.why-visit-image-caption) :is(b,small,span,p) {
+  color: var(--site-text-color-fff-2d802a) !important;
+}
 /* A small structural label must not inherit a section-sized h3. */
 #root main#home .why-visit .why-visit-copy>small {
-  color:var(--site-color-eyebrow) !important;
-  font-size:var(--site-font-size-label) !important;
-  font-weight:var(--site-font-weight-label) !important;
-  letter-spacing:var(--site-letter-spacing-label) !important;
-  line-height:1.5 !important;
+  color: var(--site-color-eyebrow) !important;
+  font-size: var(--site-font-size-label) !important;
+  font-weight: var(--site-font-weight-label) !important;
+  letter-spacing: var(--site-letter-spacing-label) !important;
+  line-height: 1.5 !important;
 }
 #root main#home :is(.eyebrow,[class*='eyebrow'],.about-reference-kicker,.expansion-eyebrow,.finish-detail-label,.find-fit-editable-heading>span) {
-  font-size:var(--site-font-size-label) !important;
-  font-weight:var(--site-font-weight-label) !important;
-  line-height:var(--site-text-line-height-1-5-91cc08) !important;
+  font-size: var(--site-font-size-label) !important;
+  font-weight: var(--site-font-weight-label) !important;
+  line-height: var(--site-text-line-height-1-5-91cc08) !important;
 }
 /* The photographic homepage hero keeps its original large, light treatment. */
 #root main#home .hero-image-showcase .hero-copy h1 {
-  color:var(--site-text-color-fff-2d802a) !important;
-  font-size:var(--site-text-size-clamp-44px-6-25vw-86px-04e0d4) !important;
-  font-weight:var(--site-text-weight-300-e597b6) !important;
-  line-height:var(--site-text-line-height-1-08-ad5b89) !important;
-  letter-spacing:var(--site-text-letter-spacing-035em-8b3067) !important;
-  text-shadow:var(--site-text-text-shadow-0-3px-24px-rgb-0-0-0-42-385244);
-}
-#root main#home .hero-image-showcase .hero-copy h1 em { color:var(--site-text-color-fff-2d802a) !important; font-weight:var(--site-text-weight-300-e597b6) !important; }
-#root main#home .hero-image-showcase .hero-copy>p { color:var(--site-text-color-fff-2d802a) !important; text-shadow:var(--site-text-text-shadow-0-2px-12px-rgb-0-0-0-55-a20e64); }
-#root main#home .hero-image-showcase .eyebrow-light { color:var(--site-text-color-fff-2d802a) !important; }
-#root main#home .about-reference-promoters>h3 { color:var(--site-color-eyebrow) !important; font-size:var(--site-text-size-11px-26f6fb) !important; font-weight:var(--site-text-weight-500-60356f) !important; letter-spacing:var(--site-text-letter-spacing-15em-049701) !important; }
-@media(max-width:600px) {
-  #root main#home .hero-image-showcase .hero-copy h1 { font-size:var(--site-text-size-clamp-39px-10vw-56px-64adf0) !important; }
-  #root main#home h1 { font-size:var(--site-text-size-32px-440085) !important; }
-  #root main#home h2 { font-size:var(--site-text-size-29px-65405d) !important; }
-  #root main#home h3 { font-size:var(--site-text-size-22px-80d0e7) !important; }
-  #root main#home .product-sizes-content h2 { font-size:var(--site-text-size-clamp-20px-5vw-29px-a08b62) !important; }
-}
-
-/* Homepage hero exception: restore the original green/white frosted treatment. */
-#root main#home .hero-image-showcase .hero-copy {
-  max-width:960px; width:min(960px,100%); margin-inline:auto;
-  padding:clamp(24px,3.5vw,44px);
-  background:rgba(255,255,255,.56) !important;
-  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,.45); border-radius:0;
-  box-shadow:none;
-}
-#root main#home .hero-image-showcase .hero-copy::before { content:none; }
-#root main#home .hero-image-showcase .hero-copy h1 {
-  color:#153f37 !important; font-size:clamp(40px,4.7vw,66px) !important;
-  font-weight:500 !important; line-height:1.08 !important;
-  letter-spacing:-.04em !important; text-shadow:none; margin:14px auto 20px;
+  color: var(--site-text-color-fff-2d802a) !important;
+  font-size: var(--site-text-size-clamp-44px-6-25vw-86px-04e0d4) !important;
+  font-weight: var(--site-text-weight-300-e597b6) !important;
+  line-height: var(--site-text-line-height-1-08-ad5b89) !important;
+  letter-spacing: var(--site-text-letter-spacing-035em-8b3067) !important;
+  text-shadow: var(--site-text-text-shadow-0-3px-24px-rgb-0-0-0-42-385244);
 }
 #root main#home .hero-image-showcase .hero-copy h1 em {
-  color:#fff !important; font-weight:400 !important; font-style:normal;
+  color: var(--site-text-color-fff-2d802a) !important;
+  font-weight: var(--site-text-weight-300-e597b6) !important;
 }
 #root main#home .hero-image-showcase .hero-copy>p {
-  color:#34443d !important; text-shadow:none; max-width:680px;
-  font-size:clamp(14px,1.2vw,17px) !important; font-weight:400; line-height:1.6;
+  color: var(--site-text-color-fff-2d802a) !important;
+  text-shadow: var(--site-text-text-shadow-0-2px-12px-rgb-0-0-0-55-a20e64);
 }
-@media(max-width:600px) {
-  #root main#home .hero-image-showcase .hero-copy { padding:24px 16px; }
-  #root main#home .hero-image-showcase .hero-copy h1 { font-size:clamp(32px,8.3vw,45px) !important; }
+#root main#home .hero-image-showcase .eyebrow-light {
+  color: var(--site-text-color-fff-2d802a) !important;
 }
-
-/* Match the earlier wide, shallow hero panel rather than a tall frosted card. */
+#root main#home .about-reference-promoters>h3 {
+  color: var(--site-color-eyebrow) !important;
+  font-size: var(--site-text-size-11px-26f6fb) !important;
+  font-weight: var(--site-text-weight-500-60356f) !important;
+  letter-spacing: var(--site-text-letter-spacing-15em-049701) !important;
+}
+@media (max-width:600px) {
+  #root main#home .hero-image-showcase .hero-copy h1 {
+    font-size: var(--site-text-size-clamp-39px-10vw-56px-64adf0) !important;
+  }
+  #root main#home h1 {
+    font-size: var(--site-text-size-32px-440085) !important;
+  }
+  #root main#home h2 {
+    font-size: var(--site-text-size-29px-65405d) !important;
+  }
+  #root main#home h3 {
+    font-size: var(--site-text-size-22px-80d0e7) !important;
+  }
+  #root main#home .product-sizes-content h2 {
+    font-size: var(--site-text-size-clamp-20px-5vw-29px-a08b62) !important;
+  }
+}
+/* Homepage hero exception: restore the original green/white frosted treatment. */
 #root main#home .hero-image-showcase .hero-copy {
-  width:min(94%,1120px); max-width:1120px; padding:clamp(24px,3vw,38px) 28px;
-  background:linear-gradient(180deg,rgba(255,255,255,.77),rgba(255,255,255,.66)) !important;
-  backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px);
-  border:0; border-radius:0; box-shadow:none;
+  max-width: 960px;
+  width: min(960px,100%);
+  margin-inline: auto;
+  padding: clamp(24px,3.5vw,44px);
+  background: rgba(255,255,255,.56) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: 0;
+  box-shadow: none;
+}
+#root main#home .hero-image-showcase .hero-copy::before {
+  content: none;
 }
 #root main#home .hero-image-showcase .hero-copy h1 {
-  max-width:850px; font-size:clamp(38px,4.1vw,60px) !important;
-  font-weight:500 !important; line-height:1.08 !important;
-  margin:8px auto 18px; letter-spacing:-.04em !important;
+  color: #153f37 !important;
+  font-size: clamp(40px,4.7vw,66px) !important;
+  font-weight: 500 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.04em !important;
+  text-shadow: none;
+  margin: 14px auto 20px;
+}
+#root main#home .hero-image-showcase .hero-copy h1 em {
+  color: #fff !important;
+  font-weight: 400 !important;
+  font-style: normal;
 }
 #root main#home .hero-image-showcase .hero-copy>p {
-  max-width:760px; font-size:clamp(14px,1.1vw,17px) !important;
-  line-height:1.55; margin:0 auto;
+  color: #34443d !important;
+  text-shadow: none;
+  max-width: 680px;
+  font-size: clamp(14px,1.2vw,17px) !important;
+  font-weight: 400;
+  line-height: 1.6;
 }
-@media(max-width:600px) {
-  #root main#home .hero-image-showcase .hero-copy { width:96%; padding:26px 18px; }
-  #root main#home .hero-image-showcase .hero-copy h1 { font-size:clamp(32px,7.8vw,44px) !important; }
+@media (max-width:600px) {
+  #root main#home .hero-image-showcase .hero-copy {
+    padding: 24px 16px;
+  }
+  #root main#home .hero-image-showcase .hero-copy h1 {
+    font-size: clamp(32px,8.3vw,45px) !important;
+  }
 }
-
+/* Match the earlier wide, shallow hero panel rather than a tall frosted card. */
+#root main#home .hero-image-showcase .hero-copy {
+  width: min(94%,1120px);
+  max-width: 1120px;
+  padding: clamp(24px,3vw,38px) 28px;
+  background: linear-gradient(180deg,rgba(255,255,255,.77),rgba(255,255,255,.66)) !important;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+#root main#home .hero-image-showcase .hero-copy h1 {
+  max-width: 850px;
+  font-size: clamp(38px,4.1vw,60px) !important;
+  font-weight: 500 !important;
+  line-height: 1.08 !important;
+  margin: 8px auto 18px;
+  letter-spacing: -.04em !important;
+}
+#root main#home .hero-image-showcase .hero-copy>p {
+  max-width: 760px;
+  font-size: clamp(14px,1.1vw,17px) !important;
+  line-height: 1.55;
+  margin: 0 auto;
+}
+@media (max-width:600px) {
+  #root main#home .hero-image-showcase .hero-copy {
+    width: 96%;
+    padding: 26px 18px;
+  }
+  #root main#home .hero-image-showcase .hero-copy h1 {
+    font-size: clamp(32px,7.8vw,44px) !important;
+  }
+}
 /* About opening banner retains its original charcoal text palette. */
-#root main#home #about-overview .about-reference-kicker { color:#37332e !important; }
+#root main#home #about-overview .about-reference-kicker {
+  color: #37332e !important;
+}
 #root main#home #about-overview h1,
-#root main#home #about-overview h1 em { color:#272521 !important; }
-#root main#home #about-overview .about-reference-hero-copy>p { color:#403c37 !important; }
+#root main#home #about-overview h1 em {
+  color: #272521 !important;
+}
+#root main#home #about-overview .about-reference-hero-copy>p {
+  color: #403c37 !important;
+}

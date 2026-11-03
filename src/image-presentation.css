@@ -3,7 +3,6 @@
   --site-image-radius: 5px;
   --site-image-shadow: 0 10px 26px rgb(25 43 36 / 9%);
 }
-
 .about-reference-story-art,
 .about-reference-transparent-collage,
 .story-image,
@@ -16,7 +15,6 @@
 .why-visit-image {
   border-radius: var(--site-image-radius);
 }
-
 .about-reference-story-art,
 .about-reference-transparent-collage,
 .story-image,
@@ -29,7 +27,6 @@
 .why-visit-image {
   overflow: hidden;
 }
-
 /* Keep secondary image cards composed and consistent without changing their layouts. */
 .story-image,
 .application-thumbnails img,
@@ -37,7 +34,6 @@
 .why-visit-image img {
   aspect-ratio: 16 / 10;
 }
-
 .story-image img,
 .application-thumbnails img,
 .why-visit-image img {
@@ -47,14 +43,12 @@
   object-fit: cover;
   object-position: center;
 }
-
 .all-tiles-library-image img,
 .catalogue-image img,
 .about-reference-size-tile-wrap img {
   object-fit: contain;
   object-position: center;
 }
-
 .all-tiles-library-image,
 .catalogue-image,
 .tile-size-image,
@@ -62,22 +56,22 @@
 .application-preview > img {
   box-shadow: var(--site-image-shadow);
 }
-
 .application-preview > img {
   height: clamp(300px, 36vw, 500px);
 }
-
 .application-thumbnails img {
   height: auto;
   aspect-ratio: 16 / 10;
 }
-
 @media (max-width: 800px) {
-  .application-preview > img { height: min(76vw, 390px); }
+  .application-preview > img {
+    height: min(76vw, 390px);
+  }
 }
-
 @media (prefers-reduced-motion: reduce) {
   .story-image img,
   .all-tiles-library-image img,
-  .catalogue-image img { transition: none !important; }
+  .catalogue-image img {
+    transition: none !important;
+  }
 }

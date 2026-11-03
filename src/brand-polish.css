@@ -1,13 +1,25 @@
 /* Shared finishing details for a cohesive, contemporary VENTOZZA experience. */
-::selection { background: rgb(8 126 110 / 18%); color:var(--site-color-primary); }
-main#home { color:var(--site-color-ink); }
-
+::selection {
+  background: rgb(8 126 110 / 18%);
+  color: var(--site-color-primary);
+}
+main#home {
+  color: var(--site-color-ink);
+}
 /* Light, precise edge treatment keeps the mostly-white brand palette intentional. */
-.header { border-bottom-color: var(--site-border-soft); box-shadow: 0 5px 20px rgb(24 48 39 / 3%); }
-.nav a, .footer a, .under-link, .text-action { transition: color var(--site-transition), border-color var(--site-transition); }
-.nav a:hover, .footer a:hover, .under-link:hover, .text-action:hover { color:var(--site-color-secondary); }
-.eyebrow, .about-reference-eyebrow, .about-reference-kicker { color:var(--site-color-accent-soft, #b37a4c); }
-
+.header {
+  border-bottom-color: var(--site-border-soft);
+  box-shadow: 0 5px 20px rgb(24 48 39 / 3%);
+}
+.nav a, .footer a, .under-link, .text-action {
+  transition: color var(--site-transition), border-color var(--site-transition);
+}
+.nav a:hover, .footer a:hover, .under-link:hover, .text-action:hover {
+  color: var(--site-color-secondary);
+}
+.eyebrow, .about-reference-eyebrow, .about-reference-kicker {
+  color: var(--site-color-accent-soft, #b37a4c);
+}
 /* Give image and content cards the same quiet edge and depth across pages. */
 .home-edit-card,
 .home-format-card,
@@ -30,16 +42,33 @@ main#home { color:var(--site-color-ink); }
 .about-reference-team-grid article {
   border-color: var(--site-border-soft);
 }
-.catalogue-image { box-shadow: var(--site-shadow-card); transition: box-shadow var(--site-transition), transform var(--site-transition); }
-.catalogue-tile-card:hover .catalogue-image { box-shadow: var(--site-shadow-card-hover); transform: translateY(-2px); }
-.cert-document { box-shadow: var(--site-shadow-card); }
+.catalogue-image {
+  box-shadow: var(--site-shadow-card);
+  transition: box-shadow var(--site-transition), transform var(--site-transition);
+}
+.catalogue-tile-card:hover .catalogue-image {
+  box-shadow: var(--site-shadow-card-hover);
+  transform: translateY(-2px);
+}
+.cert-document {
+  box-shadow: var(--site-shadow-card);
+}
 .about-reference-promoters article,
-.about-reference-team-grid article { transition: border-color var(--site-transition), box-shadow var(--site-transition), transform var(--site-transition); }
+.about-reference-team-grid article {
+  transition: border-color var(--site-transition), box-shadow var(--site-transition), transform var(--site-transition);
+}
 .about-reference-promoters article:hover,
-.about-reference-team-grid article:hover { border-color: rgb(8 126 110 / 30%); box-shadow: var(--site-shadow-card); transform: translateY(-2px); }
-.about-reference-commitment-card { box-shadow: var(--site-shadow-card); }
-.about-reference-commitment-card:hover { box-shadow: var(--site-shadow-card-hover); }
-
+.about-reference-team-grid article:hover {
+  border-color: rgb(8 126 110 / 30%);
+  box-shadow: var(--site-shadow-card);
+  transform: translateY(-2px);
+}
+.about-reference-commitment-card {
+  box-shadow: var(--site-shadow-card);
+}
+.about-reference-commitment-card:hover {
+  box-shadow: var(--site-shadow-card-hover);
+}
 /* Refined controls and consistent keyboard focus. */
 .button,
 .cert-download,
@@ -63,7 +92,9 @@ a:focus-visible, button:focus-visible {
   outline: 2px solid var(--site-color-secondary);
   outline-offset: 3px;
 }
-
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }

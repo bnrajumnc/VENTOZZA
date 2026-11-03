@@ -61,9 +61,15 @@ export default function SiteFooter({
 
   return (
     <footer className="footer">
+
+
       <div className="footer-main">
         {/* Brand */}
+
+
         <div className="footer-brand">
+
+
           <a
             href="#home"
             aria-label="VENTOZZA home"
@@ -71,8 +77,12 @@ export default function SiteFooter({
               handlePageNavigation(event, 'home')
             }
           >
+
+
             <img src={ventozzaLogo} alt="VENTOZZA" />
           </a>
+
+
 
           <p>
             Tiles for walls and floors, with considered styles,
@@ -81,8 +91,14 @@ export default function SiteFooter({
         </div>
 
         {/* Quick links */}
+
+
         <div className="footer-links">
+
+
           <span>QUICK LINKS</span>
+
+
 
           <a
             href="#home"
@@ -93,6 +109,8 @@ export default function SiteFooter({
             Home
           </a>
 
+
+
           <a
             href="#about"
             onClick={(event) =>
@@ -101,6 +119,8 @@ export default function SiteFooter({
           >
             About Us
           </a>
+
+
 
           <a
             href="#products"
@@ -111,6 +131,8 @@ export default function SiteFooter({
             E-Catalogue
           </a>
 
+
+
           <a
             href="#products"
             onClick={(event) =>
@@ -119,6 +141,8 @@ export default function SiteFooter({
           >
             Digital Showroom
           </a>
+
+
 
           <a
             className="footer-sub-link"
@@ -130,6 +154,8 @@ export default function SiteFooter({
             ↳ Tile calculator
           </a>
 
+
+
           <a
             href="#certificates"
             onClick={(event) =>
@@ -138,6 +164,8 @@ export default function SiteFooter({
           >
             Certificates
           </a>
+
+
 
           <a
             href="#contact"
@@ -150,7 +178,11 @@ export default function SiteFooter({
         </div>
 
         {/* Product sizes linking to catalogues */}
+
+
         <div className="footer-links footer-sizes" >
+
+
           <span>PRODUCT SIZES</span>
 
           {visibleSizes.map((size) => (
@@ -171,41 +203,73 @@ export default function SiteFooter({
         </div>
 
         {/* Office addresses */}
+
+
         <div className="footer-note footer-addresses">
+
+
           <span>REGISTERED OFFICE</span>
+
+
 
           <p>
             10-3-71/3/A, 3rd Floor,
+
+
             <br />
             Teachers Colony, East Marredpally,
+
+
             <br />
             Secunderabad – 500026,
+
+
             <br />
             Telangana, India
           </p>
+
+
           <span>CORPORATE OFFICE</span>
+
+
           <p>
             Siromani 142, Ground Floor,
+
+
             <br />
             G-15, Near Eden Ceramic,
+
+
             <br />
             NH-8A, Lalpar, Morbi-2,
+
+
             <br />
             Gujarat, India
           </p>
         </div>
 
         {/* Contact information */}
+
+
         <div className="footer-note footer-contact">
+
+
           <span>CONTACT US</span>
+
+
 
           <p className="footer-company">
             VENTOZZA SURFACES
           </p>
 
+
+
           <a href="mailto:sales@ventozzasurfaces.com">
             sales@ventozzasurfaces.com
           </a>
+
+
 
           <a
             href="#contact"
@@ -215,6 +279,8 @@ export default function SiteFooter({
           >
             Request a call back ↗︎
           </a>
+
+
 
           <a
             href="https://www.ventozzasurfaces.com"
@@ -227,7 +293,11 @@ export default function SiteFooter({
       </div>
 
       {/* Footer bottom */}
+
+
       <div className="footer-bottom">
+
+
         <span>© 2026 VENTOZZA. ALL RIGHTS RESERVED.</span>
         {/* <span>TILE ENQUIRIES · WALL &amp; FLOOR</span> */}
       </div>

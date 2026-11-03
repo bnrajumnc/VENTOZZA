@@ -1,6 +1,6 @@
 /* Corporate sans-serif hierarchy inspired by FirstMeridian's typography. */
 :root {
-  font-family:var(--site-text-family-poppins-sans-serif-6d4cb2);
+  font-family: var(--site-text-family-poppins-sans-serif-6d4cb2);
   --display: 'Poppins', sans-serif;
   --serif: 'Poppins', sans-serif;
   --font-body: 'Poppins', sans-serif;
@@ -9,43 +9,118 @@
   --weight-semibold: 600;
   --weight-bold: 700;
 }
-
-*, *::before, *::after { font-family:var(--site-text-family-poppins-sans-serif-6d4cb2) !important; }
-body { font-family:var(--site-text-family-poppins-sans-serif-6d4cb2); font-size:var(--site-text-size-16px-0c645d); font-weight:var(--site-text-weight-400-9abd6f); line-height:var(--site-text-line-height-1-65-b71188); }
-
-h1, h2, h3, h4, h5, h6 { font-family:var(--site-text-family-poppins-sans-serif-6d4cb2); font-weight:var(--site-text-weight-600-64a878); letter-spacing:var(--site-text-letter-spacing-025em-ff062e); }
-p, li, dd, dt, blockquote { font-size:var(--site-text-size-16px-0c645d); font-weight:var(--site-text-weight-400-9abd6f); line-height:var(--site-text-line-height-1-65-b71188); }
-small { font-size:var(--site-text-size-12px-3a2909); font-weight:var(--site-text-weight-400-9abd6f); line-height:var(--site-text-line-height-1-5-91cc08); }
-strong, b { font-weight:var(--site-text-weight-600-64a878); }
-button, input, select, textarea { font-family:var(--site-text-family-poppins-sans-serif-6d4cb2); }
-button { font-weight:var(--site-text-weight-500-60356f); }
-
-.hero h1 { font-size:var(--site-text-size-clamp-46px-5-2vw-70px-0967f0); font-weight:var(--site-text-weight-600-64a878); line-height:var(--site-text-line-height-1-06-af87b0); letter-spacing:var(--site-text-letter-spacing-035em-8b3067); }
-.hero-copy > p { font-size:var(--site-text-size-17px-77dbde); font-weight:var(--site-text-weight-400-9abd6f); line-height:var(--site-text-line-height-1-65-b71188); }
+*, *::before, *::after {
+  font-family: var(--site-text-family-poppins-sans-serif-6d4cb2) !important;
+}
+body {
+  font-family: var(--site-text-family-poppins-sans-serif-6d4cb2);
+  font-size: var(--site-text-size-16px-0c645d);
+  font-weight: var(--site-text-weight-400-9abd6f);
+  line-height: var(--site-text-line-height-1-65-b71188);
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--site-text-family-poppins-sans-serif-6d4cb2);
+  font-weight: var(--site-text-weight-600-64a878);
+  letter-spacing: var(--site-text-letter-spacing-025em-ff062e);
+}
+p, li, dd, dt, blockquote {
+  font-size: var(--site-text-size-16px-0c645d);
+  font-weight: var(--site-text-weight-400-9abd6f);
+  line-height: var(--site-text-line-height-1-65-b71188);
+}
+small {
+  font-size: var(--site-text-size-12px-3a2909);
+  font-weight: var(--site-text-weight-400-9abd6f);
+  line-height: var(--site-text-line-height-1-5-91cc08);
+}
+strong, b {
+  font-weight: var(--site-text-weight-600-64a878);
+}
+button, input, select, textarea {
+  font-family: var(--site-text-family-poppins-sans-serif-6d4cb2);
+}
+button {
+  font-weight: var(--site-text-weight-500-60356f);
+}
+.hero h1 {
+  font-size: var(--site-text-size-clamp-46px-5-2vw-70px-0967f0);
+  font-weight: var(--site-text-weight-600-64a878);
+  line-height: var(--site-text-line-height-1-06-af87b0);
+  letter-spacing: var(--site-text-letter-spacing-035em-8b3067);
+}
+.hero-copy > p {
+  font-size: var(--site-text-size-17px-77dbde);
+  font-weight: var(--site-text-weight-400-9abd6f);
+  line-height: var(--site-text-line-height-1-65-b71188);
+}
 .home-section-heading h2, .home-format-heading h2, .section-head h2,
 .about-copy h2, .cert-intro h2, .contact-copy h2,
-.about-hero-copy h2, .about-origin-copy h3 { font-weight:var(--site-text-weight-600-64a878); letter-spacing:var(--site-text-letter-spacing-03em-b53165); }
+.about-hero-copy h2, .about-origin-copy h3 {
+  font-weight: var(--site-text-weight-600-64a878);
+  letter-spacing: var(--site-text-letter-spacing-03em-b53165);
+}
 .home-section-heading > p, .home-format-heading > p, .section-head-aside p,
 .about-copy > p, .contact-copy > p, .cert-intro > p,
-.tile-view-heading p, .showroom-heading p { font-size:var(--site-text-size-16px-0c645d); font-weight:var(--site-text-weight-400-9abd6f); line-height:var(--site-text-line-height-1-7-2e7701); }
-
-.nav button, .nav a { font-size:var(--site-text-size-14px-5fbabb); font-weight:var(--site-text-weight-500-60356f); }
-.header-cta, .button, .text-action { font-size:var(--site-text-size-13px-377ddf); font-weight:var(--site-text-weight-600-64a878); }
-.eyebrow { font-size:var(--site-text-size-11px-26f6fb); font-weight:var(--site-text-weight-600-64a878); letter-spacing:var(--site-text-letter-spacing-12em-81dbde); }
-.product-info > span, .product-details, .catalogue-results-count { font-size:var(--site-text-size-12px-3a2909); font-weight:var(--site-text-weight-500-60356f); }
-.product-info h3, .catalogue-card-copy h4 { font-weight:var(--site-text-weight-600-64a878); }
-.footer .footer-links a, .footer .footer-contact a, .footer .footer-note p { font-size:var(--site-text-size-14px-5fbabb); line-height:var(--site-text-line-height-1-6-430e4d); }
-.contact-form label { font-size:var(--site-text-size-14px-5fbabb); font-weight:var(--site-text-weight-500-60356f); }
-.contact-form input, .contact-form textarea, .contact-form select { font-size:var(--site-text-size-15px-a90797); }
-.callback-form label { font-size:var(--site-text-size-14px-5fbabb); font-weight:var(--site-text-weight-500-60356f); }
-.callback-form input, .callback-form select { font-size:var(--site-text-size-15px-a90797); }
-.chat-panel, .chat-panel button, .chat-panel input { font-family:var(--site-text-family-poppins-sans-serif-6d4cb2); }
-
+.tile-view-heading p, .showroom-heading p {
+  font-size: var(--site-text-size-16px-0c645d);
+  font-weight: var(--site-text-weight-400-9abd6f);
+  line-height: var(--site-text-line-height-1-7-2e7701);
+}
+.nav button, .nav a {
+  font-size: var(--site-text-size-14px-5fbabb);
+  font-weight: var(--site-text-weight-500-60356f);
+}
+.header-cta, .button, .text-action {
+  font-size: var(--site-text-size-13px-377ddf);
+  font-weight: var(--site-text-weight-600-64a878);
+}
+.eyebrow {
+  font-size: var(--site-text-size-11px-26f6fb);
+  font-weight: var(--site-text-weight-600-64a878);
+  letter-spacing: var(--site-text-letter-spacing-12em-81dbde);
+}
+.product-info > span, .product-details, .catalogue-results-count {
+  font-size: var(--site-text-size-12px-3a2909);
+  font-weight: var(--site-text-weight-500-60356f);
+}
+.product-info h3, .catalogue-card-copy h4 {
+  font-weight: var(--site-text-weight-600-64a878);
+}
+.footer .footer-links a, .footer .footer-contact a, .footer .footer-note p {
+  font-size: var(--site-text-size-14px-5fbabb);
+  line-height: var(--site-text-line-height-1-6-430e4d);
+}
+.contact-form label {
+  font-size: var(--site-text-size-14px-5fbabb);
+  font-weight: var(--site-text-weight-500-60356f);
+}
+.contact-form input, .contact-form textarea, .contact-form select {
+  font-size: var(--site-text-size-15px-a90797);
+}
+.callback-form label {
+  font-size: var(--site-text-size-14px-5fbabb);
+  font-weight: var(--site-text-weight-500-60356f);
+}
+.callback-form input, .callback-form select {
+  font-size: var(--site-text-size-15px-a90797);
+}
+.chat-panel, .chat-panel button, .chat-panel input {
+  font-family: var(--site-text-family-poppins-sans-serif-6d4cb2);
+}
 @media (max-width: 700px) {
-  body, p, li, dd, dt, blockquote { font-size:var(--site-text-size-15px-a90797); }
-  .hero h1 { font-size:var(--site-text-size-clamp-39px-10vw-54px-a3679d); line-height:var(--site-text-line-height-1-08-ad5b89); }
-  .hero-copy > p { font-size:var(--site-text-size-15px-a90797); }
+  body, p, li, dd, dt, blockquote {
+    font-size: var(--site-text-size-15px-a90797);
+  }
+  .hero h1 {
+    font-size: var(--site-text-size-clamp-39px-10vw-54px-a3679d);
+    line-height: var(--site-text-line-height-1-08-ad5b89);
+  }
+  .hero-copy > p {
+    font-size: var(--site-text-size-15px-a90797);
+  }
   .home-section-heading > p, .home-format-heading > p, .section-head-aside p,
   .about-copy > p, .contact-copy > p, .cert-intro > p,
-  .tile-view-heading p, .showroom-heading p { font-size:var(--site-text-size-15px-a90797); }
+  .tile-view-heading p, .showroom-heading p {
+    font-size: var(--site-text-size-15px-a90797);
+  }
 }
