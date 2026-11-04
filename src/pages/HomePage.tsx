@@ -5,11 +5,11 @@ import { ventozzaEdit as editCollections } from '../data/ventozzaEdit'
 import { findYourFitContent } from '../data/homepageContent'
 
 type Slide = { eyebrow: string; title: ReactNode; body: string; image: string; alt: string; note: string }
-type Props = { slide: Slide; activeSlide: number; slideCount: number; onMoveSlide: (step: number) => void; onHeroInteraction: () => void; onNavigate: (page: 'about' | 'contact') => void; onTiles: (view: 'overview' | 'look-feel' | 'size' | 'visualizer') => void; onCatalogueSize: (format: string) => void }
+type Props = { slide: Slide; activeSlide: number; slideCount: number; onMoveSlide: (step: number) => void; onSelectSlide: (index: number) => void; onHeroInteraction: () => void; onNavigate: (page: 'about' | 'contact') => void; onTiles: (view: 'overview' | 'look-feel' | 'size' | 'visualizer') => void; onCatalogueSize: (format: string) => void }
 const Arrow = ({ diagonal = false }: { diagonal?: boolean }) => <span aria-hidden="true">{diagonal ? '↗︎' : '→'}</span>
 
 
-export default function HomePage({ slide, activeSlide, slideCount, onMoveSlide, onHeroInteraction, onNavigate, onTiles, onCatalogueSize }: Props) {
+export default function HomePage({ slide, activeSlide, slideCount, onMoveSlide, onSelectSlide, onHeroInteraction, onNavigate, onTiles, onCatalogueSize }: Props) {
   const heroPointer = useRef<{ id: number; x: number; y: number } | null>(null)
   const editTrack = useRef<HTMLDivElement>(null)
   const [activeEdit, setActiveEdit] = useState(0)
@@ -58,14 +58,20 @@ export default function HomePage({ slide, activeSlide, slideCount, onMoveSlide, 
       aria-label="Featured VENTOZZA tiles. Swipe left or right to change slides."
       onPointerDown={(event) => {
         if (!event.isPrimary || (event.pointerType === 'mouse' && event.button !== 0)) return
+        if ((event.target as HTMLElement).closest('button, a, input, select, textarea')) return
+        if (event.pointerType === 'mouse') event.preventDefault()
         heroPointer.current = { id: event.pointerId, x: event.clientX, y: event.clientY }
         onHeroInteraction()
         try { event.currentTarget.setPointerCapture(event.pointerId) } catch { /* pointer may have left the document */ }
+      }}
+      onPointerMove={(event) => {
+        if (heroPointer.current?.id === event.pointerId && event.pointerType === 'mouse') event.preventDefault()
       }}
       onPointerUp={(event) => {
         const start = heroPointer.current
         heroPointer.current = null
         if (!start || start.id !== event.pointerId) return
+        if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId)
         const dx = event.clientX - start.x
         const dy = event.clientY - start.y
         if (Math.abs(dx) >= 45 && Math.abs(dx) > Math.abs(dy) * 1.25) onMoveSlide(dx < 0 ? 1 : -1)
@@ -95,7 +101,7 @@ export default function HomePage({ slide, activeSlide, slideCount, onMoveSlide, 
 
 
           <div className="hero-progress" role="tablist" aria-label="Choose a featured slide">
-            {Array.from({ length: slideCount }, (_, index) => <button key={index} type="button" role="tab" aria-label={`Show slide ${index + 1}`} aria-selected={index === activeSlide} className={index === activeSlide ? 'active' : ''} onClick={() => onMoveSlide(index - activeSlide)} />)}
+            {Array.from({ length: slideCount }, (_, index) => <button key={index} type="button" role="tab" aria-label={`Show slide ${index + 1}`} aria-selected={index === activeSlide} className={index === activeSlide ? 'active' : ''} onClick={() => onSelectSlide(index)} />)}
           </div>
         </div>
       </div>

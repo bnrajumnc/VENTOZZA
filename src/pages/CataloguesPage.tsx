@@ -1,13 +1,14 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { catalogueItems } from '../data/catalogues'
+import { catalogueItems, type CatalogueItem } from '../data/catalogues'
 import { tileLooks } from '../data/tileData'
 import './CataloguesPage.css'
 
 const filters = [
   { id: 'all', label: 'All Catalogues' },
   { id: '1200x1800', label: '1200 × 1800 mm' },
+  { id: '1200x2400', label: '1200 × 2400 mm' },
   { id: '800x1600', label: '800 × 1600 mm' },
   { id: '300x600', label: '300 × 600 mm' },
   { id: '300x450', label: '300 × 450 mm' },
@@ -22,6 +23,7 @@ const filters = [
 
 const formatShowcase = [
   { id: '1200x1800', size: '1200 × 1800 mm', name: 'Large-format porcelain', image: '/images/ventozza/catalogue-art/size-1200x1800.webp', texture: '/images/ventozza/ivory-marble-texture-enhanced.png', finish: 'Marble look · polished' },
+  { id: '1200x2400', size: '1200 × 2400 mm', name: 'Statement slab porcelain', image: '/images/ventozza/catalogue-art/size-1200x1800.webp', texture: '/images/ventozza/ivory-marble-texture-enhanced.png', finish: 'Large-format · explore available finishes' },
   { id: '800x1600', size: '800 × 1600 mm', name: 'Statement surfaces', image: '/images/ventozza/catalogue-art/size-800x1600.webp', texture: '/images/ventozza/cream-marble-texture.png', finish: 'Stone look · matt' },
   { id: '800x800', size: '800 × 800 mm', name: 'Square format porcelain', image: '/images/ventozza/catalogue-art/size-800x800.webp', texture: '/images/ventozza/ivory-marble-texture-enhanced.png', finish: 'Marble look · polished' },
   { id: '600-full-body', size: '600 × 1200 & 600 × 600 mm', name: 'Full Body porcelain', image: '/images/ventozza/catalogue-art/size-600x1200.webp', texture: '/images/ventozza/silver-marble-slab.png', finish: 'Full body · polished / matt' },
@@ -38,6 +40,14 @@ type Props = {
   initialFormat?: string | null
 }
 
+type DriveCatalogueResponse = { catalogues?: CatalogueItem[] }
+
+declare global {
+  interface Window {
+    __ventozzaCatalogueIndexCallback?: (result: DriveCatalogueResponse) => void
+  }
+}
+
 export default function CataloguesPage({
   onEnquire,
   initialFormat,
@@ -46,9 +56,65 @@ export default function CataloguesPage({
   const [query, setQuery] = useState('')
   const [viewingItemId, setViewingItemId] = useState<string | null>(null)
   const [failedCovers, setFailedCovers] = useState<string[]>([])
+  const [catalogues, setCatalogues] = useState<CatalogueItem[]>(catalogueItems)
+
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>('.header')
+    if (!header) return
+    const updateOffset = () => document.documentElement.style.setProperty('--catalogue-sticky-top', `${Math.ceil(header.getBoundingClientRect().height) + 8}px`)
+    updateOffset()
+    const observer = new ResizeObserver(updateOffset)
+    observer.observe(header)
+    return () => { observer.disconnect(); document.documentElement.style.removeProperty('--catalogue-sticky-top') }
+  }, [])
+
+  useEffect(() => {
+    const indexUrl = import.meta.env.VITE_CATALOGUE_INDEX_URL
+    if (!indexUrl) return
+
+    const callbackName = '__ventozzaCatalogueIndexCallback'
+    const script = document.createElement('script')
+    let finished = false
+
+    const timeout = window.setTimeout(() => {
+      if (finished) return
+      finished = true
+      delete window[callbackName]
+      script.remove()
+    }, 12000)
+
+    window[callbackName] = (result) => {
+      if (finished || !Array.isArray(result.catalogues)) return
+      finished = true
+      window.clearTimeout(timeout)
+      const validItems = result.catalogues.filter((item) =>
+        item && typeof item.id === 'string' && typeof item.pdfUrl === 'string' && typeof item.title === 'string',
+      )
+      if (validItems.length) setCatalogues(validItems)
+      delete window[callbackName]
+      script.remove()
+    }
+
+    const separator = indexUrl.includes('?') ? '&' : '?'
+    script.src = `${indexUrl}${separator}callback=${callbackName}&_=${Date.now()}`
+    script.onerror = () => {
+      if (finished) return
+      finished = true
+      window.clearTimeout(timeout)
+      delete window[callbackName]
+      script.remove()
+    }
+    document.head.appendChild(script)
+
+    return () => {
+      window.clearTimeout(timeout)
+      delete window[callbackName]
+      script.remove()
+    }
+  }, [])
 
   const viewingItem =
-    catalogueItems.find((item) => item.id === viewingItemId) ?? null
+    catalogues.find((item) => item.id === viewingItemId) ?? null
 
   useEffect(() => {
     setActiveFormat(initialFormat || 'all')
@@ -57,7 +123,7 @@ export default function CataloguesPage({
   const shownCatalogues = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
 
-    return catalogueItems.filter((item) => {
+    return catalogues.filter((item) => {
       const matchesFormat =
         activeFormat === 'all' ||
         item.group === activeFormat ||
@@ -74,7 +140,7 @@ export default function CataloguesPage({
 
       return matchesFormat && matchesQuery
     })
-  }, [activeFormat, query])
+  }, [activeFormat, catalogues, query])
 
   useEffect(() => {
     if (!viewingItem) return
@@ -165,7 +231,7 @@ export default function CataloguesPage({
           <section className="catalogue-format-stage" aria-label="Selected tile format">
             {(() => {
               const selectedFormat = formatShowcase.find((format) => format.id === activeFormat) ?? formatShowcase[0]
-              const featuredCatalogue = shownCatalogues[0] ?? catalogueItems.find((item) => item.group === selectedFormat.id)
+              const featuredCatalogue = shownCatalogues[0] ?? catalogues.find((item) => item.group === selectedFormat.id)
               return <>
                 <div className="catalogue-format-scene" key={selectedFormat.id}>
 
@@ -210,7 +276,7 @@ export default function CataloguesPage({
                       <button type="button" onClick={() => setViewingItemId(featuredCatalogue.id)}>EXPLORE THE CATALOGUE
 
                         <span aria-hidden="true">↗</span></button>
-                      <a href={featuredCatalogue.pdfUrl} download={featuredCatalogue.fileName}>DOWNLOAD PDF</a>
+                      <a href={featuredCatalogue.downloadUrl ?? featuredCatalogue.pdfUrl} download={featuredCatalogue.fileName}>DOWNLOAD PDF</a>
                     </> : <span className="catalogue-format-unavailable">Ask our team about this format.</span>}
                   </div>
 
@@ -348,7 +414,7 @@ export default function CataloguesPage({
 
                         <a
                           className="catalogue-pdf-action"
-                          href={item.pdfUrl}
+                          href={item.downloadUrl ?? item.pdfUrl}
                           download={item.fileName}
                         >
 
@@ -450,7 +516,7 @@ export default function CataloguesPage({
 
 
                   <a
-                    href={viewingItem.pdfUrl}
+                    href={viewingItem.downloadUrl ?? viewingItem.pdfUrl}
                     download={viewingItem.fileName}
                   >
                     DOWNLOAD PDF
@@ -473,7 +539,7 @@ export default function CataloguesPage({
 
 
               <iframe
-                src={`${viewingItem.pdfUrl}#toolbar=1&navpanes=0`}
+                src={`${viewingItem.previewUrl ?? viewingItem.pdfUrl}#toolbar=1&navpanes=0`}
                 title={viewingItem.title}
               />
             </section>

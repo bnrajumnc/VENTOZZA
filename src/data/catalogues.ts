@@ -1,4 +1,4 @@
-export type CatalogueItem = { id: string; group: string; size: string; title: string; fileName: string; cover: string; previewPage: number; pdfUrl: string }
+export type CatalogueItem = { id: string; group: string; size: string; title: string; fileName: string; cover: string; previewPage: number; pdfUrl: string; previewUrl?: string; downloadUrl?: string }
 
 export const catalogueItems: CatalogueItem[] = [
   {

@@ -2963,7 +2963,7 @@
   inset: 0;
   content: '';
   background: url('/images/ventozza/about-reference/commitment-specialties-marble.png') center / auto 100% no-repeat;
-  opacity: .14;
+  opacity: .4;
   pointer-events: none;
 }
 .about-reference-brand-panels > .about-reference-section {
@@ -2974,7 +2974,7 @@
 }
 .about-reference-brand-panels .about-reference-commitment-card {
   background-image: none !important;
-  background-color: rgb(255 255 255 / 78%);
+  background-color: rgb(255 255 255 / 58%);
 }
 /* Specialty slides advance in place without moving the surrounding page. */
 .about-reference-size-layout {
@@ -2996,7 +2996,9 @@
   min-height: 0;
   padding: clamp(24px,3.4vw,48px);
   border-bottom: 1px solid #e6e2db;
-  background-color: transparent;
+  background-color: rgb(255 255 255 / 54%);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
   animation: about-specialty-enter .42s cubic-bezier(.2,.75,.2,1) both;
 }
 @keyframes about-specialty-enter {
@@ -3985,5 +3987,253 @@
   }
   .about-reference-page .about-reference-team-grid {
     grid-template-columns: minmax(0,1fr);
+  }
+}
+
+/* Keep the Vice President clearly distinct from the director/promoter group. */
+.about-reference-page .about-reference-vice-president {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.34fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 16px;
+  padding: 0;
+}
+.about-reference-vice-president-heading > span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--site-text-color-997548-b2791c);
+  font-size: var(--site-text-size-10px-2ca669);
+  font-weight: var(--site-text-weight-700-65cfcf);
+  letter-spacing: var(--site-text-letter-spacing-11em-68f9a5);
+}
+.about-reference-page .about-reference-vice-president-heading > h3 {
+  margin: 0;
+  color: var(--site-text-color-163f34-fc0964);
+  font-size: var(--site-text-size-18px-325b0c);
+  font-weight: var(--site-text-weight-600-64a878);
+}
+.about-reference-page .about-reference-vice-president > article {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+  width: min(100%, 365px);
+  min-height: 84px;
+  padding: 14px 18px;
+  border: 1px solid #dce4dc;
+  border-top: 2px solid #bd8c5d;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 24px #123f3406;
+}
+.about-reference-page .about-reference-core-team {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.34fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+}
+.about-reference-page .about-reference-core-team > h3 {
+  margin: 16px 0 0;
+  color: var(--site-text-color-163f34-fc0964);
+  font-size: var(--site-text-size-18px-325b0c);
+  font-weight: var(--site-text-weight-600-64a878);
+}
+.about-reference-page .about-reference-core-team .about-reference-team-grid {
+  min-width: 0;
+}
+.about-reference-page .about-reference-vice-president .team-promoter-initials {
+  display: grid;
+  place-items: center;
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+  border-radius: 8px;
+  background: #edf2e9;
+  color: var(--site-text-color-997548-b2791c);
+  font-size: var(--site-text-size-23px-f15ace);
+  font-style: normal;
+}
+.about-reference-page .about-reference-vice-president .team-promoter-details > b {
+  color: var(--site-text-color-163f34-fc0964);
+  font-size: var(--site-text-size-18px-325b0c);
+  font-weight: var(--site-text-weight-600-64a878);
+}
+.about-reference-page .about-reference-vice-president .team-promoter-details > span {
+  color: var(--site-text-color-68786e-5598b0);
+  font-size: var(--site-text-size-13px-377ddf);
+}
+@media (max-width: 600px) {
+  .about-reference-page .about-reference-vice-president {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .about-reference-page .about-reference-vice-president > article {
+    width: 100%;
+  }
+  .about-reference-page .about-reference-core-team {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .about-reference-page .about-reference-core-team > h3 {
+    margin-top: 0;
+  }
+  .about-reference-page .about-reference-vice-president > article {
+    gap: 16px;
+    min-height: 84px;
+    padding: 14px;
+  }
+}
+
+#root main#home .about-reference-page .about-reference-promoters > h3,
+#root main#home .about-reference-page .about-reference-vice-president > h3,
+#root main#home .about-reference-page .about-reference-core-team > h3 {
+  color: #007d70 !important;
+  font-size: var(--site-text-size-13px-377ddf) !important;
+  font-weight: var(--site-text-weight-600-64a878) !important;
+  line-height: var(--site-text-line-height-1-4-bd7bd3) !important;
+  letter-spacing: var(--site-text-letter-spacing-15em-049701) !important;
+  text-transform: var(--site-text-text-transform-uppercase-4823c8) !important;
+}
+#root main#home .about-reference-page .about-reference-vice-president > article,
+#root main#home .about-reference-page .about-reference-core-team .about-reference-team-grid article {
+  background: #fff !important;
+  border-color: #dce4dc !important;
+  border-top: 2px solid #bd8c5d !important;
+  box-shadow: 0 8px 24px rgb(18 63 52 / 8%) !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+#root main#home .about-reference-page .about-reference-vice-president {
+  width: min(100%, 620px);
+  margin: 28px auto 24px;
+}
+#root main#home .about-reference-page .about-reference-core-team {
+  width: min(100%, 952px);
+  margin: 0 auto;
+}
+
+/* Vision, Mission and Values: open columns joined by light separators. */
+#root main#home .about-reference-page .about-reference-principles-grid {
+  --principle-gap: clamp(28px, 5vw, 72px);
+  column-gap: var(--principle-gap);
+  row-gap: 34px;
+}
+#root main#home .about-reference-page .about-reference-principle {
+  position: relative;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#root main#home .about-reference-page .about-reference-principle:not(:last-child)::after {
+  position: absolute;
+  top: 12%;
+  right: calc(var(--principle-gap) / -2);
+  width: 1px;
+  height: 76%;
+  background: #dce4dc;
+  content: '';
+}
+@media (max-width: 900px) {
+  #root main#home .about-reference-page .about-reference-principle:not(:last-child)::after {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  #root main#home .about-reference-page .about-reference-principles-grid {
+    row-gap: 30px;
+  }
+  #root main#home .about-reference-page .about-reference-principle:not(:last-child)::after {
+    display: block;
+    top: auto;
+    right: 15%;
+    bottom: -16px;
+    width: 70%;
+    height: 1px;
+  }
+}
+
+/* Use the Directors / Promoters section pattern for the VP and core roster too. */
+.about-reference-page .about-reference-vice-president {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 28px 0 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.about-reference-page .about-reference-vice-president > h3,
+.about-reference-page .about-reference-core-team > h3 {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  margin: 0 0 2px;
+  color: var(--site-color-eyebrow) !important;
+  font-size: var(--site-text-size-11px-26f6fb) !important;
+  font-weight: var(--site-text-weight-500-60356f) !important;
+  line-height: var(--site-text-line-height-1-4-bd7bd3);
+  letter-spacing: var(--site-text-letter-spacing-15em-049701);
+  text-transform: var(--site-text-text-transform-uppercase-4823c8);
+}
+.about-reference-page .about-reference-vice-president > h3::after,
+.about-reference-page .about-reference-core-team > h3::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: #dce4dc;
+}
+.about-reference-page .about-reference-vice-president > article {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 365px);
+  min-height: 92px;
+  padding: 16px 20px;
+}
+.about-reference-page .about-reference-core-team {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+.about-reference-page .about-reference-core-team > h3 {
+  margin: 0;
+}
+.about-reference-page .about-reference-core-team .about-reference-team-grid article {
+  grid-template-columns: 48px minmax(0, 1fr);
+  column-gap: 16px;
+  min-height: 92px;
+  padding: 16px 18px;
+  border-top: 2px solid #bd8c5d;
+  border-radius: 8px;
+  background: #fff !important;
+  box-shadow: 0 8px 24px #123f3406;
+}
+.about-reference-page .about-reference-core-team .about-reference-team-grid article > span {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  font-size: var(--site-text-size-14px-5fbabb);
+}
+.about-reference-page .about-reference-core-team .about-reference-team-grid article > b {
+  font-size: var(--site-text-size-15px-a90797);
+}
+.about-reference-page .about-reference-core-team .about-reference-team-grid article > small {
+  font-size: var(--site-text-size-13px-377ddf);
+}
+@media (max-width: 600px) {
+  .about-reference-page .about-reference-vice-president {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .about-reference-page .about-reference-vice-president > article {
+    grid-column: 1;
+    justify-self: stretch;
+    width: 100%;
+    min-height: 84px;
+    padding: 14px;
   }
 }

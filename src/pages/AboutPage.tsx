@@ -5,8 +5,13 @@ import ExpansionRoadmap from './ExpansionRoadmap'
 const promoters = [
   { name: 'Vijay Kumar N. Jakhaniya', role: 'Director / Promoter', initials: 'VJ' },
   { name: 'P. Vishal Kumar', role: 'Director / Promoter', initials: 'PV' },
-  { name: 'H. Narayana Rao', role: 'Vice President – Sales & Marketing', initials: 'HN' },
 ]
+
+const vicePresident = {
+  name: 'H. Narayana Rao',
+  role: 'Vice President – Sales & Marketing',
+  initials: 'HN',
+}
 
 const team = [
   { name: 'A. Niranjan', role: 'Senior Regional Manager' },
@@ -84,11 +89,6 @@ export default function AboutPage() {
           <p>Every project deserves a tile partner, not just a tile supplier. Built by industry veterans, focused on builders and architects.</p>
 
 
-          <a className="about-reference-hero-link" href="#about-story">DISCOVER VENTOZZA
-
-            <span aria-hidden="true">↓</span></a>
-
-
           <div className="about-reference-hero-stats" aria-label="VENTOZZA at a glance">
 
 
@@ -105,6 +105,8 @@ export default function AboutPage() {
 
               <small>Years of combined project-sales experience</small></span>
           </div>
+          <a className="about-reference-hero-link" href="#about-story">DISCOVER VENTOZZA
+            <span aria-hidden="true">↓</span></a>
         </div>
       </div>
     </header>
@@ -164,53 +166,6 @@ export default function AboutPage() {
 
 
 
-    <section className="about-reference-section reveal" id="about-foundation">
-
-
-      <div className="about-reference-container about-reference-split">
-
-
-        <div className="about-reference-copy">
-
-
-          <span className="about-reference-eyebrow">THE VENTOZZA FOUNDATION</span>
-
-
-          <h2>About VENTOZZA</h2>
-
-
-          <p>Established in 2017 within Greenray Granito Private Limited, VENTOZZA brings reliability to premium tile distribution and project sales for builders and architects.</p>
-
-
-          <p>Built on a proven track record, VENTOZZA combines extensive project-sales experience with focused support for every project.</p>
-
-
-          <div className="about-reference-proof reveal" aria-label="VENTOZZA experience">
-
-
-            <div className="about-reference-proof-stat">
-
-              <b>2017</b>
-
-              <span>VENTOZZA established within Greenray Granito Private Limited</span></div>
-
-
-            <div className="about-reference-proof-stat">
-
-              <b>15+</b>
-
-              <span>Years of combined project-sales experience</span></div>
-          </div>
-        </div>
-
-
-        <figure className="about-reference-image about-reference-transparent-collage">
-
-
-          <img src="/images/ventozza/about-reference/foundation-tile-collage.png" alt="VENTOZZA tile inspiration: a green tiled bathroom, layered stone samples and colorful geometric tiles" loading="lazy" />
-        </figure>
-      </div>
-    </section>
 
 
 
@@ -311,7 +266,7 @@ export default function AboutPage() {
 
 
           <h3>Directors / Promoters</h3>
-          {promoters.map((person) => <article className={person.initials === 'HN' ? 'team-vice-president' : undefined} key={person.name}>
+          {promoters.map((person) => <article key={person.name}>
 
             <i className="team-promoter-initials" aria-hidden="true">{person.initials}</i>
 
@@ -323,14 +278,29 @@ export default function AboutPage() {
         </div>
 
 
-        <div className="about-reference-team-grid" aria-label="Core team directory">
-          {team.map((person) => <article key={person.name}>
+        <section className="about-reference-vice-president" aria-labelledby="about-vice-president-heading">
+          <h3 id="about-vice-president-heading">Vice President</h3>
+          <article>
+            <i className="team-promoter-initials" aria-hidden="true">{vicePresident.initials}</i>
+            <div className="team-promoter-details">
+              <b>{vicePresident.name}</b>
+              <span>{vicePresident.role}</span>
+            </div>
+          </article>
+        </section>
+
+
+        <div className="about-reference-core-team">
+          <h3>Our Core Team</h3>
+          <div className="about-reference-team-grid" aria-label="Core team directory">
+            {team.map((person) => <article key={person.name}>
 
             <span aria-hidden="true">{person.name.split(/\s+/).slice(0, 2).map(part => part[0]).join('')}</span>
 
             <b>{person.name}</b>
 
             <small>{person.role}</small></article>)}
+          </div>
         </div>
       </div>
     </section>

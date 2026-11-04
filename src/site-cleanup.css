@@ -8,6 +8,202 @@ body {
 main#home {
   min-width: 0;
 }
+#root main#home #about-principles .about-reference-principle {
+  position:relative;
+  border:0 !important;
+  border-radius:0 !important;
+  padding:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+#root main#home #about-principles .about-reference-principles-grid {
+  --principle-gap:clamp(28px,5vw,72px);
+  column-gap:var(--principle-gap);
+}
+#root main#home #about-principles .about-reference-principle:not(:last-child)::after {
+  content:"";
+  position:absolute;
+  top:12%;
+  right:calc(var(--principle-gap) / -2);
+  width:1px;
+  height:76%;
+  background:#dce4dc;
+}
+#root main#home :is(#about-commitment,#about-products) {
+  min-height:0; padding-block:24px;
+}
+#root main#home #about-commitment .about-reference-commitment-grid {
+  gap:12px; grid-auto-rows:auto;
+}
+#root main#home #about-commitment .about-reference-commitment-card {
+  min-height:0; padding:18px 20px;
+  background:rgba(255,255,255,.66) !important;
+  backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+}
+#root main#home #about-commitment .about-reference-commitment-card h3 {
+  font-size:21px !important; line-height:1.25 !important; margin-bottom:10px;
+}
+#root main#home #about-commitment .about-reference-commitment-card p {
+  font-size:14px !important; line-height:1.55 !important;
+}
+#root main#home :is(#about-commitment,#about-products) h2 {
+  font-size:clamp(28px,2.6vw,36px) !important; margin-block:10px 16px;
+}
+#root main#home #about-products .about-reference-size-layout { --about-panel-height:350px; }
+#root main#home #about-products .about-reference-specialty-slide {
+  padding:20px 24px; gap:24px;
+  background:rgba(255,255,255,.60) !important;
+  backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+}
+#root main#home #about-products .about-reference-specialty-slide-copy h3 {
+  font-size:24px !important; line-height:1.25 !important; margin-block:10px;
+}
+#root main#home #about-products .about-reference-specialty-slide-copy p,
+#root main#home #about-products .about-reference-copy > p {
+  font-size:14px !important; line-height:1.6 !important;
+}
+#root main#home #about-products .about-reference-format-note { padding:12px 16px; margin-block:14px; }
+@media(max-width:650px) {
+  #root main#home #about-products .about-reference-size-layout { --about-panel-height:320px; }
+  #root main#home #about-products .about-reference-specialty-slide { padding:16px; gap:16px; }
+  #root main#home #about-products .about-reference-specialty-slide-copy h3 { font-size:20px !important; }
+}
+#root main#home .finish-selector {
+  display:flex; flex-wrap:wrap; justify-content:flex-start; gap:10px;
+}
+#root main#home .finish-selector button {
+  flex:0 0 auto; width:auto; min-width:0; padding:9px 14px; gap:10px;
+}
+#root main#home .catalogue-format-count,
+#root main#home .catalogues-results-count {
+  color:#242424 !important; opacity:1 !important;
+  letter-spacing:normal !important; font-weight:600;
+}
+@media(min-width:761px) {
+  #root main#home .catalogues-sidebar {
+    position:sticky; top:var(--catalogue-sticky-top,88px); margin-top:0; align-self:start;
+    padding-top:8px; height:min(620px,calc(100dvh - var(--catalogue-sticky-top,88px) - 12px)); min-height:0;
+  }
+  #root main#home .catalogues-sidebar-title { margin-top:0; }
+  #root main#home .catalogue-category-list {
+    min-height:0; overflow:visible;
+    grid-template-rows:repeat(12,minmax(0,1fr)); padding-top:0;
+  }
+  #root main#home .catalogue-category-list .catalogue-category {
+    min-height:0; height:100%; padding:3px 7px; line-height:1.2;
+  }
+}
+#root main#home[data-page='products'][data-tile-view='calculator'] > .products.section-wrap {
+  padding-top:0 !important;
+}
+#root main#home #about-overview .about-reference-kicker,
+#root main#home #about-overview .about-reference-hero-copy > p,
+#root main#home #about-overview .about-reference-hero-stats small {
+  color:#30302e !important; opacity:1 !important;
+}
+#root main#home #about-overview .about-reference-hero-stats {
+  margin-top:22px; padding-top:0;
+}
+#root main#home #about-overview .about-reference-hero-stats > span {
+  padding:14px 16px; background:rgba(255,255,255,.86);
+  border:1px solid #dedfd7; border-left:3px solid #007d70; border-radius:5px;
+}
+#root main#home #about-overview .about-reference-hero-stats b { color:#20211f !important; font-weight:600; }
+#root main#home #about-overview .about-reference-hero-stats small { color:#242424 !important; font-size:14px !important; letter-spacing:normal !important; line-height:1.5; font-weight:500; }
+#root main#home #about-overview .about-reference-hero-link { margin-top:24px; color:#fff !important; }
+#root .callback-form textarea {
+    width:100%; box-sizing:border-box; min-height:70px; height:70px; resize:none;
+  padding:10px 12px; border:1px solid #acbeb5; border-radius:4px;
+  color:#242424; background:#fff; font:inherit; font-size:15px; line-height:1.5;
+}
+#root .callback-form textarea::placeholder { color:#62666b; opacity:1; }
+#root .callback-form .callback-optional { display:inline; font-size:12px; font-weight:400; color:#484b50; }
+@media(max-width:600px) { #root .callback-form textarea { font-size:16px; } }
+#root .chat-panel {
+  --site-chat-heading-size:12px;
+  --site-chat-body-size:var(--site-chat-heading-size,11px);
+  --site-chat-ui-size:var(--site-chat-heading-size,11px);
+}
+#root .chat-panel .chat-message,
+#root .chat-panel .chat-message p,
+#root .chat-panel .chat-welcome-prompts,
+#root .chat-panel .chat-prompts button,
+#root .chat-panel .chat-actions button {
+  font-size:var(--site-chat-heading-size,11px) !important;
+  line-height:1.4 !important;
+}
+#root .chat-panel .chat-message p { margin:0; }
+#root .chat-panel .chat-message { padding:8px 10px; }
+#root .chat-panel .chat-messages { gap:6px; }
+#root .chat-panel .chat-welcome-prompts > span { font-size:11px; }
+#root .callback-dialog {
+  display:flex; flex-direction:column;
+  min-height:0; max-height:none; overflow:visible; padding:20px 26px;
+  background:#fff;
+}
+#root .callback-dialog h2 { font-size:32px; line-height:1.12; margin:10px 30px 10px 0; }
+#root .callback-dialog > p { color:#303236 !important; font-size:14px; line-height:1.4; }
+#root .callback-dialog .eyebrow { color:#007d70 !important; font-size:13px !important; font-weight:600; }
+#root .callback-form { display:flex; flex-direction:column; flex:1; gap:10px; margin-top:14px; }
+#root .callback-form label { color:#242424 !important; font-size:14px; font-weight:500; gap:4px; }
+#root .callback-form :is(input,select) {
+  color:#242424 !important; background:#fff; min-height:42px; padding:9px 11px;
+  border-color:#acbeb5; font-size:15px;
+}
+#root .callback-form input::placeholder { color:#62666b; opacity:1; }
+#root .callback-form > .button {
+  align-self:flex-end; margin-top:auto; min-height:46px; padding:13px 18px;
+  background:#153f37; color:#fff !important; font-weight:600;
+}
+@media(max-width:600px) {
+  #root .callback-dialog { padding:18px 20px; min-height:0; max-height:none; }
+  #root .callback-form :is(input,select) { font-size:16px; }
+}
+@media(min-width:480px) {
+  #root .callback-form { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #root .callback-form > label:nth-of-type(n+3),
+  #root .callback-form > :is(button,p) { grid-column:1 / -1; }
+  #root .callback-form > .button { justify-self:end; margin-top:4px; }
+  #root .callback-form label { min-width:0; }
+}
+#root .callback-overlay { overflow-y:auto; }
+#root .header .tiles-dropdown button {
+  position: relative;
+  transition: color 200ms ease, background-color 200ms ease;
+}
+#root .header .tiles-dropdown button:is(:hover, :focus-visible) {
+  color: var(--site-color-header-hover, #921638) !important;
+}
+#root .header .tiles-dropdown button::after {
+  content: ''; display: block !important; position: absolute;
+  left: 10px; right: 10px; bottom: 5px; height: 2px;
+  background: var(--site-color-header-hover, #921638) !important;
+  transform: scaleX(0); transform-origin: left; transition: transform 200ms ease;
+}
+#root .header .tiles-dropdown button:is(:hover, :focus-visible)::after {
+  transform: scaleX(1);
+}
+/* Catalogue filters match the navbar's burgundy hover and underline. */
+#root main#home .catalogue-category-list .catalogue-category {
+  color: var(--site-color-header-text, #153f37) !important;
+  transition: color 200ms ease, background-color 200ms ease;
+}
+#root main#home .catalogue-category-list .catalogue-category > span {
+  color: inherit !important;
+}
+#root main#home .catalogue-category > span:first-child { position: relative; }
+#root main#home .catalogue-category > span:first-child::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -4px;
+  height: 2px; background: var(--site-color-header-hover, #921638);
+  transform: scaleX(0); transform-origin: left; transition: transform 200ms ease;
+}
+#root main#home .catalogue-category:is(:hover, :focus-visible),
+#root main#home .catalogue-category:is(:hover, :focus-visible) > span {
+  color: var(--site-color-header-hover, #921638) !important;
+}
+#root main#home .catalogue-category:is(:hover, :focus-visible) > span:first-child::after {
+  transform: scaleX(1);
+}
 /* Contact overview: compact desktop composition and contrast over the room photo. */
 #root main#home[data-page='contact'] .contact-structured .contact-copy > p,
 #root main#home[data-page='contact'] .contact-person > span:not(.contact-channel-icon),

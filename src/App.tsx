@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type FormEvent, type MouseEvent as ReactMouseEvent } from 'react'
 import ventozzaLogo from '../assets/ventozza-logo-clear.png'
 import SiteFooter from './components/SiteFooter'
+import SEO, { type SEOPage, type SEOTileView } from './components/SEO'
 import { enquiryRecipient, submitEnquiry } from './utils/formSubmit'
 import { tileLooks, tileSizeOptions } from './data/tileData'
 import AboutPage from './pages/AboutPage'
@@ -441,36 +442,6 @@ function App() {
   }, [activePage])
 
   useEffect(() => {
-    const viewTitles: Partial<Record<TileView, string>> = {
-      overview: 'Ceramic Tile Collection', size: 'Tile Sizes & Formats', 'look-feel': 'Tile Looks & Finishes',
-      visualizer: 'Digital Tile Showroom', calculator: 'Tile Quantity Calculator', catalogues: 'Tile Catalogues',
-    }
-    const pageTitles: Record<Page, string> = {
-      home: 'Ceramic Tiles for Walls and Floors', products: viewTitles[tileView] ?? 'Tile Collection',
-      about: 'About VENTOZZA Surfaces', certificates: 'Tile Quality & Certificates', contact: 'Contact VENTOZZA',
-    }
-    const pageDescriptions: Record<Page, string> = {
-      home: 'EXPLORE VENTOZZA Residentials/Commercials Project Spaces',
-      products: 'Browse VENTOZZA ceramic tile designs, sizes, finishes and downloadable product catalogues.',
-      about: 'Learn about VENTOZZA Surfaces, its tile expertise, offices and company profile.',
-      certificates: 'Request VENTOZZA product specifications, quality certificates and tile care information.',
-      contact: 'Contact the VENTOZZA tile team for product information, availability and project enquiries.',
-    }
-    const title = activePage === 'home' ? 'VENTOZZA — Ceramic Tiles for Walls and Floors' : `${pageTitles[activePage]} | VENTOZZA`
-    document.title = title
-    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
-    if (description) description.content = pageDescriptions[activePage]
-    const openGraphTitle = document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
-    if (openGraphTitle) openGraphTitle.content = title
-    const openGraphDescription = document.querySelector<HTMLMetaElement>('meta[property="og:description"]')
-    if (openGraphDescription) openGraphDescription.content = pageDescriptions[activePage]
-    const twitterTitle = document.querySelector<HTMLMetaElement>('meta[name="twitter:title"]')
-    if (twitterTitle) twitterTitle.content = title
-    const twitterDescription = document.querySelector<HTMLMetaElement>('meta[name="twitter:description"]')
-    if (twitterDescription) twitterDescription.content = pageDescriptions[activePage]
-  }, [activePage, tileView])
-
-  useEffect(() => {
     const updateScrollState = () => setShowTop(window.scrollY > 420)
     updateScrollState()
     window.addEventListener('scroll', updateScrollState, { passive: true })
@@ -595,6 +566,7 @@ function App() {
         name: String(values.get('name') ?? ''),
         phone: String(values.get('phone') ?? ''),
         interest: String(values.get('interest') ?? ''),
+        message: String(values.get('message') ?? ''),
       })
       setCallbackSent(true)
       form.reset()
@@ -617,10 +589,15 @@ function App() {
     pauseHeroAutoplay()
     setActiveSlide((current) => (current + step + slides.length) % slides.length)
   }
+  const selectSlide = (index: number) => {
+    pauseHeroAutoplay()
+    setActiveSlide((index + slides.length) % slides.length)
+  }
   const slide = slides[activeSlide]
 
   return (
     <>
+      <SEO page={activePage as SEOPage} tileView={tileView as SEOTileView} />
       {/* <div className="topline"><span>VENTOZZA · A TILE-FOCUSED COMPANY</span><span>Find your tile <a href="#products" onClick={(event) => { event.preventDefault(); navigateTo('products') }}>Explore <Arrow diagonal /></a></span><span className="topline-right">TILES FOR HOME & PROJECTS</span></div> */}
       <header className={activePage === 'home' ? (headerScrolled ? 'header header-home-scrolled' : 'header header-transparent') : 'header'}>
 
@@ -742,7 +719,7 @@ function App() {
       </header>
 
       <main id="home" data-page={activePage} data-tile-view={tileView} onClick={handlePageLink}>
-        {activePage === 'home' && <HomePage slide={slide} activeSlide={activeSlide} slideCount={slides.length} onMoveSlide={moveSlide} onHeroInteraction={pauseHeroAutoplay} onNavigate={navigateTo} onTiles={navigateToTileView} onCatalogueSize={(format) => navigateToTileView('catalogues', format)} />}
+        {activePage === 'home' && <HomePage slide={slide} activeSlide={activeSlide} slideCount={slides.length} onMoveSlide={moveSlide} onSelectSlide={selectSlide} onHeroInteraction={pauseHeroAutoplay} onNavigate={navigateTo} onTiles={navigateToTileView} onCatalogueSize={(format) => navigateToTileView('catalogues', format)} />}
 
         {activePage === 'products' && <ProductsPage tileView={tileView} views={tileViews} productSearch={productSearch} sizeOptions={tileSizeOptions} looks={tileLooks} initialCatalogueFormat={initialCatalogueFormat} onSelect={navigateToTileView} onEnquire={(interest) => { setCallbackInterest(interest); setCallbackOpen(true) }} onClearSearch={() => { setProductSearch(''); setHeaderSearch('') }} onNavigateContact={() => navigateTo('contact')} />}
 
@@ -801,11 +778,15 @@ function App() {
 
                   <option>Product availability</option></select></label>
 
+              <label><span>Other queries or message <span className="callback-optional">(optional)</span></span>
+                <textarea name="message" rows={3} placeholder="Tell us more about your query or project…" maxLength={3000} />
+              </label>
+
               <button className="button button-light" type="submit" disabled={callbackSending}>{callbackSending ? 'SENDING…' : 'SEND CALLBACK REQUEST'}
 
                 <Arrow diagonal /></button>{callbackError && <p className="form-error" role="alert">{callbackError}</p>}
 
-              <small>Form delivery is handled by FormSubmit; submissions may be retained for up to 30 days.</small></form></>}</section></div>}
+              </form></>}</section></div>}
 
       {showTop && <button className="back-to-top" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Back to top">
 
@@ -858,7 +839,7 @@ function App() {
 
             <button type="submit" aria-label="Send message" disabled={!chatInput.trim()}>→</button></form>
 
-          <p className="chat-note">Guidance is based on site information. Confirm product suitability, availability and pricing with our team.</p></section>}
+          </section>}
 
 
         <button className="chat-launcher" type="button" onClick={() => setChatOpen((open) => !open)} aria-expanded={chatOpen} aria-label={chatOpen ? 'Close tile guide' : 'Open tile guide'}>
