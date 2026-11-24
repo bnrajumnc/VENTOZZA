@@ -28,7 +28,7 @@
 #root main#home :is(p,li,address,dd,dt,blockquote,label,figcaption) {
   color: var(--site-color-text) !important;
 }
-#root main#home :is(.eyebrow,[class*='eyebrow'],.about-reference-kicker,.expansion-eyebrow,.expansion-phase-label,.finish-detail-label,.application-filter,.find-fit-editable-heading>span,.product-sizes-content header>span,.contact-office-heading>span,.cert-holder>b,.about-reference-specialty-slide-copy>small) {
+#root main#home :is(.eyebrow,[class*='eyebrow'],.about-reference-kicker,.expansion-eyebrow,.expansion-phase-label,.finish-detail-label,.application-filter,.catalogue-finish-swatches small,.find-fit-editable-heading>span,.product-sizes-content header>span,.contact-office-heading>span,.cert-holder>b,.about-reference-specialty-slide-copy>small) {
   color: var(--site-color-eyebrow) !important;
 }
 #root main#home :is(.eyebrow,[class*='eyebrow']) i {
