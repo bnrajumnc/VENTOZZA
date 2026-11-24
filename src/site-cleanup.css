@@ -405,7 +405,7 @@ main#home {
   line-height: 1.4;
 }
 #root main#home #about-team .about-reference-promoters {
-  grid-template-columns: repeat(2,minmax(0,max-content));
+  grid-template-columns: repeat(3,minmax(0,max-content));
   justify-content: center;
 }
 #root main#home #about-team .about-reference-promoters .team-vice-president {
