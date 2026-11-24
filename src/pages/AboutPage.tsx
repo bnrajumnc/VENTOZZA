@@ -5,6 +5,7 @@ import ExpansionRoadmap from './ExpansionRoadmap'
 const promoters = [
   { name: 'Vijay Kumar N. Jakhaniya', role: 'Director / Promoter', initials: 'VJ' },
   { name: 'P. Vishal Kumar', role: 'Director / Promoter', initials: 'PV' },
+  { name: 'Jitendra Patel', role: 'Director', initials: 'JP' },
 ]
 
 const vicePresident = {
@@ -19,6 +20,7 @@ const team = [
   { name: 'G. HimaBindu', role: 'Retail Manager · Sales' },
   { name: 'V. Nehru', role: 'Senior Sales Manager' },
   { name: 'A. Jaswanth', role: 'Operations' },
+  { name: 'PRADIP SAVANIYA', role: 'Operations' },
   { name: 'G. Thukaram', role: 'Senior Sales Manager' },
   { name: 'A. Ramulu', role: 'Sales Manager' },
   { name: 'Md. V Khan', role: 'Business Development Manager' },

@@ -3857,8 +3857,8 @@
 }
 .about-reference-page .about-reference-promoters {
   display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 18px;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 14px;
   margin: 28px 0 24px;
 }
 .about-reference-page .about-reference-promoters>h3 {
@@ -3884,10 +3884,10 @@
 .about-reference-page .about-reference-promoters article {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 16px;
   min-width: 0;
   min-height: 126px;
-  padding: 24px;
+  padding: 20px;
   border: 1px solid #dce4dc;
   border-top: 2px solid #bd8c5d;
   border-left: 1px solid #dce4dc;
@@ -3971,14 +3971,28 @@
   color: var(--site-text-color-6d7970-f21882);
 }
 @media (max-width:900px) {
+  .about-reference-page .about-reference-promoters {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 10px;
+  }
+  .about-reference-page .about-reference-promoters article {
+    gap: 10px;
+    padding: 14px;
+  }
+  .about-reference-page .team-promoter-initials {
+    flex-basis: 48px;
+    height: 48px;
+  }
   .about-reference-page .about-reference-team-grid {
     grid-template-columns: repeat(2,minmax(0,1fr));
   }
 }
 @media (max-width:600px) {
   .about-reference-page .about-reference-promoters {
-    grid-template-columns: minmax(0,1fr);
+    grid-template-columns: repeat(3,minmax(210px,1fr));
     gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
   }
   .about-reference-page .about-reference-promoters article {
     padding: 20px;
